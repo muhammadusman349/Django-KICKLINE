@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Products - Sportova{% endblock %}
+{% block title %}Products - Kickline{% endblock %}
 
 {% block content %}
 <!-- Page Header -->
@@ -18,9 +18,9 @@
                         <i class="fas fa-filter me-2"></i>Filter by Category
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'sportova:product_list' %}">All Products</a></li>
+                        <li><a class="dropdown-item" href="{% url 'Kickline:product_list' %}">All Products</a></li>
                         {% for category in categories %}
-                        <li><a class="dropdown-item" href="{% url 'sportova:product_list' %}?category={{ category.slug }}">{{ category.name }}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'Kickline:product_list' %}?category={{ category.slug }}">{{ category.name }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -36,14 +36,14 @@
         <div class="alert" style="background: var(--gradient-gold); border: 2px solid var(--secondary-color); border-radius: 15px; color: var(--primary-color);">
             <i class="fas fa-info-circle me-2"></i>
             Showing products in category: <strong>{{ current_category }}</strong>
-            <a href="{% url 'sportova:product_list' %}" class="btn btn-sm btn-outline-primary ms-3">Show All</a>
+            <a href="{% url 'Kickline:product_list' %}" class="btn btn-sm btn-outline-primary ms-3">Show All</a>
         </div>
         {% endif %}
 
         <div class="row g-4">
             {% for product in products %}
             <div class="col-lg-4 col-md-6">
-                <div class="card product-card sportova-product-card h-100">
+                <div class="card product-card Kickline-product-card h-100">
                     <div class="position-relative product-image-container">
                         {% if product.images.exists %}
                             <img src="{{ product.images.first.image.url }}" 
@@ -68,7 +68,7 @@
                             </div>
                         {% endif %}
                         {% if product.is_featured %}
-                        <span class="badge sportova-featured-badge position-absolute top-0 end-0 m-3">
+                        <span class="badge Kickline-featured-badge position-absolute top-0 end-0 m-3">
                             <i class="fas fa-star me-1"></i>Featured
                         </span>
                         {% endif %}
@@ -85,7 +85,7 @@
                     </div>
                     <div class="card-body d-flex flex-column">
                         <div class="mb-2">
-                            <span class="badge sportova-category-badge">{{ product.category.name }}</span>
+                            <span class="badge Kickline-category-badge">{{ product.category.name }}</span>
                         </div>
                         <h5 class="card-title">{{ product.name }}</h5>
                         <p class="card-text flex-grow-1">{{ product.description|truncatewords:15 }}</p>
@@ -104,7 +104,7 @@
                     <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
                     <h3 style="color: var(--primary-color);">No products found</h3>
                     <p style="color: var(--text-light);">Check back later for new arrivals!</p>
-                    <a href="{% url 'sportova:home' %}" class="btn btn-primary">
+                    <a href="{% url 'Kickline:home' %}" class="btn btn-primary">
                         <i class="fas fa-home me-2"></i>Back to Home
                     </a>
                 </div>

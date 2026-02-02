@@ -1,6 +1,6 @@
 Dear {{ reply.contact_message.name }},
 
-Thank you for contacting Sportova! We have reviewed your message and are pleased to provide you with a response.
+Thank you for contacting Kickline! We have reviewed your message and are pleased to provide you with a response.
 
 Your Original Message:
 Subject: {{ reply.contact_message.subject }}
@@ -22,9 +22,9 @@ WhatsApp: {{ whatsapp_number }}
 
 Best regards,
 {{ reply.sent_by }}
-Sportova Team
+Kickline Team
 
 ---
-This email was sent in response to your inquiry on the Sportova website.
+This email was sent in response to your inquiry on the Kickline website.
 Reply ID: #{{ reply.id }} | Original Message ID: #{{ reply.contact_message.id }}
-© {{ current_year }} Sportova - Premium Sports Equipment
+© {{ current_year }} Kickline - Premium Sports Equipment

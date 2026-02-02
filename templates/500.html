@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Server Error - Sportova{% endblock %}
+{% block title %}Server Error - Kickline{% endblock %}
 
 {% block content %}
 <section class="section d-flex align-items-center" style="min-height: 80vh; background: var(--background-color);">
@@ -20,10 +20,10 @@
                     </p>
                     
                     <div class="error-actions d-flex gap-3 justify-content-center flex-wrap">
-                        <a href="{% url 'sportova:home' %}" class="btn btn-primary btn-lg">
+                        <a href="{% url 'Kickline:home' %}" class="btn btn-primary btn-lg">
                             <i class="fas fa-refresh me-2"></i>Try Again
                         </a>
-                        <a href="https://wa.me/{{ WHATSAPP_NUMBER|cut:'+' }}?text=Hi, I'm experiencing technical issues on the Sportova website" 
+                        <a href="https://wa.me/{{ WHATSAPP_NUMBER|cut:'+' }}?text=Hi, I'm experiencing technical issues on the Kickline website" 
                            class="btn btn-success btn-lg contact-btn" target="_blank">
                             <i class="fab fa-whatsapp me-2"></i>Report Issue
                         </a>

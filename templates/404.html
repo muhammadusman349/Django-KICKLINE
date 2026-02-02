@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Page Not Found - Sportova{% endblock %}
+{% block title %}Page Not Found - Kickline{% endblock %}
 
 {% block content %}
 <section class="section d-flex align-items-center" style="min-height: 80vh; background: var(--background-color);">
@@ -20,13 +20,13 @@
                     </p>
                     
                     <div class="error-actions d-flex gap-3 justify-content-center flex-wrap">
-                        <a href="{% url 'sportova:home' %}" class="btn btn-primary btn-lg">
+                        <a href="{% url 'Kickline:home' %}" class="btn btn-primary btn-lg">
                             <i class="fas fa-home me-2"></i>Back to Home
                         </a>
-                        <a href="{% url 'sportova:product_list' %}" class="btn btn-outline-primary btn-lg">
+                        <a href="{% url 'Kickline:product_list' %}" class="btn btn-outline-primary btn-lg">
                             <i class="fas fa-shopping-bag me-2"></i>Browse Products
                         </a>
-                        <a href="https://wa.me/{{ WHATSAPP_NUMBER|cut:'+' }}?text=Hi, I need help navigating the Sportova website" 
+                        <a href="https://wa.me/{{ WHATSAPP_NUMBER|cut:'+' }}?text=Hi, I need help navigating the Kickline website" 
                            class="btn btn-success btn-lg contact-btn" target="_blank">
                             <i class="fab fa-whatsapp me-2"></i>Get Help
                         </a>
@@ -37,7 +37,7 @@
                         <div class="row g-3">
                             {% for category in categories|slice:":4" %}
                             <div class="col-md-3 col-6">
-                                <a href="{% url 'sportova:category_detail' category.slug %}" 
+                                <a href="{% url 'Kickline:category_detail' category.slug %}" 
                                    class="card text-decoration-none h-100 hover-lift"
                                    style="border: 2px solid var(--secondary-color); border-radius: var(--border-radius);">
                                     <div class="card-body text-center p-3">

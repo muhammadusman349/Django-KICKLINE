@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}All Categories - Sportova{% endblock %}
+{% block title %}All Categories - Kickline{% endblock %}
 
 {% block content %}
 <!-- Category List Header -->
@@ -11,7 +11,7 @@
             <div class="col-md-8">
                 <nav aria-label="breadcrumb" class="mb-3">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{% url 'sportova:home' %}" style="color: var(--text-light); text-decoration: none;">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'Kickline:home' %}" style="color: var(--text-light); text-decoration: none;">Home</a></li>
                         <li class="breadcrumb-item active" style="color: var(--secondary-color); font-weight: 600;">Categories</li>
                     </ol>
                 </nav>
@@ -20,7 +20,7 @@
             </div>
             <div class="col-md-4 text-md-end">
                 <div class="category-stats">
-                    <span class="badge sportova-category-badge fs-5">{{ categories.count }} Categories</span>
+                    <span class="badge Kickline-category-badge fs-5">{{ categories.count }} Categories</span>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
         <div class="row g-4">
             {% for category in categories %}
             <div class="col-lg-4 col-md-6">
-                <div class="card category-card sportova-card h-100">
+                <div class="card category-card Kickline-card h-100">
                     <div class="card-image-wrapper">
                         {% if category.image %}
                         <img src="{{ category.image.url }}" class="card-img-top" alt="{{ category.name }}" style="height: 280px; object-fit: cover;">
@@ -72,7 +72,7 @@
                     <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
                     <h3 style="color: var(--primary-color);">No categories available</h3>
                     <p style="color: var(--text-light);">Categories will be added soon!</p>
-                    <a href="{% url 'sportova:home' %}" class="btn btn-primary">
+                    <a href="{% url 'Kickline:home' %}" class="btn btn-primary">
                         <i class="fas fa-arrow-left me-2"></i>Back to Home
                     </a>
                 </div>
@@ -129,14 +129,14 @@
                 <h2 class="mb-4" style="color: var(--primary-color);">Need Help Choosing?</h2>
                 <p class="lead mb-4" style="color: var(--text-light);">Our sports equipment experts are here to help you find the perfect gear for your sport and skill level.</p>
                 <div class="d-flex gap-3 justify-content-center flex-wrap">
-                    <a href="{% url 'sportova:product_list' %}" class="btn btn-primary btn-lg">
+                    <a href="{% url 'Kickline:product_list' %}" class="btn btn-primary btn-lg">
                         <i class="fas fa-th-large me-2"></i>Browse All Products
                     </a>
                     <a href="https://wa.me/{{ WHATSAPP_NUMBER|cut:'+' }}?text=Hi, I need help choosing sports equipment" 
                        class="btn btn-success btn-lg contact-btn" target="_blank">
                         <i class="fab fa-whatsapp me-2"></i>Get Expert Advice
                     </a>
-                    <a href="{% url 'sportova:contact' %}" class="btn btn-outline-primary btn-lg">
+                    <a href="{% url 'Kickline:contact' %}" class="btn btn-outline-primary btn-lg">
                         <i class="fas fa-envelope me-2"></i>Contact Us
                     </a>
                 </div>
@@ -150,7 +150,7 @@
     <div class="container">
         <div class="row justify-content-center text-center">
             <div class="col-lg-10">
-                <h2 class="mb-4">Why Choose Sportova Categories?</h2>
+                <h2 class="mb-4">Why Choose Kickline Categories?</h2>
                 <div class="row g-4">
                     <div class="col-md-4">
                         <div class="feature-box">

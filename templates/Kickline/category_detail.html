@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}{{ category.name }} - Sportova{% endblock %}
+{% block title %}{{ category.name }} - Kickline{% endblock %}
 
 {% block content %}
 <!-- Category Header -->
@@ -11,8 +11,8 @@
             <div class="col-md-8">
                 <nav aria-label="breadcrumb" class="mb-3">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{% url 'sportova:home' %}" style="color: var(--text-light); text-decoration: none;">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'sportova:product_list' %}" style="color: var(--text-light); text-decoration: none;">Products</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'Kickline:home' %}" style="color: var(--text-light); text-decoration: none;">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'Kickline:product_list' %}" style="color: var(--text-light); text-decoration: none;">Products</a></li>
                         <li class="breadcrumb-item active" style="color: var(--secondary-color); font-weight: 600;">{{ category.name }}</li>
                     </ol>
                 </nav>
@@ -35,13 +35,13 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 style="color: var(--primary-color);">Products in {{ category.name }}</h2>
-            <span class="badge sportova-category-badge fs-6">{{ products.count }} item{{ products.count|pluralize }}</span>
+            <span class="badge Kickline-category-badge fs-6">{{ products.count }} item{{ products.count|pluralize }}</span>
         </div>
 
         <div class="row g-4">
             {% for product in products %}
             <div class="col-lg-4 col-md-6">
-                <div class="card product-card sportova-product-card h-100">
+                <div class="card product-card Kickline-product-card h-100">
                     <div class="position-relative product-image-container">
                         {% if product.images.exists %}
                             <img src="{{ product.images.first.image.url }}" 
@@ -66,7 +66,7 @@
                             </div>
                         {% endif %}
                         {% if product.is_featured %}
-                        <span class="badge sportova-featured-badge position-absolute top-0 end-0 m-3">
+                        <span class="badge Kickline-featured-badge position-absolute top-0 end-0 m-3">
                             <i class="fas fa-star me-1"></i>Featured
                         </span>
                         {% endif %}
@@ -99,7 +99,7 @@
                     <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
                     <h3 style="color: var(--primary-color);">No products in this category</h3>
                     <p style="color: var(--text-light);">Check back later for new arrivals!</p>
-                    <a href="{% url 'sportova:product_list' %}" class="btn btn-primary">
+                    <a href="{% url 'Kickline:product_list' %}" class="btn btn-primary">
                         <i class="fas fa-arrow-left me-2"></i>Browse All Products
                     </a>
                 </div>
@@ -117,7 +117,7 @@
                 <h2 class="mb-4" style="color: var(--primary-color);">Explore More Categories</h2>
                 <p class="lead mb-4" style="color: var(--text-light);">Discover our complete range of premium sports equipment across all categories.</p>
                 <div class="d-flex gap-3 justify-content-center flex-wrap">
-                    <a href="{% url 'sportova:product_list' %}" class="btn btn-primary btn-lg">
+                    <a href="{% url 'Kickline:product_list' %}" class="btn btn-primary btn-lg">
                         <i class="fas fa-th-large me-2"></i>View All Products
                     </a>
                     <a href="https://wa.me/{{ WHATSAPP_NUMBER|cut:'+' }}?text=Hi, I'm interested in {{ category.name }} products" 

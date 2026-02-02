@@ -1,4 +1,4 @@
-New contact message received from Sportova website:
+New contact message received from Kickline website:
 
 Name: {{ contact_message.name }}
 Email: {{ contact_message.email }}
@@ -9,7 +9,7 @@ Message:
 {{ contact_message.message }}
 
 ---
-This message was sent from the Sportova website contact form.
+This message was sent from the Kickline website contact form.
 You can reply directly to the customer at: {{ contact_message.email }}
 
 Message ID: {{ contact_message.id }}

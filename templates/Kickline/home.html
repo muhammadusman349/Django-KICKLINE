@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Sportova - Premium Sports Equipment{% endblock %}
+{% block title %}Kickline - Premium Sports Equipment{% endblock %}
 
 {% block content %}
 <!-- Hero Section with Modern Professional Design -->
@@ -31,7 +31,7 @@
             Elevate your game with professional-grade sports gear designed for champions
         </p>
         <div class="hero-cta">
-            <a href="{% url 'sportova:product_list' %}" class="btn btn-primary btn-lg">
+            <a href="{% url 'Kickline:product_list' %}" class="btn btn-primary btn-lg">
                 <i class="fas fa-shopping-bag me-2"></i>Shop Now
             </a>
             <a href="#featured-products" class="btn btn-outline-light btn-lg ms-3">
@@ -50,7 +50,7 @@
         <div class="row g-4">
             {% for category in categories %}
             <div class="col-lg-4 col-md-6">
-                <div class="card category-card sportova-card">
+                <div class="card category-card Kickline-card">
                     <div class="card-image-wrapper">
                         {% if category.image %}
                         <img src="{{ category.image.url }}" class="card-img-top" alt="{{ category.name }}">
@@ -85,7 +85,7 @@
             {% endfor %}
         </div>
         <div class="text-center mt-5">
-            <a href="{% url 'sportova:category_list' %}" class="btn btn-outline-primary btn-lg">
+            <a href="{% url 'Kickline:category_list' %}" class="btn btn-outline-primary btn-lg">
                 <i class="fas fa-th-large me-2"></i>View All Categories
             </a>
         </div>
@@ -100,7 +100,7 @@
         <div class="row g-4">
             {% for product in featured_products %}
             <div class="col-lg-4 col-md-6">
-                <div class="card product-card sportova-product-card">
+                <div class="card product-card Kickline-product-card">
                     <div class="position-relative product-image-container">
                         {% if product.images.exists %}
                             <img src="{{ product.images.first.image.url }}" class="card-img-top" alt="{{ product.name }}">
@@ -108,7 +108,7 @@
                             <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
                         {% endif %}
                         <div class="product-badge">
-                            <span class="badge sportova-featured-badge">
+                            <span class="badge Kickline-featured-badge">
                                 <i class="fas fa-star me-1"></i>Featured
                             </span>
                         </div>
@@ -125,7 +125,7 @@
                     </div>
                     <div class="card-body">
                         <div class="mb-2">
-                            <span class="badge sportova-category-badge">{{ product.category.name }}</span>
+                            <span class="badge Kickline-category-badge">{{ product.category.name }}</span>
                         </div>
                         <h5 class="card-title">{{ product.name }}</h5>
                         <p class="card-text">{{ product.description|truncatewords:12 }}</p>
@@ -141,7 +141,7 @@
             {% endfor %}
         </div>
         <div class="text-center mt-5">
-            <a href="{% url 'sportova:product_list' %}" class="btn btn-outline-primary btn-lg">
+            <a href="{% url 'Kickline:product_list' %}" class="btn btn-outline-primary btn-lg">
                 <i class="fas fa-th-large me-2"></i>View All Products
             </a>
         </div>
@@ -150,12 +150,12 @@
 {% endif %}
 
 <!-- Why Choose Us Section -->
-<section class="section sportova-features-section" style="background: var(--background-color);">
+<section class="section Kickline-features-section" style="background: var(--background-color);">
     <div class="container">
-        <h2 class="section-title">Why Choose Sportova?</h2>
+        <h2 class="section-title">Why Choose Kickline Sports?</h2>
         <div class="row g-4">
             <div class="col-lg-3 col-md-6 text-center">
-                <div class="feature-box sportova-feature-box">
+                <div class="feature-box Kickline-feature-box">
                     <div class="feature-icon mb-4">
                         <div class="icon-wrapper">
                             <i class="fas fa-medal fa-3x"></i>
@@ -166,7 +166,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 text-center">
-                <div class="feature-box sportova-feature-box">
+                <div class="feature-box Kickline-feature-box">
                     <div class="feature-icon mb-4">
                         <div class="icon-wrapper">
                             <i class="fas fa-shipping-fast fa-3x"></i>
@@ -177,7 +177,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 text-center">
-                <div class="feature-box sportova-feature-box">
+                <div class="feature-box Kickline-feature-box">
                     <div class="feature-icon mb-4">
                         <div class="icon-wrapper">
                             <i class="fas fa-headset fa-3x"></i>
@@ -188,7 +188,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 text-center">
-                <div class="feature-box sportova-feature-box">
+                <div class="feature-box Kickline-feature-box">
                     <div class="feature-icon mb-4">
                         <div class="icon-wrapper">
                             <i class="fas fa-star fa-3x"></i>

@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}{{ product.name }} - Sportova{% endblock %}
+{% block title %}{{ product.name }} - Kickline{% endblock %}
 
 {% block content %}
 <div class="bg-light py-4">
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a href="{% url 'sportova:home' %}" class="text-decoration-none">Home</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'sportova:product_list' %}" class="text-decoration-none">Products</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'Kickline:home' %}" class="text-decoration-none">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'Kickline:product_list' %}" class="text-decoration-none">Products</a></li>
                 <li class="breadcrumb-item"><a href="{{ category.get_absolute_url }}" class="text-decoration-none">{{ category.name }}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
             </ol>
@@ -67,9 +67,9 @@
             <div class="col-lg-6">
                 <div class="product-details-content">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="badge sportova-category-badge fs-6">{{ product.category.name }}</span>
+                        <span class="badge Kickline-category-badge fs-6">{{ product.category.name }}</span>
                         {% if product.is_featured %}
-                        <span class="badge sportova-featured-badge">
+                        <span class="badge Kickline-featured-badge">
                             <i class="fas fa-star me-1"></i>Featured
                         </span>
                         {% endif %}
@@ -92,7 +92,7 @@
                     </div>
 
                     <!-- Contact Buttons -->
-                    <div class="card sportova-contact-card shadow-sm mb-4">
+                    <div class="card Kickline-contact-card shadow-sm mb-4">
                         <div class="card-body">
                             <h5 class="card-title fw-bold mb-3" style="color: var(--primary-color);">Interested in this product?</h5>
                             <p class="card-text mb-4" style="color: var(--text-light);">Contact us directly for more information or to place an order.</p>
@@ -261,8 +261,8 @@
     transform: scale(1.05);
 }
 
-/* Sportova Contact Card */
-.sportova-contact-card {
+/* Kickline Contact Card */
+.Kickline-contact-card {
     border: 2px solid var(--secondary-color);
     background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
     border-radius: 20px;
