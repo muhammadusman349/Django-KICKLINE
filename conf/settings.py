@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "sportova",
+    "Kickline",
 ]
 
 MIDDLEWARE = [
@@ -63,8 +63,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "sportova.context_processors.site_contacts",
-                "sportova.context_processors.background_images",
+                "Kickline.context_processors.site_contacts",
+                "Kickline.context_processors.background_images",
             ],
         },
     },
@@ -148,4 +148,4 @@ EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool)
 
 # Email settings for contact form
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
-SPORTOVA_OWNER_EMAIL = config('SPORTOVA_OWNER_EMAIL')
+KICKLINE_SPORTS_OWNER_EMAIL = config('KICKLINE_SPORTS_OWNER_EMAIL')
