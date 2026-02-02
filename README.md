@@ -1,2 +1,2 @@
-# Django-Sportova
+# Django-Kickline
 Django Sports Website 
