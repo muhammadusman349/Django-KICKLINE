@@ -120,7 +120,7 @@
                     <a href="{% url 'Kickline:product_list' %}" class="btn btn-primary btn-lg">
                         <i class="fas fa-th-large me-2"></i>View All Products
                     </a>
-                    <a href="https://wa.me/{{ WHATSAPP_NUMBER|cut:'+' }}?text=Hi, I'm interested in {{ category.name }} products" 
+                    <a href="https://wa.me/{{ WHATSAPP_NUMBER_1|cut:'+' }}?text=Hi, I'm interested in {{ category.name }} products" 
                        class="btn btn-success btn-lg contact-btn" target="_blank">
                         <i class="fab fa-whatsapp me-2"></i>Get Expert Advice
                     </a>
@@ -138,7 +138,7 @@
                 <h2 class="mb-4">Need Help with {{ category.name }}?</h2>
                 <p class="lead mb-4">Our experts can help you choose the perfect {{ category.name|lower }} for your needs and skill level.</p>
                 <div class="d-flex gap-3 justify-content-center flex-wrap">
-                    <a href="https://wa.me/{{ WHATSAPP_NUMBER|cut:'+' }}?text=Hi, I need help choosing {{ category.name|lower }}" 
+                    <a href="https://wa.me/{{ WHATSAPP_NUMBER_1|cut:'+' }}?text=Hi, I need help choosing {{ category.name|lower }}" 
                        class="btn btn-success btn-lg" target="_blank">
                         <i class="fab fa-whatsapp me-2"></i>Get Expert Advice
                     </a>

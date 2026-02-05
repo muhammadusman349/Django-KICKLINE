@@ -13,4 +13,4 @@ The Kickline Team
 
 ---
 This is an automated confirmation email. Please do not reply to this email.
-If you need immediate assistance, please contact us via WhatsApp: {{ whatsapp_number }}
+If you need immediate assistance, please contact us via WhatsApp: {{ whatsapp_number_1 }}

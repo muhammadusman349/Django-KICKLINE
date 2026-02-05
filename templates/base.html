@@ -20,34 +20,34 @@
     <style>
         :root {
             /* Kickline Bold & Premium Color Palette (Crimson Red Accent) */
-            --primary-color: #0E1C36; /* Deep Navy - strength, authority, trust */
-            --secondary-color: #E63946; /* Crimson Red - energetic premium accent */
+            --primary-color: #0F172A; /* Deep Navy - strength, authority, trust */
+            --secondary-color: #3B82F6; /* Crimson Red - energetic premium accent */
             --background-color: #F4F4F4; /* Light Gray - modern balance */
             --text-primary: #1A1A1A; /* Dark Charcoal - strong readability */
             --text-secondary: #FFFFFF; /* White - clean contrast, overlay use */
             --text-light: #666666; /* Medium gray for secondary text */
-            --accent-color: #E63946; /* Crimson accent */
+            --accent-color: #3B82F6; /* Crimson accent */
             --success-color: #16a34a; /* Balanced green */
             --warning-color: #FF6B6B; /* Coral warning to avoid yellow */
-            --dark-color: #0E1C36;
+            --dark-color: #0F172A;
             --bg-light: #F4F4F4;
             
             /* Kickline Gradients */
-            --gradient-primary: linear-gradient(135deg, #0E1C36 0%, #1a2d4a 100%);
-            --gradient-secondary: linear-gradient(135deg, #ff6b73 0%, #E63946 100%);
-            --gradient-dark: linear-gradient(135deg, #0E1C36 0%, #1a2d4a 100%);
-            --gradient-hero: linear-gradient(135deg, rgba(14, 28, 54, 0.75) 0%, rgba(14, 28, 54, 0.45) 100%);
-            --gradient-accent: linear-gradient(45deg, #0E1C36, #E63946, #0E1C36);
+            --gradient-primary: linear-gradient(135deg, #0F172A 0%, #1F2937 100%);
+            --gradient-secondary: linear-gradient(135deg, #93C5FD 0%, #3B82F6 100%);
+            --gradient-dark: linear-gradient(135deg, #0F172A 0%, #1F2937 100%);
+            --gradient-hero: linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.45) 100%);
+            --gradient-accent: linear-gradient(45deg, #0F172A, #3B82F6, #0F172A);
             /* Keep the same variable name but switch to crimson so existing usage works */
-            --gradient-gold: linear-gradient(135deg, #ff6b73 0%, #E63946 50%, #ff6b73 100%);
+            --gradient-gold: linear-gradient(135deg, #93C5FD 0%, #3B82F6 50%, #93C5FD 100%);
             
             /* Kickline Shadows */
             --shadow: 0 15px 35px rgba(14, 28, 54, 0.15);
             --shadow-hover: 0 25px 50px rgba(14, 28, 54, 0.25);
             --shadow-card: 0 8px 25px rgba(14, 28, 54, 0.08);
             /* Crimson glow instead of gold */
-            --shadow-neon: 0 0 20px rgba(230, 57, 70, 0.35);
-            --shadow-gold: 0 0 25px rgba(230, 57, 70, 0.35);
+            --shadow-neon: 0 0 20px rgba(59, 130, 246, 0.35);
+            --shadow-gold: 0 0 25px rgba(59, 130, 246, 0.35);
         }
 
         * {
@@ -173,18 +173,29 @@
             border-bottom: 1px solid rgba(255, 215, 0, 0.1);
         }
 
+        @keyframes blink-glow {
+            0%, 100% {
+                text-shadow: 0 2px 4px rgba(15, 23, 42, 0.1);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 2px 4px rgba(15, 23, 42, 0.1);
+            }
+        }
+
         .navbar-brand {
-            font-size: 2rem;
+            font-size: 3rem; /* Increased size */
+            font-family: 'Harlow Solid', 'Harlow Solid Italic', 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             font-weight: 800;
             color: var(--primary-color) !important;
             text-shadow: 0 2px 4px rgba(14, 28, 54, 0.1);
             transition: all 0.3s ease;
             letter-spacing: -0.03em;
+            animation: blink-glow 3s infinite ease-in-out; /* Added blinking effect */
         }
 
         .navbar-brand:hover {
             color: var(--secondary-color) !important;
-            text-shadow: 0 0 15px rgba(230, 57, 70, 0.35);
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.35);
         }
 
         .navbar-nav .nav-link {
@@ -230,7 +241,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: linear-gradient(135deg, #0E1C36 0%, #1a2d4a 50%, #0E1C36 100%);
+            background: linear-gradient(135deg, #0F172A 0%, #1F2937 50%, #0F172A 100%);
         }
         
         .hero-section::before {
@@ -241,8 +252,8 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(230, 57, 70, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(230, 57, 70, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
                 linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
             z-index: 1;
         }
@@ -294,7 +305,7 @@
                 135deg,
                 rgba(14, 28, 54, 0.8) 0%,
                 rgba(14, 28, 54, 0.4) 30%,
-                rgba(230, 57, 70, 0.2) 70%,
+                rgba(59, 130, 246, 0.2) 70%,
                 rgba(14, 28, 54, 0.6) 100%
             );
             z-index: 1;
@@ -314,7 +325,7 @@
                 135deg,
                 rgba(14, 28, 54, 0.85) 0%,
                 rgba(14, 28, 54, 0.3) 40%,
-                rgba(230, 57, 70, 0.15) 60%,
+                rgba(59, 130, 246, 0.15) 60%,
                 rgba(14, 28, 54, 0.7) 100%
             );
             z-index: 3;
@@ -347,7 +358,7 @@
             margin-bottom: 1.5rem;
             color: #ffffff;
             text-shadow: 
-                0 0 40px rgba(230, 57, 70, 0.6),
+                0 0 40px rgba(59, 130, 246, 0.6),
                 3px 3px 12px rgba(0, 0, 0, 0.9),
                 -1px -1px 0 rgba(0, 0, 0, 0.8),
                 1px -1px 0 rgba(0, 0, 0, 0.8),
@@ -360,7 +371,7 @@
         .hero-title .accent {
             color: var(--secondary-color);
             text-shadow: 
-                0 0 40px rgba(230, 57, 70, 0.8),
+                0 0 40px rgba(59, 130, 246, 0.8),
                 3px 3px 12px rgba(0, 0, 0, 0.9),
                 -1px -1px 0 rgba(0, 0, 0, 0.8),
                 1px -1px 0 rgba(0, 0, 0, 0.8),
@@ -451,7 +462,7 @@
 
         .btn-hero:hover {
             transform: translateY(-6px) scale(1.08);
-            box-shadow: 0 0 40px rgba(230, 57, 70, 0.6), 0 0 80px rgba(230, 57, 70, 0.3);
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.6), 0 0 80px rgba(59, 130, 246, 0.3);
             color: var(--primary-color);
             border-color: var(--secondary-color);
         }
@@ -473,8 +484,8 @@
             transform: translateY(-15px) scale(1.03);
             box-shadow: 
                 0 25px 50px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(230, 57, 70, 0.3),
-                0 0 30px rgba(230, 57, 70, 0.2);
+                0 0 0 1px rgba(59, 130, 246, 0.3),
+                0 0 30px rgba(59, 130, 246, 0.2);
         }
 
         .card {
@@ -510,7 +521,7 @@
         }
 
         .card:hover {
-            box-shadow: 0 0 30px rgba(230, 57, 70, 0.25), 0 25px 50px rgba(14, 28, 54, 0.15);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.25), 0 25px 50px rgba(14, 28, 54, 0.15);
         }
 
         .card-img-top {
@@ -546,7 +557,7 @@
             font-weight: 700;
             color: var(--secondary-color);
             margin: 1rem 0;
-            text-shadow: 0 1px 2px rgba(230, 57, 70, 0.2);
+            text-shadow: 0 1px 2px rgba(59, 130, 246, 0.2);
             letter-spacing: -0.01em;
         }
 
@@ -608,7 +619,7 @@
             color: var(--primary-color);
             border-color: var(--secondary-color);
             transform: translateY(-4px);
-            box-shadow: 0 0 25px rgba(230, 57, 70, 0.4);
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
         }
 
         /* Section Styling */
@@ -655,8 +666,8 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 30% 70%, rgba(230, 57, 70, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 70% 30%, rgba(230, 57, 70, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 30% 70%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
                 linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
             z-index: 1;
         }
@@ -683,7 +694,7 @@
         
         .categories-section .section-title::after {
             background: var(--gradient-secondary);
-            box-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
 
         /* Featured Products Section - Dynamic Background */
@@ -701,8 +712,8 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 25% 25%, rgba(230, 57, 70, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(230, 57, 70, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
                 linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
             z-index: 1;
         }
@@ -731,7 +742,7 @@
 
         .featured-products .section-title::after {
             background: var(--gradient-secondary);
-            box-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
 
         /* Footer */
@@ -759,7 +770,7 @@
 
         .footer a:hover {
             color: var(--secondary-color);
-            text-shadow: 0 0 8px rgba(230, 57, 70, 0.35);
+            text-shadow: 0 0 8px rgba(59, 130, 246, 0.35);
             transform: translateX(3px);
         }
 
@@ -1060,7 +1071,7 @@
 
         .Kickline-feature-box:hover .icon-wrapper {
             transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(230, 57, 70, 0.5);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
         }
 
         .feature-title {
@@ -1216,8 +1227,11 @@
                 </div>
                 <div class="col-md-4">
                     <h5>Contact Us</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> Head Marala Road, Gohad Pur, Sialkot</p>
                     <p><i class="fas fa-envelope"></i> {{ CONTACT_EMAIL }}</p>
-                    <p><i class="fab fa-whatsapp"></i> {{ WHATSAPP_NUMBER }}</p>
+                    <p><i class="fab fa-whatsapp"></i> <strong>Sales:</strong> {{ WHATSAPP_NUMBER_1 }}</p>
+                    <p><i class="fab fa-whatsapp"></i> <strong>Support:</strong> {{ WHATSAPP_NUMBER_2 }}</p>
+
                 </div>
             </div>
             <hr class="my-4">

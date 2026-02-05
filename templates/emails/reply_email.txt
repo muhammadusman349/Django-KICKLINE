@@ -18,7 +18,7 @@ Need Further Assistance?
 If you have any additional questions or need more information, don't hesitate to reach out to us!
 
 Email: {{ contact_email }}
-WhatsApp: {{ whatsapp_number }}
+WhatsApp: {{ whatsapp_number_1 }}
 
 Best regards,
 {{ reply.sent_by }}
