@@ -134,7 +134,8 @@ MEDIA_ROOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Site Contact
-WHATSAPP_NUMBER = config('WHATSAPP_NUMBER')
+WHATSAPP_NUMBER_1 = config('WHATSAPP_NUMBER_1')
+WHATSAPP_NUMBER_2 = config('WHATSAPP_NUMBER_2')
 CONTACT_EMAIL = config('CONTACT_EMAIL')
 
 # Email Configuration

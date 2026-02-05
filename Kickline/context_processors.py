@@ -4,12 +4,10 @@ from .models import BackgroundImage
 
 
 def site_contacts(request):
-    raw = getattr(settings, "WHATSAPP_NUMBER", "")
-    cleaned = re.sub(r"\D", "", raw)
     return {
         "CONTACT_EMAIL": getattr(settings, "CONTACT_EMAIL", ""),
-        "WHATSAPP_NUMBER": raw,
-        "WHATSAPP_NUMBER_CLEAN": cleaned,
+        "WHATSAPP_NUMBER_1": getattr(settings, "WHATSAPP_NUMBER_1", ""),
+        "WHATSAPP_NUMBER_2": getattr(settings, "WHATSAPP_NUMBER_2", ""),
     }
 
 

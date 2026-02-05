@@ -85,7 +85,7 @@ def send_reply_email(reply):
         context = {
             'reply': reply,
             'current_year': timezone.now().year,
-            'whatsapp_number': settings.WHATSAPP_NUMBER,
+            'whatsapp_number_1': settings.WHATSAPP_NUMBER_1,
             'contact_email': settings.CONTACT_EMAIL,
         }
 
