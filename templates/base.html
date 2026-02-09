@@ -1144,155 +1144,84 @@
             color: var(--text-primary);
         }
 
-        /* Mobile Theme Toggle & Navbar Improvements */
-        @media (max-width: 991px) {
-            .navbar {
-                background: var(--background-color);
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            }
+        /* Animated Hamburger Menu */
+        .hamburger-menu {
+            width: 30px;
+            height: 24px;
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-            [data-theme="dark"] .navbar {
-                background: rgba(15, 23, 42, 0.95);
-                backdrop-filter: blur(10px);
-                border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-            }
+        .hamburger-line {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 3px;
+            position: absolute;
+            left: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
 
-            /* Position hamburger toggle button on the right */
-            .navbar-toggler {
-                position: absolute;
-                top: 50%;
-                right: 15px;
-                transform: translateY(-50%);
-                border: none;
-                padding: 0.5rem;
-                background: transparent;
-                z-index: 1050;
-            }
+        .hamburger-line.line-1 {
+            top: 0;
+        }
 
-            .navbar-toggler:focus {
-                box-shadow: none;
-                outline: none;
-            }
+        .hamburger-line.line-2 {
+            top: 50%;
+            transform: translateY(-50%);
+        }
 
-            .navbar-toggler-icon {
-                width: 1.5em;
-                height: 1.5em;
-            }
+        .hamburger-line.line-3 {
+            bottom: 0;
+        }
 
-            /* Center the brand name */
-            .navbar-brand {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-                font-size: 1.2rem;
-                font-weight: 700;
-                z-index: 1049;
-            }
+        /* Hamburger to X animation */
+        .navbar-toggler:not(.collapsed) .hamburger-line.line-1 {
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+            background: var(--secondary-color);
+        }
 
-            /* Theme toggle button positioned on the left */
-            .theme-toggle {
-                position: absolute;
-                top: 50%;
-                left: 15px;
-                transform: translateY(-50%);
-                margin: 0;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1050;
-            }
+        .navbar-toggler:not(.collapsed) .hamburger-line.line-2 {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
 
-            /* Mobile menu layout when opened */
-            .navbar-collapse {
-                position: fixed;
-                top: 80px; /* Below the navbar */
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: var(--background-color);
-                padding: 2rem 1rem 1rem;
-                z-index: 1040;
-                display: flex;
-                flex-direction: column;
-            }
+        .navbar-toggler:not(.collapsed) .hamburger-line.line-3 {
+            bottom: 50%;
+            transform: translateY(50%) rotate(-45deg);
+            background: var(--secondary-color);
+        }
 
-            [data-theme="dark"] .navbar-collapse {
-                background: rgba(15, 23, 42, 0.98);
-            }
+        /* Dark mode hamburger colors */
+        [data-theme="dark"] .hamburger-line {
+            background: rgba(255, 255, 255, 0.9);
+        }
 
-            /* Site name at the top when menu is open */
-            .navbar-collapse::before {
-                content: "Kickline Sports";
-                position: absolute;
-                top: 1rem;
-                left: 50%;
-                transform: translateX(-50%);
-                font-size: 1.4rem;
-                font-weight: 700;
-                color: var(--primary-color);
-                text-align: center;
-            }
+        [data-theme="dark"] .navbar-toggler:not(.collapsed) .hamburger-line.line-1,
+        [data-theme="dark"] .navbar-toggler:not(.collapsed) .hamburger-line.line-3 {
+            background: var(--secondary-color);
+        }
 
-            [data-theme="dark"] .navbar-collapse::before {
-                color: var(--secondary-color);
-            }
+        /* Hover effects */
+        .hamburger-menu:hover .hamburger-line.line-1 {
+            transform: translateY(-2px);
+        }
 
-            .navbar-nav {
-                margin-top: 3rem; /* Space for the site name */
-                padding: 0;
-                width: 100%;
-                flex-direction: column;
-                align-items: flex-start; /* Navigation items on the left */
-                gap: 0.5rem;
-            }
+        .hamburger-menu:hover .hamburger-line.line-3 {
+            transform: translateY(2px);
+        }
 
-            .navbar-nav .nav-item {
-                width: 100%;
-                margin: 0;
-            }
+        .navbar-toggler:not(.collapsed):hover .hamburger-line.line-1 {
+            transform: translateY(-50%) rotate(45deg) scale(1.1);
+        }
 
-            .navbar-nav .nav-link {
-                padding: 1rem 1.5rem;
-                font-size: 1.1rem;
-                font-weight: 500;
-                border-radius: 8px;
-                margin: 0;
-                text-align: left;
-                width: 100%;
-                transition: all 0.3s ease;
-                display: block;
-            }
-
-            .navbar-nav .nav-link:hover {
-                background: var(--bg-light);
-                color: var(--primary-color);
-                transform: translateX(10px);
-            }
-
-            [data-theme="dark"] .navbar-nav .nav-link:hover {
-                background: var(--bg-card);
-                color: var(--text-primary);
-            }
-
-            /* Close button for mobile menu */
-            .navbar-collapse.show::after {
-                content: "×";
-                position: absolute;
-                top: 1rem;
-                right: 1.5rem;
-                font-size: 2rem;
-                color: var(--text-body);
-                cursor: pointer;
-                z-index: 1050;
-            }
-
-            [data-theme="dark"] .navbar-collapse.show::after {
-                color: var(--text-primary);
-            }
+        .navbar-toggler:not(.collapsed):hover .hamburger-line.line-3 {
+            transform: translateY(50%) rotate(-45deg) scale(1.1);
         }
 
         /* Enhanced Mobile Touch Targets */
@@ -1818,8 +1747,10 @@
         <div class="container">
             <a class="navbar-brand" href="{% url 'Kickline:home' %}"><i class="fas fa-running"></i>Kickline Sports</a>
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler hamburger-menu" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="hamburger-line line-1"></span>
+                <span class="hamburger-line line-2"></span>
+                <span class="hamburger-line line-3"></span>
             </button>
             
             <div class="collapse navbar-collapse" id="navbarNav">
