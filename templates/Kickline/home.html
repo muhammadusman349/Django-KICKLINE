@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Kickline - Premium Sports Equipment{% endblock %}
 
 {% block content %}
@@ -148,6 +148,36 @@
     </div>
 </section>
 {% endif %}
+
+<!-- Our Compliance Section -->
+<section class="section" style="background: var(--bg-light);">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Our Compliance</h2>
+            <p class="lead" style="color: var(--text-body); max-width: 600px; margin: 0 auto;">
+                We adhere to international standards and certifications to ensure the highest quality and safety in all our sports equipment.
+            </p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="card shadow-lg border-0 compliance-card">
+                    <img src="{% static 'images/compliances/Our Comilance.jpeg' %}" 
+                         class="img-fluid rounded" 
+                         alt="Our Compliance Certifications">
+                    <div class="card-body text-center p-4">
+                        <h4 class="mb-3" style="color: var(--primary-color);">
+                            <i class="fas fa-certificate me-2"></i>Quality & Safety Certified
+                        </h4>
+                        <p class="mb-0" style="color: var(--text-body);">
+                            Our commitment to excellence is demonstrated through our compliance with international quality standards, 
+                            ensuring every product meets the highest safety and performance requirements.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Why Choose Us Section -->
 <section class="section Kickline-features-section" style="background: var(--background-color);">
