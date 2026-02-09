@@ -1103,6 +1103,20 @@
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
 
+        /* Compliance section dark mode */
+        [data-theme="dark"] .compliance-card {
+            background: var(--bg-card);
+            border: 1px solid var(--bg-light);
+        }
+
+        [data-theme="dark"] .compliance-card h4 {
+            color: var(--secondary-color) !important;
+        }
+
+        [data-theme="dark"] .compliance-card p {
+            color: var(--text-primary) !important;
+        }
+
         /* WhatsApp button dark mode */
         [data-theme="dark"] .whatsapp-float {
             box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
@@ -1143,56 +1157,16 @@
                 border-bottom: 1px solid rgba(148, 163, 184, 0.1);
             }
 
-            .navbar-nav {
-                text-align: center;
-                margin-top: 1rem;
-                padding-bottom: 1rem;
-                width: 100%;
-            }
-
-            .navbar-nav .nav-item {
-                margin: 0.5rem 0;
-                width: 100%;
-            }
-
-            .navbar-nav .nav-link {
-                padding: 0.75rem 1rem;
-                font-size: 1rem;
-                font-weight: 500;
-                border-radius: 8px;
-                margin: 0 1rem;
-                transition: all 0.3s ease;
-            }
-
-            .navbar-nav .nav-link:hover {
-                background: var(--bg-light);
-                color: var(--primary-color);
-            }
-
-            [data-theme="dark"] .navbar-nav .nav-link:hover {
-                background: var(--bg-card);
-                color: var(--text-primary);
-            }
-
-            .theme-toggle {
+            /* Position hamburger toggle button on the right */
+            .navbar-toggler {
                 position: absolute;
                 top: 50%;
-                right: 60px;
+                right: 15px;
                 transform: translateY(-50%);
-                margin: 0;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1050;
-            }
-
-            .navbar-toggler {
                 border: none;
                 padding: 0.5rem;
                 background: transparent;
+                z-index: 1050;
             }
 
             .navbar-toggler:focus {
@@ -1205,42 +1179,119 @@
                 height: 1.5em;
             }
 
-            /* Mobile brand positioning */
+            /* Center the brand name */
             .navbar-brand {
                 position: absolute;
                 left: 50%;
-                transform: translateX(-50%);
+                top: 50%;
+                transform: translate(-50%, -50%);
                 font-size: 1.2rem;
                 font-weight: 700;
+                z-index: 1049;
             }
 
-            /* Mobile menu animation */
-            .navbar-collapse {
+            /* Theme toggle button positioned on the left */
+            .theme-toggle {
                 position: absolute;
-                top: 100%;
+                top: 50%;
+                left: 15px;
+                transform: translateY(-50%);
+                margin: 0;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1050;
+            }
+
+            /* Mobile menu layout when opened */
+            .navbar-collapse {
+                position: fixed;
+                top: 80px; /* Below the navbar */
                 left: 0;
                 right: 0;
+                bottom: 0;
                 background: var(--background-color);
-                border-radius: 0 0 15px 15px;
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-                animation: slideDown 0.3s ease-out;
+                padding: 2rem 1rem 1rem;
+                z-index: 1040;
+                display: flex;
+                flex-direction: column;
             }
 
             [data-theme="dark"] .navbar-collapse {
                 background: rgba(15, 23, 42, 0.98);
-                border-top: 1px solid rgba(148, 163, 184, 0.1);
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
             }
 
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+            /* Site name at the top when menu is open */
+            .navbar-collapse::before {
+                content: "Kickline Sports";
+                position: absolute;
+                top: 1rem;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 1.4rem;
+                font-weight: 700;
+                color: var(--primary-color);
+                text-align: center;
+            }
+
+            [data-theme="dark"] .navbar-collapse::before {
+                color: var(--secondary-color);
+            }
+
+            .navbar-nav {
+                margin-top: 3rem; /* Space for the site name */
+                padding: 0;
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start; /* Navigation items on the left */
+                gap: 0.5rem;
+            }
+
+            .navbar-nav .nav-item {
+                width: 100%;
+                margin: 0;
+            }
+
+            .navbar-nav .nav-link {
+                padding: 1rem 1.5rem;
+                font-size: 1.1rem;
+                font-weight: 500;
+                border-radius: 8px;
+                margin: 0;
+                text-align: left;
+                width: 100%;
+                transition: all 0.3s ease;
+                display: block;
+            }
+
+            .navbar-nav .nav-link:hover {
+                background: var(--bg-light);
+                color: var(--primary-color);
+                transform: translateX(10px);
+            }
+
+            [data-theme="dark"] .navbar-nav .nav-link:hover {
+                background: var(--bg-card);
+                color: var(--text-primary);
+            }
+
+            /* Close button for mobile menu */
+            .navbar-collapse.show::after {
+                content: "×";
+                position: absolute;
+                top: 1rem;
+                right: 1.5rem;
+                font-size: 2rem;
+                color: var(--text-body);
+                cursor: pointer;
+                z-index: 1050;
+            }
+
+            [data-theme="dark"] .navbar-collapse.show::after {
+                color: var(--text-primary);
             }
         }
 
