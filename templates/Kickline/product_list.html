@@ -9,8 +9,8 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h1 class="display-4 fw-bold" style="color: var(--primary-color);">Our Products</h1>
-                <p class="lead" style="color: var(--text-light);">Discover premium sports equipment for every athlete</p>
+                <h1 class="display-4 fw-bold" style="color: var(--text-primary);">Our Products</h1>
+                <p class="lead" style="color: var(--text-body);">Discover premium sports equipment for every athlete</p>
             </div>
             <div class="col-md-4 text-md-end">
                 <div class="dropdown">
@@ -33,10 +33,12 @@
 <section class="section">
     <div class="container">
         {% if current_category %}
-        <div class="alert" style="background: var(--gradient-gold); border: 2px solid var(--secondary-color); border-radius: 15px; color: var(--primary-color);">
-            <i class="fas fa-info-circle me-2"></i>
-            Showing products in category: <strong>{{ current_category }}</strong>
-            <a href="{% url 'Kickline:product_list' %}" class="btn btn-sm btn-outline-primary ms-3">Show All</a>
+        <div class="alert" style="background: var(--bg-card); border: 2px solid var(--secondary-color); border-radius: 15px; color: var(--text-primary);">
+            <i class="fas fa-info-circle me-2" style="color: var(--secondary-color);"></i>
+            Showing products in category: <strong style="color: var(--text-primary);">{{ current_category }}</strong>
+            <a href="{% url 'Kickline:product_list' %}" class="btn btn-sm btn-outline-primary ms-3" style="border-color: var(--secondary-color); color: var(--secondary-color);">
+                <i class="fas fa-times me-1"></i>Show All
+            </a>
         </div>
         {% endif %}
 
@@ -101,9 +103,9 @@
             {% empty %}
             <div class="col-12">
                 <div class="empty-state text-center py-5">
-                    <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
-                    <h3 style="color: var(--primary-color);">No products found</h3>
-                    <p style="color: var(--text-light);">Check back later for new arrivals!</p>
+                    <i class="fas fa-box-open fa-4x mb-3" style="color: var(--text-muted);"></i>
+                    <h3 style="color: var(--text-primary);">No products found</h3>
+                    <p style="color: var(--text-body);">Check back later for new arrivals!</p>
                     <a href="{% url 'Kickline:home' %}" class="btn btn-primary">
                         <i class="fas fa-home me-2"></i>Back to Home
                     </a>
@@ -158,8 +160,8 @@
     <div class="container">
         <div class="row justify-content-center text-center">
             <div class="col-lg-8">
-                <h2 class="mb-4" style="color: var(--primary-color);">Need Help Finding the Right Equipment?</h2>
-                <p class="lead mb-4" style="color: var(--text-light);">Our sports experts are here to help you choose the perfect gear for your needs.</p>
+                <h2 class="mb-4" style="color: var(--text-primary);">Need Help Finding the Right Equipment?</h2>
+                <p class="lead mb-4" style="color: var(--text-body);">Our sports experts are here to help you choose the perfect gear for your needs.</p>
                 <div class="d-flex gap-3 justify-content-center flex-wrap">
                     <a href="https://wa.me/{{ WHATSAPP_NUMBER_1|cut:'+' }}?text=Hi, I need help choosing sports equipment" 
                        class="btn btn-success btn-lg contact-btn" target="_blank">

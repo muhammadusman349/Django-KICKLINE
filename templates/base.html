@@ -14,46 +14,85 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Premium Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Premium Google Fonts - Professional Sports Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* Kickline Bold & Premium Color Palette (Crimson Red Accent) */
-            --primary-color: #0F172A; /* Deep Navy - strength, authority, trust */
-            --secondary-color: #3B82F6; /* Crimson Red - energetic premium accent */
-            --background-color: #F4F4F4; /* Light Gray - modern balance */
-            --text-primary: #1A1A1A; /* Dark Charcoal - strong readability */
-            --text-secondary: #FFFFFF; /* White - clean contrast, overlay use */
-            --text-light: #666666; /* Medium gray for secondary text */
-            --accent-color: #3B82F6; /* Crimson accent */
-            --success-color: #16a34a; /* Balanced green */
-            --warning-color: #FF6B6B; /* Coral warning to avoid yellow */
+            /* Kickline Sports - Premium Professional UI/UX Palette */
+            --primary-color: #0F172A; /* Dark Navy - authoritative base */
+            --secondary-color: #0D9488; /* Restrained Teal - branding accent */
+            --accent-color: #14B8A6; /* Bright Teal - interactivity */
+            
+            /* Soft Neutral Backgrounds - No Pure White */
+            --background-color: #F1F5F9; /* Soft Neutral Slate - main background */
+            --bg-light: #F8FAFC; /* Lighter Neutral - sections */
+            --bg-card: #E2E8F0; /* Balanced Slate - card backgrounds */
+            --bg-dark: #0F172A; /* Dark Navy - footer, dark elements */
+            
+            /* High Contrast Text - WCAG Standard Compliance */
+            --text-primary: #0F172A; /* Darkest Navy - headings */
+            --text-secondary: #334155; /* Slate Blue - body text */
+            --text-body: #475569; /* Medium Slate - secondary body */
+            --text-light: #64748B; /* Darker Slate Gray - minimum for meta */
+            --text-muted: #94A3B8; /* Muted - only for non-textual elements */
+            --text-white: #F8FAFC; /* Neutral white for dark backgrounds */
             --dark-color: #0F172A;
-            --bg-light: #F4F4F4;
             
-            /* Kickline Gradients */
-            --gradient-primary: linear-gradient(135deg, #0F172A 0%, #1F2937 100%);
-            --gradient-secondary: linear-gradient(135deg, #93C5FD 0%, #3B82F6 100%);
-            --gradient-dark: linear-gradient(135deg, #0F172A 0%, #1F2937 100%);
-            --gradient-hero: linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.45) 100%);
-            --gradient-accent: linear-gradient(45deg, #0F172A, #3B82F6, #0F172A);
-            /* Keep the same variable name but switch to crimson so existing usage works */
-            --gradient-gold: linear-gradient(135deg, #93C5FD 0%, #3B82F6 50%, #93C5FD 100%);
+            /* Feedback Colors */
+            --success-color: #0D9488; /* Teal success */
+            --warning-color: #D97706; /* High contrast amber */
+            --error-color: #DC2626; /* High contrast red */
             
-            /* Kickline Shadows */
-            --shadow: 0 15px 35px rgba(14, 28, 54, 0.15);
-            --shadow-hover: 0 25px 50px rgba(14, 28, 54, 0.25);
-            --shadow-card: 0 8px 25px rgba(14, 28, 54, 0.08);
-            /* Crimson glow instead of gold */
-            --shadow-neon: 0 0 20px rgba(59, 130, 246, 0.35);
-            --shadow-gold: 0 0 25px rgba(59, 130, 246, 0.35);
+            /* Gradients and Shadows */
+            --gradient-primary: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            --gradient-secondary: linear-gradient(135deg, #0D9488 0%, #14B8A6 100%);
+            --gradient-dark: linear-gradient(135deg, #0F172A 0%, #020617 100%);
+            
+            /* Professional Shadows */
+            --shadow: 0 1px 3px rgba(15, 23, 42, 0.1);
+            --shadow-hover: 0 10px 15px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -2px rgba(15, 23, 42, 0.05);
+            --shadow-card: 0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -1px rgba(15, 23, 42, 0.06);
+            --shadow-teal: 0 0 15px rgba(13, 148, 136, 0.25);
         }
 
+        /* Dark Mode Variables */
+        [data-theme="dark"] {
+            --primary-color: #0F172A;
+            --secondary-color: #0D9488;
+            --accent-color: #14B8A6;
+            
+            --background-color: #0F172A;
+            --bg-light: #1E293B;
+            --bg-card: #334155;
+            --bg-dark: #020617;
+            
+            --text-primary: #F8FAFC;
+            --text-secondary: #E2E8F0;
+            --text-body: #CBD5E1;
+            --text-light: #94A3B8;
+            --text-muted: #64748B;
+            --text-white: #F8FAFC;
+            --dark-color: #020617;
+            
+            --gradient-primary: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            --gradient-secondary: linear-gradient(135deg, #0D9488 0%, #14B8A6 100%);
+            --gradient-dark: linear-gradient(135deg, #020617 0%, #0F172A 100%);
+            
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --shadow-teal: 0 0 15px rgba(13, 148, 136, 0.4);
+        }
+
+        /* Smooth theme transition */
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Disable transition for performance on page load */
+        .no-transition * {
+            transition: none !important;
         }
 
         body {
@@ -68,164 +107,141 @@
             letter-spacing: -0.01em;
         }
 
-        /* Modern Typography Hierarchy */
+        /* Typography Hierarchy - Professional Sports Font Pairing */
         
-        /* Primary Headings: Space Grotesk for impact and modernity */
-        h1, h2, h3,
-        .navbar-brand,
-        .section-title,
-        .hero-title {
-            font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-weight: 700;
-            letter-spacing: -0.02em;
+        /* Primary Headings (H1, H2): Oswald - Strong, Athletic, Confident */
+        h1, h2, .hero-title, .section-title {
+            font-family: 'Oswald', 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
             line-height: 1.2;
         }
         
         /* Large Display Text */
         h1, .hero-title {
-            font-weight: 800;
-            letter-spacing: -0.03em;
+            font-weight: 700;
+            letter-spacing: 0.01em;
         }
         
         /* Section Titles */
         h2, .section-title {
-            font-weight: 700;
-            letter-spacing: -0.025em;
+            font-weight: 600;
+            letter-spacing: 0.02em;
         }
         
-        /* Subsection Headings */
-        h3 {
-            font-weight: 600;
-            letter-spacing: -0.02em;
-        }
-
-        /* Secondary Headings: Outfit for versatility */
-        h4, h5, h6,
-        .subheading,
-        .section-subtitle,
-        .card-title {
-            font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        /* Secondary Headings (H3-H6): Space Grotesk - Modern, Geometric, Clean */
+        h3, h4, h5, h6,
+        .navbar-brand,
+        .card-title,
+        .feature-title {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
             font-weight: 600;
             letter-spacing: -0.01em;
             line-height: 1.3;
         }
         
+        h3 { font-weight: 600; }
         h4 { font-weight: 600; }
         h5 { font-weight: 500; }
         h6 { font-weight: 500; }
 
-        /* Body Text: Inter for excellent readability */
-        p, .card-text, .feature-text {
+        /* Body Text: Inter - Neutral, Highly Readable, Professional */
+        body, p, .card-text, .feature-text, .nav-link, .btn, 
+        .footer p, .footer a, 
+        input, textarea, select,
+        .price, .text-body,
+        small, .text-muted, .caption,
+        .breadcrumb, .timestamp, .meta-info {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        /* Body text weight */
+        p, .card-text, .feature-text, .footer p, .footer a,
+        small, .text-muted, .caption, .meta-info {
             font-weight: 400;
-            letter-spacing: -0.005em;
+            letter-spacing: 0;
             line-height: 1.6;
         }
         
-        /* Small Text */
-        small, .small {
-            font-size: 0.875rem;
-            font-weight: 400;
-            letter-spacing: 0;
+        /* Emphasis & Interactive Elements: Inter Medium */
+        .btn, .nav-link, label, .form-label, 
+        .badge, .tag, .category-label {
+            font-weight: 500;
+            letter-spacing: 0.3px;
         }
         
-        /* Accent text and highlights */
-        .accent-text,
-        .slogan,
-        .highlight-accent,
+        /* Price & Accent Text */
         .price {
-            font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: -0.01em;
         }
         
-        /* Navigation Links */
-        .nav-link {
-            font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-weight: 500;
-            letter-spacing: 0.01em;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-        
-        /* Buttons */
-        .btn {
-            font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        /* Accent Highlights */
+        .accent-text, .slogan, .highlight-accent {
             font-weight: 600;
             letter-spacing: 0.02em;
             text-transform: uppercase;
-            font-size: 0.875rem;
-        }
-        
-        /* Code and Monospace */
-        code, pre, .monospace {
-            font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
-            font-weight: 400;
         }
 
-        /* Navigation - Kickline Premium */
+        /* Navigation - Minimal Premium High Contrast */
         .navbar {
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(248, 250, 252, 0.98);
             backdrop-filter: blur(15px);
-            box-shadow: 0 4px 30px rgba(14, 28, 54, 0.1);
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
             transition: all 0.3s ease;
-            padding: 1.2rem 0;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
-        }
-
-        @keyframes blink-glow {
-            0%, 100% {
-                text-shadow: 0 2px 4px rgba(15, 23, 42, 0.1);
-            }
-            50% {
-                text-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 2px 4px rgba(15, 23, 42, 0.1);
-            }
+            padding: 1.4rem 0;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.05);
         }
 
         .navbar-brand {
-            font-size: 3rem; /* Increased size */
-            font-family: 'Harlow Solid', 'Harlow Solid Italic', 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-weight: 800;
-            color: var(--primary-color) !important;
-            text-shadow: 0 2px 4px rgba(14, 28, 54, 0.1);
+            font-size: 2.8rem;
+            font-family: 'Oswald', 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: var(--text-primary) !important;
             transition: all 0.3s ease;
-            letter-spacing: -0.03em;
-            animation: blink-glow 3s infinite ease-in-out; /* Added blinking effect */
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
         }
 
         .navbar-brand:hover {
             color: var(--secondary-color) !important;
-            text-shadow: 0 0 15px rgba(59, 130, 246, 0.35);
+            transform: scale(1.02);
+        }
+
+        .navbar-brand i {
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            margin-right: 12px;
         }
 
         .navbar-nav .nav-link {
             font-weight: 600;
-            color: var(--primary-color) !important;
+            color: var(--text-secondary) !important;
             margin: 0 1.2rem;
             position: relative;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 0.95rem;
+            text-transform: none;
+            letter-spacing: 0.3px;
+            font-size: 1.25rem;
+            padding: 0.75rem 1rem;
         }
 
         .navbar-nav .nav-link:hover {
             color: var(--secondary-color) !important;
-            transform: translateY(-2px);
         }
 
         .navbar-nav .nav-link::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 3px;
-            bottom: -8px;
+            height: 2px;
+            bottom: -6px;
             left: 50%;
-            background: var(--gradient-gold);
+            background: var(--secondary-color);
             transition: all 0.3s ease;
             transform: translateX(-50%);
-            border-radius: 2px;
-            box-shadow: var(--shadow-gold);
+            border-radius: 1px;
         }
 
         .navbar-nav .nav-link:hover::after {
@@ -488,20 +504,22 @@
                 0 0 30px rgba(59, 130, 246, 0.2);
         }
 
+        /* Cards - Balanced Neutrals High Contrast */
         .card {
-            border: none;
-            border-radius: 20px;
+            border: 1px solid var(--bg-card);
+            border-radius: 12px;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: var(--shadow-card);
             height: 100%;
             position: relative;
-            background: #ffffff;
+            background: var(--bg-light);
         }
 
         .card:hover {
-            transform: translateY(-15px) scale(1.02);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-hover);
+            border-color: var(--secondary-color);
         }
 
         .card::before {
@@ -511,17 +529,13 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: var(--gradient-gold);
+            background: var(--secondary-color);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
         .card:hover::before {
             opacity: 1;
-        }
-
-        .card:hover {
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.25), 0 25px 50px rgba(14, 28, 54, 0.15);
         }
 
         .card-img-top {
@@ -540,62 +554,61 @@
 
         .card-title {
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--text-primary);
             margin-bottom: 0.75rem;
             font-size: 1.25rem;
             line-height: 1.3;
         }
 
         .card-text {
-            color: var(--text-light);
-            font-size: 0.9rem;
+            color: var(--text-body);
+            font-size: 0.95rem;
             line-height: 1.6;
         }
 
         .price {
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             font-weight: 700;
             color: var(--secondary-color);
             margin: 1rem 0;
-            text-shadow: 0 1px 2px rgba(59, 130, 246, 0.2);
             letter-spacing: -0.01em;
         }
 
-        /* Buttons - Kickline Premium */
+        /* Buttons - Minimal Premium Teal Accent */
         .btn-primary {
-            background: var(--gradient-primary);
-            border: 2px solid var(--primary-color);
-            border-radius: 30px;
-            padding: 0.8rem 2.2rem;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(14, 28, 54, 0.2);
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            background: var(--secondary-color);
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            padding: 0.75rem 1.75rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow);
+            color: #FFFFFF;
+            text-transform: none;
+            letter-spacing: 0.3px;
             font-size: 0.9rem;
         }
 
         .btn-primary:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 25px rgba(14, 28, 54, 0.3), 0 8px 30px rgba(14, 28, 54, 0.15);
-            background: var(--gradient-dark);
-            border-color: var(--secondary-color);
-            color: var(--text-secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover), var(--shadow-teal);
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #FFFFFF;
         }
 
         .btn-outline-primary {
             border: 2px solid var(--secondary-color);
             color: var(--secondary-color);
-            border-radius: 30px;
-            padding: 0.8rem 2.2rem;
-            font-weight: 700;
-            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 0.75rem 1.75rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
             position: relative;
             overflow: hidden;
             background: transparent;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            text-transform: none;
+            letter-spacing: 0.3px;
             font-size: 0.9rem;
         }
 
@@ -606,7 +619,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--gradient-gold);
+            background: var(--secondary-color);
             transition: left 0.3s ease;
             z-index: -1;
         }
@@ -616,15 +629,15 @@
         }
 
         .btn-outline-primary:hover {
-            color: var(--primary-color);
+            color: #FFFFFF;
             border-color: var(--secondary-color);
-            transform: translateY(-4px);
-            box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
+            box-shadow: var(--shadow-hover);
         }
 
-        /* Section Styling */
+        /* Section Styling - Soft Neutral Section Transitions */
         .section {
             padding: 5rem 0;
+            background: var(--background-color);
         }
 
         .section-title {
@@ -633,7 +646,7 @@
             text-align: center;
             margin-bottom: 3.5rem;
             position: relative;
-            color: var(--primary-color);
+            color: var(--text-primary);
             letter-spacing: -0.025em;
             line-height: 1.1;
         }
@@ -641,21 +654,22 @@
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -15px;
+            bottom: -12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
-            height: 5px;
-            background: var(--gradient-gold);
-            border-radius: 3px;
-            box-shadow: var(--shadow-gold);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 2px;
         }
 
-        /* Categories Section - Dynamic Background */
+        /* Categories Section - Neutral UI/UX Background */
         .categories-section {
             position: relative;
-            color: white;
+            color: var(--text-primary);
             min-height: 600px;
+            background: var(--bg-light);
+            padding: 5rem 0;
         }
         
         .categories-section::before {
@@ -666,9 +680,8 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 30% 70%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 70% 30%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-                linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
+                radial-gradient(circle at 30% 70%, rgba(13, 148, 136, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(13, 148, 136, 0.03) 0%, transparent 50%);
             z-index: 1;
         }
         
@@ -677,31 +690,33 @@
             z-index: 2;
         }
         
-        /* Force readable dark text inside category cards */
-        .categories-section .card .card-body { background-color: #ffffff !important; color: var(--text-primary) !important; }
+        /* Force readable high-contrast text inside category cards */
+        .categories-section .card .card-body { background-color: var(--bg-light) !important; color: var(--text-primary) !important; }
         .categories-section .card .card-body h1,
         .categories-section .card .card-body h2,
         .categories-section .card .card-body h3,
         .categories-section .card .card-body h4,
         .categories-section .card .card-body h5,
-        .categories-section .card .card-body .card-title { color: var(--primary-color) !important; }
+        .categories-section .card .card-body .card-title { color: var(--text-primary) !important; }
         .categories-section .card .card-body p,
-        .categories-section .card .card-body .card-text { color: var(--text-light) !important; }
+        .categories-section .card .card-body .card-text { color: var(--text-body) !important; }
 
         .categories-section .section-title {
-            color: inherit;
+            color: var(--text-primary);
         }
         
         .categories-section .section-title::after {
-            background: var(--gradient-secondary);
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            background: var(--secondary-color);
+            box-shadow: none;
         }
 
-        /* Featured Products Section - Dynamic Background */
+        /* Featured Products Section - Neutral Background UI */
         .featured-products {
             position: relative;
-            color: white;
+            color: var(--text-primary);
             min-height: 700px;
+            background: var(--background-color);
+            padding: 5rem 0;
         }
 
         .featured-products::before {
@@ -712,9 +727,8 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
+                radial-gradient(circle at 25% 25%, rgba(13, 148, 136, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(13, 148, 136, 0.04) 0%, transparent 50%);
             z-index: 1;
         }
 
@@ -723,58 +737,618 @@
             z-index: 2;
         }
 
-        /* Force readable dark text inside product cards */
-        .featured-products .card .card-body { background-color: #ffffff !important; color: var(--text-primary) !important; }
+        /* Force readable high-contrast text inside product cards */
+        .featured-products .card .card-body { background-color: var(--bg-light) !important; color: var(--text-primary) !important; }
         .featured-products .card .card-body h1,
         .featured-products .card .card-body h2,
         .featured-products .card .card-body h3,
         .featured-products .card .card-body h4,
         .featured-products .card .card-body h5,
-        .featured-products .card .card-body .card-title { color: var(--primary-color) !important; }
+        .featured-products .card .card-body .card-title { color: var(--text-primary) !important; }
         .featured-products .card .card-body p,
-        .featured-products .card .card-body .card-text { color: var(--text-light) !important; }
+        .featured-products .card .card-body .card-text { color: var(--text-body) !important; }
         .featured-products .card .card-body .price { color: var(--secondary-color) !important; }
 
         .featured-products .section-title {
-            color: inherit;
+            color: var(--text-primary);
             text-shadow: none;
         }
 
         .featured-products .section-title::after {
-            background: var(--gradient-secondary);
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            background: var(--secondary-color);
+            box-shadow: none;
         }
 
-        /* Footer */
+        /* Footer - Dark Navy Contrast UI */
         .footer {
             background: var(--gradient-dark);
-            color: white;
-            padding: 3rem 0 1rem;
-            margin-top: 5rem;
+            color: var(--text-white);
+            padding: 4rem 0 1.5rem;
+            margin-top: 0;
+            border-top: 4px solid var(--secondary-color);
         }
 
         .footer h5 {
             color: var(--secondary-color);
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            font-size: 1rem;
+        }
+
+        .footer p {
+            color: #94A3B8;
+            line-height: 1.7;
         }
 
         .footer a {
-            color: #bdc3c7;
+            color: #64748B;
             text-decoration: none;
             transition: all 0.3s ease;
             font-weight: 500;
+            display: inline-block;
         }
 
         .footer a:hover {
             color: var(--secondary-color);
-            text-shadow: 0 0 8px rgba(59, 130, 246, 0.35);
             transform: translateX(3px);
         }
 
-        /* Responsive - Kickline Premium */
+        .footer hr {
+            border-color: rgba(148, 163, 184, 0.1);
+            margin: 2rem 0;
+        }
+
+        .footer .text-center p {
+            color: #475569;
+            font-size: 0.9rem;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            padding: 0;
+        }
+
+        .theme-toggle:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: var(--shadow-teal);
+        }
+
+        .theme-toggle i {
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover i {
+            transform: rotate(20deg);
+        }
+
+        /* Dark mode specific adjustments */
+        [data-theme="dark"] .navbar {
+            background: rgba(15, 23, 42, 0.98);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        [data-theme="dark"] .navbar-brand {
+            color: var(--text-primary) !important;
+        }
+
+        [data-theme="dark"] .navbar-nav .nav-link {
+            color: var(--text-secondary) !important;
+        }
+
+        [data-theme="dark"] .navbar-nav .nav-link:hover {
+            color: var(--secondary-color) !important;
+        }
+
+        /* Hero section dark mode */
+        [data-theme="dark"] .hero-section {
+            background: linear-gradient(135deg, #020617 0%, #0F172A 50%, #020617 100%);
+        }
+
+        [data-theme="dark"] .hero-section::before {
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(13, 148, 136, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(13, 148, 136, 0.15) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 30%, rgba(15, 23, 42, 0.1) 50%, transparent 70%);
+        }
+
+        [data-theme="dark"] .hero-section::after {
+            background-image: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid-dark" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grid-dark)"/></svg>');
+        }
+
+        [data-theme="dark"] .hero-slide::before {
+            background: linear-gradient(
+                135deg,
+                rgba(2, 6, 23, 0.9) 0%,
+                rgba(2, 6, 23, 0.5) 30%,
+                rgba(13, 148, 136, 0.1) 70%,
+                rgba(2, 6, 23, 0.7) 100%
+            );
+        }
+
+        [data-theme="dark"] .hero-overlay {
+            background: linear-gradient(
+                135deg,
+                rgba(2, 6, 23, 0.9) 0%,
+                rgba(2, 6, 23, 0.4) 40%,
+                rgba(13, 148, 136, 0.1) 60%,
+                rgba(2, 6, 23, 0.8) 100%
+            );
+        }
+
+        [data-theme="dark"] .hero-content {
+            color: var(--text-secondary);
+        }
+
+        [data-theme="dark"] .hero-title {
+            color: #ffffff;
+            text-shadow: 
+                0 0 40px rgba(13, 148, 136, 0.6),
+                3px 3px 12px rgba(0, 0, 0, 0.9),
+                -1px -1px 0 rgba(0, 0, 0, 0.8),
+                1px -1px 0 rgba(0, 0, 0, 0.8),
+                -1px 1px 0 rgba(0, 0, 0, 0.8),
+                1px 1px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        [data-theme="dark"] .hero-title .accent {
+            color: var(--secondary-color);
+            text-shadow: 
+                0 0 40px rgba(13, 148, 136, 0.8),
+                3px 3px 12px rgba(0, 0, 0, 0.9),
+                -1px -1px 0 rgba(0, 0, 0, 0.8),
+                1px -1px 0 rgba(0, 0, 0, 0.8),
+                -1px 1px 0 rgba(0, 0, 0, 0.8),
+                1px 1px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        [data-theme="dark"] .hero-subtitle {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        [data-theme="dark"] .btn-hero {
+            background: var(--gradient-primary);
+            border-color: var(--secondary-color);
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .btn-hero:hover {
+            background: var(--gradient-dark);
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .card {
+            background: var(--bg-light);
+            border-color: var(--bg-card);
+        }
+
+        [data-theme="dark"] .card-title {
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .card-text {
+            color: var(--text-body);
+        }
+
+        [data-theme="dark"] .section-title {
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .categories-section {
+            background: var(--bg-light);
+        }
+
+        [data-theme="dark"] .categories-section .card .card-body { 
+            background-color: var(--bg-card) !important; 
+        }
+
+        [data-theme="dark"] .categories-section .card .card-body .card-title { 
+            color: var(--text-primary) !important; 
+        }
+
+        [data-theme="dark"] .categories-section .card .card-body .card-text { 
+            color: var(--text-body) !important; 
+        }
+
+        [data-theme="dark"] .featured-products {
+            background: var(--background-color);
+        }
+
+        [data-theme="dark"] .featured-products .card .card-body { 
+            background-color: var(--bg-card) !important; 
+        }
+
+        [data-theme="dark"] .Kickline-product-card {
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        /* Feature boxes dark mode */
+        [data-theme="dark"] .Kickline-feature-box {
+            background: var(--bg-light);
+            border: 1px solid var(--bg-card);
+        }
+
+        [data-theme="dark"] .Kickline-feature-box:hover {
+            background: var(--bg-card);
+            border-color: var(--secondary-color);
+        }
+
+        /* Icon wrappers dark mode */
+        [data-theme="dark"] .icon-wrapper {
+            background: var(--gradient-primary);
+            color: var(--text-primary);
+            box-shadow: var(--shadow);
+        }
+
+        [data-theme="dark"] .icon-wrapper:hover {
+            box-shadow: 0 0 30px rgba(13, 148, 136, 0.3);
+        }
+
+        /* Feature titles and text dark mode */
+        [data-theme="dark"] .feature-title {
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .feature-text {
+            color: var(--text-body);
+        }
+
+        /* Empty state dark mode */
+        [data-theme="dark"] .empty-state {
+            background: var(--bg-light);
+            border: 1px solid var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        /* Product overlays dark mode */
+        [data-theme="dark"] .product-overlay {
+            background: rgba(2, 6, 23, 0.9);
+        }
+
+        [data-theme="dark"] .Kickline-product-card .product-overlay {
+            background: rgba(2, 6, 23, 0.95);
+        }
+
+        /* Card overlays dark mode */
+        [data-theme="dark"] .card-overlay {
+            background: rgba(2, 6, 23, 0.9);
+        }
+
+        /* Badges dark mode */
+        [data-theme="dark"] .Kickline-featured-badge {
+            background: var(--gradient-primary) !important;
+            color: var(--text-primary) !important;
+            box-shadow: var(--shadow);
+        }
+
+        [data-theme="dark"] .Kickline-category-badge {
+            background: var(--bg-card) !important;
+            color: var(--text-primary) !important;
+            border: 1px solid var(--secondary-color);
+        }
+
+        /* Button actions dark mode */
+        [data-theme="dark"] .btn-action {
+            background: var(--bg-card);
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        [data-theme="dark"] .btn-action:hover {
+            background: var(--secondary-color);
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .Kickline-feature-box:hover {
+            background: var(--bg-card);
+            border-color: var(--secondary-color);
+        }
+
+        [data-theme="dark"] .footer p {
+            color: #CBD5E1;
+        }
+
+        [data-theme="dark"] .footer a {
+            color: #94A3B8;
+        }
+
+        [data-theme="dark"] .footer a:hover {
+            color: var(--secondary-color);
+        }
+
+        [data-theme="dark"] .footer .text-center p {
+            color: #64748B;
+        }
+
+        [data-theme="dark"] .footer h5 {
+            color: var(--secondary-color);
+        }
+
+        [data-theme="dark"] input,
+        [data-theme="dark"] textarea,
+        [data-theme="dark"] select {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border-color: var(--text-muted);
+        }
+
+        [data-theme="dark"] .alert {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border-color: var(--text-muted);
+        }
+
+        [data-theme="dark"] .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* WhatsApp button dark mode */
+        [data-theme="dark"] .whatsapp-float {
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        [data-theme="dark"] .whatsapp-float:hover {
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Product badge dark mode */
+        [data-theme="dark"] .product-badge {
+            background: var(--bg-card);
+            border: 2px solid var(--secondary-color);
+        }
+
+        /* Product actions dark mode */
+        [data-theme="dark"] .product-actions .btn {
+            background: var(--bg-card);
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        [data-theme="dark"] .product-actions .btn:hover {
+            background: var(--secondary-color);
+            color: var(--text-primary);
+        }
+
+        /* Mobile Theme Toggle & Navbar Improvements */
+        @media (max-width: 991px) {
+            .navbar {
+                background: var(--background-color);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            [data-theme="dark"] .navbar {
+                background: rgba(15, 23, 42, 0.95);
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            }
+
+            .navbar-nav {
+                text-align: center;
+                margin-top: 1rem;
+                padding-bottom: 1rem;
+                width: 100%;
+            }
+
+            .navbar-nav .nav-item {
+                margin: 0.5rem 0;
+                width: 100%;
+            }
+
+            .navbar-nav .nav-link {
+                padding: 0.75rem 1rem;
+                font-size: 1rem;
+                font-weight: 500;
+                border-radius: 8px;
+                margin: 0 1rem;
+                transition: all 0.3s ease;
+            }
+
+            .navbar-nav .nav-link:hover {
+                background: var(--bg-light);
+                color: var(--primary-color);
+            }
+
+            [data-theme="dark"] .navbar-nav .nav-link:hover {
+                background: var(--bg-card);
+                color: var(--text-primary);
+            }
+
+            .theme-toggle {
+                position: absolute;
+                top: 50%;
+                right: 60px;
+                transform: translateY(-50%);
+                margin: 0;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1050;
+            }
+
+            .navbar-toggler {
+                border: none;
+                padding: 0.5rem;
+                background: transparent;
+            }
+
+            .navbar-toggler:focus {
+                box-shadow: none;
+                outline: none;
+            }
+
+            .navbar-toggler-icon {
+                width: 1.5em;
+                height: 1.5em;
+            }
+
+            /* Mobile brand positioning */
+            .navbar-brand {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 1.2rem;
+                font-weight: 700;
+            }
+
+            /* Mobile menu animation */
+            .navbar-collapse {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--background-color);
+                border-radius: 0 0 15px 15px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+                animation: slideDown 0.3s ease-out;
+            }
+
+            [data-theme="dark"] .navbar-collapse {
+                background: rgba(15, 23, 42, 0.98);
+                border-top: 1px solid rgba(148, 163, 184, 0.1);
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+
+        /* Enhanced Mobile Touch Targets */
+        @media (max-width: 768px) {
+            .btn {
+                min-height: 44px;
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .btn-action {
+                width: 48px;
+                height: 48px;
+            }
+
+            .product-actions {
+                gap: 12px;
+            }
+
+            .whatsapp-float {
+                width: 60px;
+                height: 60px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 24px;
+            }
+
+            .whatsapp-float i {
+                margin-top: 16px;
+            }
+
+            /* Mobile Form Improvements */
+            .form-control, .form-select {
+                font-size: 1rem;
+                padding: 0.75rem;
+                min-height: 44px;
+            }
+
+            .form-label {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+                font-weight: 500;
+            }
+
+            /* Mobile Card Spacing */
+            .card {
+                margin-bottom: 1rem;
+            }
+
+            .product-card {
+                margin-bottom: 1.5rem;
+            }
+
+            /* Mobile Badge Adjustments */
+            .Kickline-category-badge {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .Kickline-featured-badge {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        /* Extra Small Mobile (Phones in portrait) */
+        @media (max-width: 576px) {
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+                margin-bottom: 2rem;
+            }
+
+            .btn-hero {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            .feature-box {
+                margin-bottom: 1.5rem;
+            }
+
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 15px;
+                right: 15px;
+                font-size: 20px;
+            }
+
+            .whatsapp-float i {
+                margin-top: 14px;
+            }
+        }
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2.8rem;
@@ -1023,23 +1597,24 @@
 
         /* Badges */
         .Kickline-featured-badge {
-            background: var(--gradient-gold) !important;
-            color: var(--primary-color) !important;
+            background: linear-gradient(135deg, #FFD700, #FFA500) !important;
+            color: #1A1A1A !important;
             font-weight: 700;
             padding: 0.5rem 1rem;
             border-radius: 20px;
-            box-shadow: var(--shadow-gold);
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
         }
 
         .Kickline-category-badge {
-            background: var(--primary-color) !important;
-            color: var(--text-secondary) !important;
+            background: var(--secondary-color) !important;
+            color: var(--text-primary) !important;
             font-weight: 600;
             padding: 0.4rem 0.8rem;
             border-radius: 15px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             font-size: 0.75rem;
+            border: 2px solid var(--secondary-color);
         }
 
         /* Feature Boxes */
@@ -1125,6 +1700,18 @@
             color: var(--text-primary) !important;
             text-shadow: none !important;
         }
+        
+        /* Dark mode override for categories section */
+        [data-theme="dark"] .categories-section {
+            background: var(--bg-dark) !important;
+        }
+        [data-theme="dark"] .categories-section .section-title,
+        [data-theme="dark"] .categories-section p,
+        [data-theme="dark"] .categories-section .text-muted,
+        [data-theme="dark"] .categories-section .card-title,
+        [data-theme="dark"] .categories-section .card-text {
+            color: var(--text-primary) !important;
+        }
         {% endif %}
         
         {% if backgrounds.bg_featured %}
@@ -1153,6 +1740,18 @@
             color: var(--text-primary) !important;
             text-shadow: none !important;
         }
+        
+        /* Dark mode override for featured products */
+        [data-theme="dark"] .featured-products {
+            background: var(--background-color) !important;
+        }
+        [data-theme="dark"] .featured-products .section-title,
+        [data-theme="dark"] .featured-products p,
+        [data-theme="dark"] .featured-products .text-muted,
+        [data-theme="dark"] .featured-products .card-title,
+        [data-theme="dark"] .featured-products .card-text {
+            color: var(--text-primary) !important;
+        }
         {% endif %}
         
         {% if backgrounds.bg_hero %}
@@ -1166,16 +1765,14 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'Kickline:home' %}">
-                <i class="fas fa-running"></i> Kickline Sports
-            </a>
+            <a class="navbar-brand" href="{% url 'Kickline:home' %}"><i class="fas fa-running"></i>Kickline Sports</a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'Kickline:home' %}">Home</a>
                     </li>
@@ -1187,6 +1784,11 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'Kickline:contact' %}">Contact</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                            <i class="fas fa-moon"></i>
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -1250,6 +1852,61 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Theme Switching JavaScript -->
+    <script>
+        // Theme Switching functionality
+        (function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            const icon = themeToggle ? themeToggle.querySelector('i') : null;
+            
+            // Get saved theme from localStorage or default to light
+            const getSavedTheme = () => localStorage.getItem('kickline-theme') || 'light';
+            
+            // Apply theme
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    body.setAttribute('data-theme', 'dark');
+                    if (icon) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    }
+                } else {
+                    body.removeAttribute('data-theme');
+                    if (icon) {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    }
+                }
+                localStorage.setItem('kickline-theme', theme);
+            };
+            
+            // Toggle theme
+            const toggleTheme = () => {
+                const currentTheme = body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            };
+            
+            // Initialize
+            const initTheme = () => {
+                const savedTheme = getSavedTheme();
+                applyTheme(savedTheme);
+                
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', toggleTheme);
+                }
+            };
+            
+            // Run immediately and also on DOMContentLoaded as fallback
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initTheme);
+            } else {
+                initTheme();
+            }
+        })();
+    </script>
     
     {% block extra_js %}
     {% endblock %}

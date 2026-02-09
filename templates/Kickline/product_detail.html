@@ -4,18 +4,29 @@
 {% block title %}{{ product.name }} - Kickline{% endblock %}
 
 {% block content %}
-<div class="bg-light py-4">
+<!-- Page Header -->
+<section class="py-5" style="background: var(--background-color);">
     <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a href="{% url 'Kickline:home' %}" class="text-decoration-none">Home</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'Kickline:product_list' %}" class="text-decoration-none">Products</a></li>
-                <li class="breadcrumb-item"><a href="{{ category.get_absolute_url }}" class="text-decoration-none">{{ category.name }}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
-            </ol>
-        </nav>
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-4 fw-bold" style="color: var(--text-primary);">Our Products</h1>
+                <p class="lead" style="color: var(--text-body);">Discover premium sports equipment for every athlete</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <div class="breadcrumb-wrapper">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 justify-content-end">
+                            <li class="breadcrumb-item"><a href="{% url 'Kickline:home' %}" class="text-decoration-none" style="color: var(--text-secondary);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'Kickline:product_list' %}" class="text-decoration-none" style="color: var(--text-secondary);">Products</a></li>
+                            <li class="breadcrumb-item"><a href="{{ category.get_absolute_url }}" class="text-decoration-none" style="color: var(--text-secondary);">{{ category.name }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page" style="color: var(--text-primary);">{{ product.name }}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>
 
 <section class="section product-detail-section">
     <div class="container">
@@ -37,10 +48,10 @@
                                  id="mainImage"
                                  data-bs-toggle="modal" data-bs-target="#productLightbox">
                         {% else %}
-                            <div class="d-flex align-items-center justify-content-center bg-secondary-subtle rounded-3" style="min-height: 450px;">
+                            <div class="d-flex align-items-center justify-content-center" style="min-height: 450px; background: var(--bg-card);">
                                 <div class="text-center p-4">
-                                    <i class="fas fa-image fa-4x text-muted mb-3"></i>
-                                    <p class="text-muted mb-0">No image available</p>
+                                    <i class="fas fa-image fa-4x mb-3" style="color: var(--text-muted);"></i>
+                                    <p class="mb-0" style="color: var(--text-body);">No image available</p>
                                 </div>
                             </div>
                         {% endif %}
@@ -75,27 +86,27 @@
                         {% endif %}
                     </div>
                     
-                    <h1 class="h2 fw-bold mb-4" style="color: var(--primary-color);">{{ product.name }}</h1>
+                    <h1 class="h2 fw-bold mb-4" style="color: var(--text-primary);">{{ product.name }}</h1>
                     
                     <div class="price-section mb-4">
-                        <span class="h1 fw-bolder" style="color: var(--secondary-color); text-shadow: 0 2px 4px rgba(255, 215, 0, 0.2);">${{ product.price }}</span>
+                        <span class="h1 fw-bolder" style="color: var(--secondary-color);">${{ product.price }}</span>
                         <div class="mt-2">
-                            <span class="badge bg-light text-dark fs-6 px-3 py-2">
+                            <span class="badge" style="background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--secondary-color);">
                                 <i class="fas fa-ruler-combined me-2"></i>Size: {{ product.size|default:'N/A' }}
                             </span>
                         </div>
                     </div>
                     
                     <div class="description mb-4">
-                        <h5 class="fw-semibold mb-3" style="color: var(--primary-color);">Description</h5>
-                        <p style="color: var(--text-light); line-height: 1.7;">{{ product.description|linebreaks }}</p>
+                        <h5 class="fw-semibold mb-3" style="color: var(--text-primary);">Description</h5>
+                        <p style="color: var(--text-body); line-height: 1.7;">{{ product.description|linebreaks }}</p>
                     </div>
 
                     <!-- Contact Buttons -->
                     <div class="card Kickline-contact-card shadow-sm mb-4">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold mb-3" style="color: var(--primary-color);">Interested in this product?</h5>
-                            <p class="card-text mb-4" style="color: var(--text-light);">Contact us directly for more information or to place an order.</p>
+                            <h5 class="card-title fw-bold mb-3" style="color: var(--text-primary);">Interested in this product?</h5>
+                            <p class="card-text mb-4" style="color: var(--text-body);">Contact us directly for more information or to place an order.</p>
                             <div class="d-flex gap-3">
                                 <a href="{{ product.get_whatsapp_url }}" 
                                    class="btn btn-success contact-btn rounded-pill d-flex align-items-center flex-fill justify-content-center"
@@ -114,23 +125,23 @@
 
                     <!-- Product Features -->
                     <div class="features-section">
-                        <h5 class="fw-bold mb-4" style="color: var(--primary-color);">Why Choose This Product?</h5>
+                        <h5 class="fw-bold mb-4" style="color: var(--text-primary);">Why Choose This Product?</h5>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex align-items-center border-0 px-0 py-2">
+                            <li class="list-group-item d-flex align-items-center border-0 px-0 py-2" style="background: transparent; border-color: var(--bg-card);">
                                 <i class="fas fa-check-circle me-3" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
-                                <span style="color: var(--text-light); font-weight: 500;">Premium quality materials</span>
+                                <span style="color: var(--text-body); font-weight: 500;">Premium quality materials</span>
                             </li>
-                            <li class="list-group-item d-flex align-items-center border-0 px-0 py-2">
+                            <li class="list-group-item d-flex align-items-center border-0 px-0 py-2" style="background: transparent; border-color: var(--bg-card);">
                                 <i class="fas fa-check-circle me-3" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
-                                <span style="color: var(--text-light); font-weight: 500;">Professional grade equipment</span>
+                                <span style="color: var(--text-body); font-weight: 500;">Professional grade equipment</span>
                             </li>
-                            <li class="list-group-item d-flex align-items-center border-0 px-0 py-2">
+                            <li class="list-group-item d-flex align-items-center border-0 px-0 py-2" style="background: transparent; border-color: var(--bg-card);">
                                 <i class="fas fa-check-circle me-3" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
-                                <span style="color: var(--text-light); font-weight: 500;">Fast and secure delivery</span>
+                                <span style="color: var(--text-body); font-weight: 500;">Fast and secure delivery</span>
                             </li>
-                            <li class="list-group-item d-flex align-items-center border-0 px-0 py-2">
+                            <li class="list-group-item d-flex align-items-center border-0 px-0 py-2" style="background: transparent; border-color: var(--bg-card);">
                                 <i class="fas fa-check-circle me-3" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
-                                <span style="color: var(--text-light); font-weight: 500;">Expert customer support</span>
+                                <span style="color: var(--text-body); font-weight: 500;">Expert customer support</span>
                             </li>
                         </ul>
                     </div>
@@ -154,11 +165,11 @@
 
 <!-- Related Products -->
 {% if related_products %}
-<section class="section bg-light">
+<section class="section" style="background: var(--background-color);">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Related Products</h2>
-            <a href="{{ category.get_absolute_url }}" class="btn btn-outline-primary">
+            <h2 class="mb-0" style="color: var(--text-primary);">Related Products</h2>
+            <a href="{{ category.get_absolute_url }}" class="btn btn-outline-primary" style="border-color: var(--secondary-color); color: var(--secondary-color);">
                 View All in {{ category.name }} <i class="fas fa-arrow-right ms-1"></i>
             </a>
         </div>
@@ -176,16 +187,16 @@
                                      class="card-img-top" 
                                      alt="{{ related_product.name }}">
                             {% else %}
-                                <div class="card-img-top bg-secondary-subtle d-flex align-items-center justify-content-center" style="height: 250px;">
-                                    <i class="fas fa-image fa-3x text-muted"></i>
+                                <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 250px; background: var(--bg-card);">
+                                    <i class="fas fa-image fa-3x" style="color: var(--text-muted);"></i>
                                 </div>
                             {% endif %}
                         </a>
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title h6"><a href="{{ related_product.get_absolute_url }}" class="text-dark text-decoration-none">{{ related_product.name }}</a></h5>
-                            <p class="card-text small text-muted flex-grow-1">{{ related_product.description|truncatewords:12 }}</p>
+                            <h5 class="card-title h6"><a href="{{ related_product.get_absolute_url }}" class="text-decoration-none" style="color: var(--text-primary);">{{ related_product.name }}</a></h5>
+                            <p class="card-text small flex-grow-1" style="color: var(--text-body);">{{ related_product.description|truncatewords:12 }}</p>
                             <div class="mt-auto">
-                                <p class="card-text fw-bold text-primary fs-5 mb-2">${{ related_product.price }}</p>
+                                <p class="card-text fw-bold fs-5 mb-2" style="color: var(--secondary-color);">${{ related_product.price }}</p>
                                 <a href="{{ related_product.get_absolute_url }}" class="btn btn-primary w-100 stretched-link">
                                     <i class="fas fa-eye me-2"></i>View Details
                                 </a>
@@ -264,7 +275,7 @@
 /* Kickline Contact Card */
 .Kickline-contact-card {
     border: 2px solid var(--secondary-color);
-    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+    background: var(--bg-card);
     border-radius: 20px;
 }
 
