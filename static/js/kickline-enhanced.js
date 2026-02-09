@@ -1,4 +1,4 @@
-// Sportova Enhanced JavaScript - Performance & UX Optimizations
+// Kickline Enhanced JavaScript - Performance & UX Optimizations
 
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Enhanced Product Card Animations
-    const productCards = document.querySelectorAll('.sportova-product-card');
+    const productCards = document.querySelectorAll('.Kickline-product-card');
     productCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-8px) scale(1.02)';
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Enhanced Button Interactions
-    document.querySelectorAll('.btn-sportova').forEach(btn => {
+    document.querySelectorAll('.btn-Kickline').forEach(btn => {
         btn.addEventListener('click', function(e) {
             // Create ripple effect
             const ripple = document.createElement('span');
