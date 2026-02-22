@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active" style="color: var(--secondary-color); font-weight: 600;">Categories</li>
                     </ol>
                 </nav>
-                <h1 class="display-4 fw-bold" style="color: var(--primary-color);">All Categories</h1>
+                <h1 class="fw-bold" style="color: var(--primary-color);">All Categories</h2>
                 <p class="lead" style="color: var(--text-light);">Explore our complete range of premium sports equipment categories</p>
             </div>
             <div class="col-md-4 text-md-end">
@@ -132,9 +132,9 @@
                     <a href="{% url 'Kickline:product_list' %}" class="btn btn-primary btn-lg">
                         <i class="fas fa-th-large me-2"></i>Browse All Products
                     </a>
-                    <a href="https://wa.me/{{ WHATSAPP_NUMBER_1|cut:'+' }}?text=Hi, I need help choosing sports equipment" 
+                    <a href="https://api.whatsapp.com/send?phone=923480867200&text=Hi, I need help choosing sports equipment" 
                        class="btn btn-success btn-lg contact-btn" target="_blank">
-                        <i class="fab fa-whatsapp me-2"></i>Get Expert Advice
+                        <i class="fab fa-whatsapp me-2"></i><i class="fas fa-comments me-2"></i>
                     </a>
                     <a href="{% url 'Kickline:contact' %}" class="btn btn-outline-primary btn-lg">
                         <i class="fas fa-envelope me-2"></i>Contact Us
