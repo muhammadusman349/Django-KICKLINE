@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h1 class="display-4 fw-bold" style="color: var(--text-primary);">Our Products</h1>
+                <h1 class="h1 fw-bold mb-4" style="color: var(--text-primary);">Our Products</h1>
                 <p class="lead" style="color: var(--text-body);">Discover premium sports equipment for every athlete</p>
             </div>
             <div class="col-md-4 text-md-end">
@@ -163,9 +163,9 @@
                 <h2 class="mb-4" style="color: var(--text-primary);">Need Help Finding the Right Equipment?</h2>
                 <p class="lead mb-4" style="color: var(--text-body);">Our sports experts are here to help you choose the perfect gear for your needs.</p>
                 <div class="d-flex gap-3 justify-content-center flex-wrap">
-                    <a href="https://wa.me/{{ WHATSAPP_NUMBER_1|cut:'+' }}?text=Hi, I need help choosing sports equipment" 
+                    <a href="https://api.whatsapp.com/send?phone=923480867200&text=Hi, I need help choosing sports equipment" 
                        class="btn btn-success btn-lg contact-btn" target="_blank">
-                        <i class="fab fa-whatsapp me-2"></i>Chat on WhatsApp
+                        <i class="fab fa-whatsapp me-2"></i><i class="fas fa-comments me-2"></i>
                     </a>
                     <a href="mailto:{{ CONTACT_EMAIL }}?subject=Product Inquiry" class="btn btn-outline-primary btn-lg">
                         <i class="fas fa-envelope me-2"></i>Send Email
