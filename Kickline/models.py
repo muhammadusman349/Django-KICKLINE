@@ -71,9 +71,9 @@ class Product(models.Model):
         size_info = f" (Size: {self.size})" if self.size and self.size != 'N/A' else ""
         message = f"Hi, I'm interested in {self.name}{size_info} - ${self.price}"
         # Clean number to digits only for wa.me compatibility
-        raw = getattr(settings, 'WHATSAPP_NUMBER', '')
+        raw = getattr(settings, 'WHATSAPP_NUMBER_1', '')
         phone_number = re.sub(r"\D", "", raw)
-        return f"https://wa.me/{phone_number}?text={quote(message)}"
+        return f"https://api.whatsapp.com/send?phone={phone_number}&text={quote(message)}"
 
     # Email contact
     def get_email_recipient(self):
