@@ -11,4 +11,6 @@ urlpatterns = [
     path('category/<slug:slug>/', views.category_detail, name='category_detail'),
     path('shipment/', views.shipment, name='shipment'),
     path('contact/', views.contact, name='contact'),
+    path('catalogs/', views.catalog_list, name='catalog_list'),
+    path('catalogs/<int:catalog_id>/download/', views.catalog_download, name='catalog_download'),
 ]

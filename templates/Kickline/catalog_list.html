@@ -1,0 +1,268 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Product Catalogs - Kickline{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="py-5" style="background: var(--background-color);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="h1 fw-bold mb-4" style="color: var(--text-primary);">Product Catalogs</h1>
+                <p class="lead" style="color: var(--text-body);">Browse and download our latest product catalogs</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-filter me-2"></i>Filter by Category
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'Kickline:catalog_list' %}">All Catalogs</a></li>
+                        {% for category_code, category_name in categories %}
+                        <li><a class="dropdown-item" href="?category={{ category_code }}">{{ category_name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Catalogs Grid -->
+<section class="section">
+    <div class="container">
+        {% if messages %}
+        <div class="row mb-4">
+            <div class="col-12">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert" style="background: var(--bg-card); border-color: var(--secondary-color); color: var(--text-primary);">
+                    <i class="fas fa-info-circle me-2" style="color: var(--secondary-color);"></i>
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% for category_code, category_name in categories %}
+        <div class="category-section mb-5">
+            <h3 class="border-bottom pb-3 mb-4" style="color: var(--text-primary); border-color: var(--text-muted) !important;">
+                <i class="fas fa-folder-open me-2" style="color: var(--secondary-color);"></i>{{ category_name }}
+            </h3>
+            <div class="row g-4">
+                {% for catalog in catalogs %}
+                    {% if catalog.category == category_code %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="card product-card Kickline-product-card h-100" style="background: var(--bg-card); border-color: var(--text-muted);">
+                        <div class="position-relative product-image-container">
+                            {% if catalog.cover_image %}
+                            <img src="{{ catalog.cover_image.url }}" 
+                                 class="card-img-top catalog-image" 
+                                 alt="{{ catalog.title }}"
+                                 data-placeholder="{% static 'img/placeholder.jpg' %}"
+                                 onerror="this.onerror=null; this.src=this.getAttribute('data-placeholder');">
+                            {% else %}
+                            <div class="card-img-top d-flex align-items-center justify-content-center catalog-image-placeholder">
+                                <div class="text-center">
+                                    <i class="fas fa-file-pdf fa-4x mb-2" style="color: var(--secondary-color);"></i>
+                                    <p class="mb-0" style="color: var(--text-secondary);">No cover image</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <div class="product-overlay">
+                                <div class="product-actions">
+                                    <span class="btn btn-light btn-action">
+                                        <i class="fas fa-calendar"></i>
+                                    </span>
+                                    <span class="btn btn-light btn-action">
+                                        <i class="fas fa-download"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div class="mb-2">
+                                <span class="badge Kickline-category-badge">{{ category_name }}</span>
+                            </div>
+                            <h5 class="card-title" style="color: var(--text-primary);">{{ catalog.title }}</h5>
+                            <p class="card-text flex-grow-1" style="color: var(--text-body);">
+                                <i class="fas fa-calendar-alt me-2" style="color: var(--secondary-color);"></i>Year: {{ catalog.year }}
+                            </p>
+                            <div class="mb-3">
+                                <span class="badge" style="background: var(--secondary-color); color: white;">
+                                    <i class="fas fa-download me-1"></i>{{ catalog.download_count }} downloads
+                                </span>
+                            </div>
+
+                            <!-- Password Form -->
+                            <form method="post" action="{% url 'Kickline:catalog_download' catalog.id %}" class="mt-auto">
+                                {% csrf_token %}
+                                {% if catalog.password %}
+                                <div class="input-group mb-2">
+                                    <input type="password"
+                                           name="password"
+                                           class="form-control form-control-sm"
+                                           placeholder="Enter password"
+                                           style="background: var(--bg-card); color: var(--text-primary); border-color: var(--text-muted);"
+                                           required>
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-download me-1"></i>Download
+                                    </button>
+                                </div>
+                                <small style="color: var(--text-muted);"><i class="fas fa-lock me-1"></i>Password required</small>
+                                <!-- Password Request Buttons -->
+                                <div class="d-flex gap-2 mt-2">
+                                    <a href="{{ catalog.get_password_request_whatsapp_url }}" 
+                                       class="btn btn-success btn-sm flex-fill" 
+                                       target="_blank">
+                                        <i class="fab fa-whatsapp me-1"></i>Request on WhatsApp
+                                    </a>
+                                    <a href="{{ catalog.get_password_request_email_url }}" 
+                                       class="btn btn-outline-primary btn-sm flex-fill">
+                                        <i class="fas fa-envelope me-1"></i>Request by Email
+                                    </a>
+                                </div>
+                                {% else %}
+                                <button type="submit" class="btn btn-success w-100">
+                                    <i class="fas fa-download me-2"></i>Free Download
+                                </button>
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                    {% endif %}
+                {% empty %}
+                <div class="col-12">
+                    <div class="empty-state text-center py-5">
+                        <i class="fas fa-folder-open fa-4x mb-3" style="color: var(--text-muted);"></i>
+                        <h3 style="color: var(--text-primary);">No catalogs found</h3>
+                        <p style="color: var(--text-body);">Check back later for new catalogs!</p>
+                        <a href="{% url 'Kickline:home' %}" class="btn btn-primary">
+                            <i class="fas fa-home me-2"></i>Back to Home
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-state text-center py-5">
+            <i class="fas fa-folder-open fa-4x mb-3" style="color: var(--text-muted);"></i>
+            <h3 style="color: var(--text-primary);">No catalogs available</h3>
+            <p style="color: var(--text-body);">Check back later for new catalogs!</p>
+            <a href="{% url 'Kickline:home' %}" class="btn btn-primary">
+                <i class="fas fa-home me-2"></i>Back to Home
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="section" style="background: var(--background-color);">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2 class="mb-4" style="color: var(--text-primary);">Need Custom Catalogs?</h2>
+                <p class="lead mb-4" style="color: var(--text-body);">Contact us for custom product catalogs tailored to your specific needs.</p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="https://api.whatsapp.com/send?phone=923480867200&text=Hi, I need a custom product catalog" 
+                       class="btn btn-success btn-lg contact-btn" target="_blank">
+                        <i class="fab fa-whatsapp me-2"></i>Whatsapp
+                    </a>
+                    <a href="mailto:{{ CONTACT_EMAIL }}?subject=Custom Catalog Request" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-envelope me-2"></i>Send Email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<style>
+/* Catalog image heights - smaller on mobile */
+.catalog-image {
+    height: 200px;
+    object-fit: cover;
+}
+.catalog-image-placeholder {
+    height: 200px;
+    background: var(--gradient-primary);
+}
+
+/* Desktop - larger images */
+@media (min-width: 768px) {
+    .catalog-image {
+        height: 280px;
+    }
+    .catalog-image-placeholder {
+        height: 280px;
+    }
+}
+
+/* Password placeholder text color for dark mode */
+input[type="password"]::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Dark mode specific - ensure placeholder is visible */
+[data-theme="dark"] input[type="password"]::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+/* Ensure input text is visible in dark mode */
+[data-theme="dark"] input[type="password"] {
+    color: var(--text-primary);
+}
+
+/* For webkit browsers */
+input[type="password"]::-webkit-input-placeholder {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] input[type="password"]::-webkit-input-placeholder {
+    color: var(--text-secondary);
+}
+
+/* For Firefox */
+input[type="password"]::-moz-placeholder {
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+[data-theme="dark"] input[type="password"]::-moz-placeholder {
+    color: var(--text-secondary);
+    opacity: 1;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add smooth animations to catalog cards
+    const cards = document.querySelectorAll('.product-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    });
+    
+    cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'all 0.6s ease';
+        observer.observe(card);
+    });
+});
+</script>
+{% endblock %}

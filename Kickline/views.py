@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.core.paginator import Paginator
-from .models import Category, Product, Shipment, BannerPicture
-from .forms import ContactForm
+from django.http import FileResponse, Http404
+from .models import Category, Product, Shipment, BannerPicture, Catalog
+from .forms import ContactForm, CatalogPasswordForm
 from .tasks import send_contact_notification_email, send_contact_confirmation_email
 
 
@@ -116,3 +117,56 @@ def contact(request):
         form = ContactForm()
 
     return render(request, 'Kickline/contact.html', {'form': form})
+
+
+def catalog_list(request):
+    """Display all catalogs organized by category"""
+    catalogs = Catalog.objects.all().order_by('-year', 'category')
+    context = {
+        'catalogs': catalogs,
+        'categories': Catalog.CATEGORY_CHOICES,
+    }
+    return render(request, 'Kickline/catalog_list.html', context)
+
+
+def catalog_download(request, catalog_id):
+    """Verify password and serve PDF with download count increment"""
+    catalog = get_object_or_404(Catalog, pk=catalog_id)
+
+    if request.method == 'POST':
+        # If no password is set, allow direct download without form validation
+        if not catalog.password:
+            catalog.increase_download()
+            try:
+                return FileResponse(
+                    catalog.catalog_file.open(),
+                    as_attachment=True,
+                    filename=f"{catalog.title}.pdf"
+                )
+            except FileNotFoundError:
+                raise Http404("PDF file not found")
+
+        # Password-protected download
+        form = CatalogPasswordForm(request.POST)
+        if form.is_valid():
+            entered_password = form.cleaned_data['password']
+
+            if entered_password == catalog.password:
+                # Password correct - increment count and serve file
+                catalog.increase_download()
+
+                try:
+                    return FileResponse(
+                        catalog.catalog_file.open(),
+                        as_attachment=True,
+                        filename=f"{catalog.title}.pdf"
+                    )
+                except FileNotFoundError:
+                    raise Http404("PDF file not found")
+            else:
+                # Password incorrect
+                messages.error(request, 'Incorrect password. Please try again.')
+                return redirect('Kickline:catalog_list')
+
+    # Redirect to list if accessed via GET
+    return redirect('Kickline:catalog_list')
