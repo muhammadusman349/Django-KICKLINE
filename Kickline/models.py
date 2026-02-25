@@ -264,3 +264,50 @@ class BannerPicture(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Catalog(models.Model):
+    CATEGORY_CHOICES = [
+        ('football', 'Football'),
+        ('gloves', 'Gloves'),
+        ('hosiery', 'Hosiery'),
+    ]
+
+    title = models.CharField(max_length=200)
+    cover_image = models.ImageField(upload_to='catalog/covers/')
+    catalog_file = models.FileField(upload_to='catalog/pdfs/')
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
+    year = models.PositiveIntegerField()
+    download_count = models.PositiveIntegerField(default=0)
+
+    # password for protected access
+    password = models.CharField(max_length=100, blank=True)
+
+    upload_date = models.DateTimeField(auto_now_add=True)
+    update_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.title} ({self.year})"
+
+    def increase_download(self):
+        self.download_count += 1
+        self.save(update_fields=['download_count'])
+
+    def get_password_request_whatsapp_url(self):
+        """Generate WhatsApp URL to request password"""
+        from urllib.parse import quote
+        from django.conf import settings
+        import re
+        message = f"Hi, I'm interested in downloading the catalog '{self.title}' ({self.year}). Could you please provide the password?"
+        raw = getattr(settings, 'WHATSAPP_NUMBER_1', '')
+        phone_number = re.sub(r"\D", "", raw)
+        return f"https://api.whatsapp.com/send?phone={phone_number}&text={quote(message)}"
+
+    def get_password_request_email_url(self):
+        """Generate mailto URL to request password"""
+        from urllib.parse import quote
+        from django.conf import settings
+        subject = f"Password Request: {self.title} Catalog"
+        body = f"Hi,\n\nI'm interested in downloading the catalog '{self.title}' ({self.year}).\n\nCould you please provide the password?\n\nThank you!"
+        email = getattr(settings, 'CONTACT_EMAIL', '')
+        return f"mailto:{email}?subject={quote(subject)}&body={quote(body)}"

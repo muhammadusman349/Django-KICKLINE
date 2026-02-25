@@ -29,3 +29,7 @@ class ContactForm(forms.ModelForm):
         if cleaned.get('website'):
             raise forms.ValidationError('Invalid submission.')
         return cleaned
+
+
+class CatalogPasswordForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput(), label="Enter password")

@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import (
     Category, Product, ProductImage,
     Shipment, BannerPicture, BackgroundImage,
-    ContactMessage, ContactReply
+    ContactMessage, ContactReply, Catalog
 )
 
 
@@ -170,6 +170,34 @@ class BannerPictureAdmin(admin.ModelAdmin):
         }),
         ('Timestamps', {
             'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        })
+    )
+
+
+@admin.register(Catalog)
+class CatalogAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title', 'category', 'year', 'download_count', 'upload_date']
+    list_filter = ['category', 'year', 'upload_date']
+    search_fields = ['title', 'category']
+    readonly_fields = ['download_count', 'upload_date', 'update_date']
+    fieldsets = (
+        ('Catalog Information', {
+            'fields': ('title', 'category', 'year')
+        }),
+        ('Files', {
+            'fields': ('cover_image', 'catalog_file')
+        }),
+        ('Access Control', {
+            'fields': ('password',),
+            'description': 'Leave password blank for free download access'
+        }),
+        ('Statistics', {
+            'fields': ('download_count',),
+            'classes': ('collapse',)
+        }),
+        ('Timestamps', {
+            'fields': ('upload_date', 'update_date'),
             'classes': ('collapse',)
         })
     )
