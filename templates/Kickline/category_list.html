@@ -19,8 +19,21 @@
                 <p class="lead" style="color: var(--text-light);">Explore our complete range of premium sports equipment categories</p>
             </div>
             <div class="col-md-4 text-md-end">
-                <div class="category-stats">
-                    <span class="badge Kickline-category-badge fs-5">{{ categories.count }} Categories</span>
+                <div class="d-flex align-items-center justify-content-end gap-3">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-sort me-2"></i>Sort Categories
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item {% if sort_by == 'name' %}active{% endif %}" href="?{% if search_query %}search={{ search_query }}&{% endif %}sort=name">Name (A-Z)</a></li>
+                            <li><a class="dropdown-item {% if sort_by == 'name_desc' %}active{% endif %}" href="?{% if search_query %}search={{ search_query }}&{% endif %}sort=name_desc">Name (Z-A)</a></li>
+                            <li><a class="dropdown-item {% if sort_by == 'products' %}active{% endif %}" href="?{% if search_query %}search={{ search_query }}&{% endif %}sort=products">Products (Low to High)</a></li>
+                            <li><a class="dropdown-item {% if sort_by == 'products_desc' %}active{% endif %}" href="?{% if search_query %}search={{ search_query }}&{% endif %}sort=products_desc">Products (High to Low)</a></li>
+                        </ul>
+                    </div>
+                    <div class="category-stats">
+                        <span class="badge Kickline-category-badge fs-5">{{ categories.count }} Categories</span>
+                    </div>
                 </div>
             </div>
         </div>
