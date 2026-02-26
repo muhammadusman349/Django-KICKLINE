@@ -83,6 +83,9 @@
             --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
             --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
             --shadow-teal: 0 0 15px rgba(13, 148, 136, 0.4);
+
+            /* Breadcrumb separator color for dark mode */
+            --bs-breadcrumb-divider-color: var(--text-secondary);
         }
 
         /* Smooth theme transition */
@@ -93,6 +96,11 @@
         /* Disable transition for performance on page load */
         .no-transition * {
             transition: none !important;
+        }
+
+        /* Dark mode breadcrumb separator fix */
+        [data-theme="dark"] .breadcrumb-item + .breadcrumb-item::before {
+            color: var(--text-secondary) !important;
         }
 
         body {
