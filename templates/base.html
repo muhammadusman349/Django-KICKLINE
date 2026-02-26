@@ -58,7 +58,7 @@
 
         /* Dark Mode Variables */
         [data-theme="dark"] {
-            --primary-color: #0F172A;
+            --primary-color: #F8FAFC;
             --secondary-color: #0D9488;
             --accent-color: #14B8A6;
             
@@ -1141,6 +1141,15 @@
 
         [data-theme="dark"] .footer h5 {
             color: var(--secondary-color);
+        }
+
+        /* Breadcrumb dark mode styling */
+        [data-theme="dark"] .breadcrumb-item a {
+            color: var(--text-light) !important;
+        }
+        
+        [data-theme="dark"] .breadcrumb-item.active {
+            color: var(--text-primary) !important;
         }
 
         [data-theme="dark"] input,
