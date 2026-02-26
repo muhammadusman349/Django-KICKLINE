@@ -87,11 +87,12 @@
                     </div>
                     <div class="card-body d-flex flex-column">
                         <div class="mb-2">
-                            <span class="badge Kickline-category-badge">{{ product.category.name }}</span>
+                            <span class="badge" style="background: var(--secondary-color); color: white;">
+                                <i class="fas fa-folder me-1"></i>{{ product.category.name }}
+                            </span>
                         </div>
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text flex-grow-1">{{ product.description|truncatewords:15 }}</p>
-                        <div class="price mb-3">${{ product.price }}</div>
+                        <h5 class="card-title" style="color: var(--text-primary);">{{ product.name }}</h5>
+                        <p class="card-text flex-grow-1" style="color: var(--text-body);">{{ product.description|truncatewords:15 }}</p>
                         <div class="mt-auto">
                             <a href="{{ product.get_absolute_url }}" class="btn btn-primary w-100">
                                 <i class="fas fa-eye me-2"></i>View Details
@@ -180,23 +181,31 @@
 {% block extra_js %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Add smooth animations to product cards
+    // Add stagger animation to product cards
     const cards = document.querySelectorAll('.product-card');
     
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    });
-    
-    cards.forEach(card => {
+    cards.forEach((card, index) => {
         card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
+        card.style.transform = 'translateY(30px)';
         card.style.transition = 'all 0.6s ease';
-        observer.observe(card);
+        
+        setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+
+    // Add hover effects to product cards
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+            this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '';
+        });
     });
 });
 </script>
