@@ -71,16 +71,6 @@
                                 </div>
                             </div>
                             {% endif %}
-                            <div class="product-overlay">
-                                <div class="product-actions">
-                                    <span class="btn btn-light btn-action">
-                                        <i class="fas fa-calendar"></i>
-                                    </span>
-                                    <span class="btn btn-light btn-action">
-                                        <i class="fas fa-download"></i>
-                                    </span>
-                                </div>
-                            </div>
                         </div>
                         <div class="card-body d-flex flex-column">
                             <div class="mb-2">
@@ -103,25 +93,28 @@
                                 <div class="input-group mb-2">
                                     <input type="password"
                                            name="password"
-                                           class="form-control form-control-sm"
-                                           placeholder="Enter password"
-                                           style="background: var(--bg-card); color: var(--text-primary); border-color: var(--text-muted);"
+                                           class="form-control"
+                                           placeholder="Password"
+                                           style="background: var(--bg-card); color: var(--text-primary); border-color: var(--text-muted); font-size: 0.8rem; padding: 0.25rem 0.5rem;"
                                            required>
-                                    <button type="submit" class="btn btn-primary btn-sm">
+                                    <button type="submit" class="btn btn-primary" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">
                                         <i class="fas fa-download me-1"></i>Download
                                     </button>
                                 </div>
                                 <small style="color: var(--text-muted);"><i class="fas fa-lock me-1"></i>Password required</small>
+                                <small style="color: var(--text-muted); display: block; margin-top: 2px;"><i class="fas fa-key me-1"></i>request for password</small>
                                 <!-- Password Request Buttons -->
-                                <div class="d-flex gap-2 mt-2">
+                                <div class="d-flex gap-1 mt-1">
                                     <a href="{{ catalog.get_password_request_whatsapp_url }}" 
-                                       class="btn btn-success btn-sm flex-fill" 
+                                       class="btn btn-success flex-fill" 
+                                       style="font-size: 0.85rem; padding: 0.3rem 0.5rem;"
                                        target="_blank">
-                                        <i class="fab fa-whatsapp me-1"></i>Request on WhatsApp
+                                        <i class="fab fa-whatsapp"></i>
                                     </a>
                                     <a href="{{ catalog.get_password_request_email_url }}" 
-                                       class="btn btn-outline-primary btn-sm flex-fill">
-                                        <i class="fas fa-envelope me-1"></i>Request by Email
+                                       class="btn btn-outline-primary flex-fill"
+                                       style="font-size: 0.85rem; padding: 0.3rem 0.5rem;">
+                                        <i class="fas fa-envelope"></i>
                                     </a>
                                 </div>
                                 {% else %}
@@ -209,6 +202,18 @@
 input[type="password"]::placeholder {
     color: var(--text-muted);
     opacity: 0.7;
+}
+
+/* Mobile responsive styles for password buttons */
+@media (max-width: 576px) {
+    .btn-success.flex-fill, .btn-outline-primary.flex-fill {
+        font-size: 0.9rem !important;
+        padding: 0.4rem 0.6rem !important;
+    }
+    .d-flex.gap-1.mt-1 {
+        gap: 0.5rem !important;
+        margin-top: 0.5rem !important;
+    }
 }
 
 /* Dark mode specific - ensure placeholder is visible */
