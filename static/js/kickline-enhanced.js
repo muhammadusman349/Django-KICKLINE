@@ -83,6 +83,68 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Theme Toggle Functionality
+    const themeToggle = document.querySelector('#themeToggle');
+    const html = document.documentElement;
+    
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', currentTheme);
+    
+    // Update toggle button icon based on current theme
+    function updateThemeIcon(theme) {
+        const icon = themeToggle.querySelector('i');
+        if (theme === 'dark') {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        } else {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
+    }
+    
+    // Set initial icon
+    updateThemeIcon(currentTheme);
+    
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            // Update theme
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon with animation
+            const icon = this.querySelector('i');
+            icon.style.transform = 'scale(0) rotate(180deg)';
+            
+            setTimeout(() => {
+                updateThemeIcon(newTheme);
+                icon.style.transform = 'scale(1) rotate(0deg)';
+            }, 150);
+            
+            // Optional: Show toast notification
+            showToast(`Switched to ${newTheme} mode`, 'success');
+        });
+        
+        // Show/hide based on scroll position (same as WhatsApp)
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 300) {
+                themeToggle.style.opacity = '1';
+                themeToggle.style.visibility = 'visible';
+            } else {
+                themeToggle.style.opacity = '0';
+                themeToggle.style.visibility = 'hidden';
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+    }
+
     // Enhanced WhatsApp Float Button
     const whatsappFloat = document.querySelector('.whatsapp-float');
     if (whatsappFloat) {
