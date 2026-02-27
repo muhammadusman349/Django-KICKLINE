@@ -222,7 +222,7 @@
             text-transform: uppercase;
             display: flex;
             align-items: center;
-            gap: 0;
+            gap: 15px;
             height: 100%;
         }
 
@@ -236,7 +236,7 @@
         }
 
         .navbar-brand .logo-image {
-            max-height: 120px;
+            max-height: 90px;
             width: auto;
             object-fit: contain;
             transition: all 0.3s ease;
@@ -286,13 +286,13 @@
         .navbar-nav .nav-link {
             font-weight: 600;
             color: var(--text-secondary) !important;
-            margin: 0 1.2rem;
+            margin: 0 0.8rem;
             position: relative;
             transition: all 0.3s ease;
             text-transform: none;
             letter-spacing: 0.3px;
-            font-size: 1.25rem;
-            padding: 0.75rem 1rem;
+            font-size: 1.1rem;
+            padding: 0.5rem 0.75rem;
         }
 
         .navbar-nav .nav-link:hover {
@@ -304,7 +304,7 @@
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: -6px;
+            bottom: -4px;
             left: 50%;
             background: var(--secondary-color);
             transition: all 0.3s ease;
@@ -873,38 +873,57 @@
             font-size: 0.9rem;
         }
 
-        /* Theme Toggle Button */
+        /* Theme Toggle Button - Enhanced Visibility */
         .theme-toggle {
-            background: var(--bg-card);
-            border: 2px solid var(--secondary-color);
-            color: var(--secondary-color);
-            width: 44px;
-            height: 44px;
+            background: linear-gradient(135deg, #0D9488, #14B8A6);
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             padding: 0;
             position: relative;
             z-index: 1000;
+            box-shadow: 0 3px 10px rgba(13, 148, 136, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.2);
+            margin-left: 10px;
+            margin-right: 10px;
         }
 
         .theme-toggle:hover {
-            background: var(--secondary-color);
-            color: white;
+            background: linear-gradient(135deg, #14B8A6, #0D9488);
             transform: scale(1.1);
-            box-shadow: var(--shadow-teal);
+            box-shadow: 0 5px 15px rgba(13, 148, 136, 0.6), 0 0 0 4px rgba(255, 255, 255, 0.3);
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.95);
         }
 
         .theme-toggle i {
             transition: transform 0.3s ease;
+            color: #ffffff;
         }
 
         .theme-toggle:hover i {
             transform: rotate(20deg);
+        }
+
+        /* Dark mode theme toggle */
+        [data-theme="dark"] .theme-toggle {
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            border: 2px solid #ffffff;
+            box-shadow: 0 3px 10px rgba(245, 158, 11, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="dark"] .theme-toggle:hover {
+            background: linear-gradient(135deg, #D97706, #F59E0B);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.6), 0 0 0 4px rgba(255, 255, 255, 0.3);
         }
 
         /* Dark mode specific adjustments */
@@ -1248,12 +1267,18 @@
             transform: scale(0.95);
         }
 
-        [data-theme="dark"] .navbar-toggler {
-            background: rgba(255, 255, 255, 0.08);
+        /* Dark mode theme toggle */
+        [data-theme="dark"] .theme-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            box-shadow: 0 2px 8px rgba(13, 148, 136, 0.3);
         }
 
-        [data-theme="dark"] .navbar-toggler:hover {
-            background: rgba(13, 148, 136, 0.15);
+        [data-theme="dark"] .theme-toggle:hover {
+            background: var(--secondary-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.5);
         }
 
         /* Professional Hamburger Menu */
@@ -1356,14 +1381,32 @@
             }
         }
 
-        /* Enhanced Mobile Touch Targets */
+        /* Mobile theme toggle - consistent sizing */
         @media (max-width: 768px) {
             .theme-toggle {
-                width: 48px;
-                height: 48px;
-                font-size: 1.4rem;
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+                border: 2px solid var(--secondary-color);
+                background: var(--bg-card);
+                color: var(--secondary-color);
+                box-shadow: 0 2px 8px rgba(13, 148, 136, 0.2);
             }
-            
+        }
+
+        @media (max-width: 576px) {
+            .theme-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+                border: 2px solid var(--secondary-color);
+                background: var(--bg-card);
+                color: var(--secondary-color);
+                box-shadow: 0 2px 8px rgba(13, 148, 136, 0.2);
+            }
+        }
+
+        @media (max-width: 768px) {
             .btn {
                 min-height: 44px;
                 padding: 0.75rem 1.5rem;
@@ -1380,8 +1423,8 @@
             }
 
             .whatsapp-float {
-                width: 56px;
-                height: 56px;
+                width: 48px;
+                height: 48px;
                 bottom: 15px;
                 right: 15px;
                 font-size: 22px;
@@ -1390,6 +1433,19 @@
             .whatsapp-float i {
                 font-size: 1.5rem;
                 margin-top: 0;
+            }
+
+            .theme-toggle-float {
+                width: 48px;
+                height: 48px;
+                bottom: 67px;
+                right: 15px;
+                left: auto;
+                font-size: 1.2rem;
+            }
+
+            .theme-toggle-float i {
+                font-size: 1.2rem;
             }
 
             /* Mobile Form Improvements */
@@ -1452,121 +1508,89 @@
                 margin-bottom: 1rem;
             }
 
+            /* Hero CTA buttons mobile styling - smaller size */
+            .hero-cta {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+                max-width: 250px;
+                margin: 1rem auto 0;
+            }
+
+            .hero-cta .btn {
+                width: 100%;
+                padding: 0.625rem 1.5rem;
+                font-size: 0.9rem;
+                font-weight: 600;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-sizing: border-box;
+            }
+
+            .hero-cta .btn i {
+                font-size: 0.85rem;
+            }
+
+            .hero-cta .btn-primary {
+                background: #0D9488;
+                border: 2px solid #0D9488;
+                color: #ffffff;
+            }
+
+            .hero-cta .btn-outline-light {
+                border: 2px solid rgba(255, 255, 255, 0.8);
+                color: #ffffff;
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .hero-cta .btn-outline-light:hover {
+                background: rgba(255, 255, 255, 0.2);
+                border-color: #ffffff;
+                color: #ffffff;
+            }
+
             .feature-box {
                 margin-bottom: 1.5rem;
             }
 
             .whatsapp-float {
-                width: 50px;
-                height: 50px;
+                width: 44px;
+                height: 44px;
                 bottom: 12px;
                 right: 12px;
                 font-size: 20px;
             }
 
             .whatsapp-float i {
-                font-size: 1.375rem;
+                font-size: 1.4rem;
                 margin-top: 0;
             }
 
-            .theme-toggle {
-                width: 40px;
-                height: 40px;
+            .theme-toggle-float {
+                width: 44px;
+                height: 44px;
+                bottom: 60px;
+                right: 12px;
+                left: auto;
                 font-size: 1.1rem;
             }
-        }
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.8rem;
-                margin-bottom: 1rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.3rem;
-                margin-bottom: 2rem;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-                margin-bottom: 2.5rem;
-            }
-            
-            .navbar-brand {
-                font-size: 1.8rem;
-            }
-            
-            .navbar-nav .nav-link {
-                margin: 0 0.5rem;
-                font-size: 0.9rem;
-            }
-            
-            .btn-hero {
-                padding: 1.2rem 2.5rem;
-                font-size: 1.1rem;
-            }
-            
-            .hero-section {
-                height: 70vh;
-            }
-            
-            .card-title {
-                font-size: 1.1rem;
-            }
-            
-            .price {
-                font-size: 1.4rem;
-            }
-            
-            .icon-wrapper {
-                width: 70px;
-                height: 70px;
-            }
-            
-            .icon-wrapper i {
-                font-size: 2rem;
-            }
-            
-            .feature-title {
-                font-size: 1.1rem;
-            }
-            
-            .feature-text {
-                font-size: 0.9rem;
-            }
-        }
 
-        @media (max-width: 576px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            
-            .hero-subtitle {
+            .theme-toggle-float i {
                 font-size: 1.1rem;
             }
-            
-            .section-title {
-                font-size: 1.8rem;
+
+            .navbar-toggler:not(.collapsed) .hamburger-line.line-2 {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0);
             }
-            
-            .btn-hero {
-                padding: 1rem 2rem;
-                font-size: 1rem;
-            }
-            
-            .navbar-brand {
-                font-size: 1.6rem;
-            }
-            
-            .hero-section {
-                height: 60vh;
-            }
-            
-            .section {
-                padding: 3rem 0;
-            }
-            
-            .Kickline-feature-box {
-                padding: 1.5rem 1rem;
+
+            .navbar-toggler:not(.collapsed) .hamburger-line.line-3 {
+                bottom: 50%;
+                transform: translate(-50%, 50%) rotate(-45deg);
+                background: var(--secondary-color);
+                width: 20px;
             }
         }
 
@@ -1619,8 +1643,8 @@
         /* WhatsApp Float Button with Image Icon */
         .whatsapp-float {
             position: fixed;
-            width: 56px;
-            height: 56px;
+            width: 48px;
+            height: 48px;
             bottom: 30px;
             right: 30px;
             background: #25D366;
@@ -1639,8 +1663,86 @@
         }
 
         .whatsapp-float i {
-            font-size: 1.875rem;
+            font-size: 1.5rem;
             color: white;
+        }
+
+        /* Theme Toggle Float Button */
+        .theme-toggle-float {
+            position: fixed;
+            width: 48px;
+            height: 48px;
+            bottom: 82px;
+            right: 30px;
+            left: auto;
+            background: linear-gradient(135deg, #0D9488, #14B8A6);
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(13, 148, 136, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.2), inset 0 0 8px rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+            animation: themeFloatGlow 3s ease-in-out infinite;
+        }
+
+        .theme-toggle-float i {
+            font-size: 1.5rem;
+            color: #ffffff;
+            transition: transform 0.3s ease;
+            text-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-toggle-float:hover {
+            background: linear-gradient(135deg, #14B8A6, #0D9488);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(13, 148, 136, 0.6), 0 0 0 4px rgba(255, 255, 255, 0.3), inset 0 0 12px rgba(255, 255, 255, 0.2);
+        }
+
+        .theme-toggle-float:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes themeFloatGlow {
+            0%, 100% { 
+                box-shadow: 0 4px 15px rgba(13, 148, 136, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.2), inset 0 0 8px rgba(255, 255, 255, 0.1);
+            }
+            50% { 
+                box-shadow: 0 4px 20px rgba(13, 148, 136, 0.6), 0 0 0 5px rgba(255, 255, 255, 0.4), inset 0 0 12px rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        .theme-toggle-float i {
+            font-size: 1.5rem;
+            color: #ffffff;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle-float:hover {
+            background: linear-gradient(135deg, #14B8A6, #0D9488);
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 8px 25px rgba(13, 148, 136, 0.5), 0 0 0 4px rgba(255, 255, 255, 0.3);
+        }
+
+        .theme-toggle-float:active {
+            transform: scale(0.95);
+        }
+
+        /* Dark mode theme toggle float */
+        [data-theme="dark"] .theme-toggle-float {
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            border: 2px solid #ffffff;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="dark"] .theme-toggle-float:hover {
+            background: linear-gradient(135deg, #D97706, #F59E0B);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5), 0 0 0 4px rgba(255, 255, 255, 0.3);
         }
 
         @keyframes pulse {
@@ -2050,9 +2152,9 @@
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
+        <div class=" container-fluid px-3">
             <a class="navbar-brand" href="{% url 'Kickline:home' %}">
-    <img src="{% static 'images/logo/KS-Logo.png' %}" alt="Kickline Sports" class="logo-image">
+    <img src="{% static 'images/logo/logo-kl.png' %}" alt="Kickline Sports" class="logo-image">
     <span class="brand-text">Kickline Sports</span>
 </a>
             
@@ -2081,11 +2183,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'Kickline:contact' %}">Contact</a>
-                    </li>
-                    <li class="nav-item ms-2">
-                        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-                            <i class="fas fa-moon"></i>
-                        </button>
                     </li>
                 </ul>
             </div>
@@ -2175,6 +2272,11 @@
     <!-- WhatsApp Float Button -->
     <div class="whatsapp-float" id="whatsappFloat">
         <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <!-- Theme Toggle Float Button -->
+    <div class="theme-toggle-float" id="themeToggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
     </div>
 
     <!-- Bootstrap JS -->

@@ -201,11 +201,20 @@ a:focus {
     }
 }
 
+/* Equal-width hero buttons */
+.hero-cta .btn {
+    width: 160px !important;
+    padding: 0.75rem 0 !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+}
+
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
     :root {
         --background-color: #1F2937;
         --text-primary: #F9FAFB;
         --text-light: #D1D5DB;
+        --bs-breadcrumb-divider-color: var(--text-light);
     }
 }
