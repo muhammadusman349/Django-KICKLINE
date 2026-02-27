@@ -207,5 +207,6 @@ a:focus {
         --background-color: #1F2937;
         --text-primary: #F9FAFB;
         --text-light: #D1D5DB;
+        --bs-breadcrumb-divider-color: var(--text-light);
     }
 }

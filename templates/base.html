@@ -222,7 +222,7 @@
             text-transform: uppercase;
             display: flex;
             align-items: center;
-            gap: 0;
+            gap: 10px;
             height: 100%;
         }
 
@@ -236,7 +236,7 @@
         }
 
         .navbar-brand .logo-image {
-            max-height: 120px;
+            max-height: 90px;
             width: auto;
             object-fit: contain;
             transition: all 0.3s ease;
@@ -2050,7 +2050,7 @@
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
+        <div class=" container-fluid px-3">
             <a class="navbar-brand" href="{% url 'Kickline:home' %}">
     <img src="{% static 'images/logo/KS-Logo.png' %}" alt="Kickline Sports" class="logo-image">
     <span class="brand-text">Kickline Sports</span>
