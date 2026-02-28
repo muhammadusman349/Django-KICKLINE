@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import FileResponse, Http404
+from django.db.models import Count
 from .models import Category, Product, Shipment, BannerPicture, Catalog
 from .forms import ContactForm, CatalogPasswordForm
 from .tasks import send_contact_notification_email, send_contact_confirmation_email
@@ -73,8 +74,28 @@ def category_detail(request, slug):
 
 
 def category_list(request):
-    """Category list page showing all categories"""
-    category_list = Category.objects.all().order_by('name')
+    """Category list page showing all categories with sorting and search"""
+    category_list = Category.objects.all()
+    
+    # Handle search query
+    search_query = request.GET.get('search')
+    if search_query:
+        category_list = category_list.filter(name__icontains=search_query)
+    
+    # Handle sorting
+    sort_by = request.GET.get('sort', 'name')  # Default sort by name
+    
+    if sort_by == 'name':
+        category_list = category_list.order_by('name')
+    elif sort_by == 'name_desc':
+        category_list = category_list.order_by('-name')
+    elif sort_by == 'products':
+        # Annotate with product count and sort
+        category_list = category_list.annotate(product_count=Count('products')).order_by('product_count')
+    elif sort_by == 'products_desc':
+        category_list = category_list.annotate(product_count=Count('products')).order_by('-product_count')
+    else:
+        category_list = category_list.order_by('name')
 
     # Pagination
     paginator = Paginator(category_list, 6)  # Show 6 categories per page
@@ -83,6 +104,8 @@ def category_list(request):
 
     context = {
         'categories': categories,
+        'sort_by': sort_by,
+        'search_query': search_query,
     }
     return render(request, 'Kickline/category_list.html', context)
 
@@ -120,11 +143,18 @@ def contact(request):
 
 
 def catalog_list(request):
-    """Display all catalogs organized by category"""
+    """Display all catalogs organized by category with optional filtering"""
     catalogs = Catalog.objects.all().order_by('-year', 'category')
+    
+    # Get category filter from query parameters
+    category_code = request.GET.get('category')
+    if category_code:
+        catalogs = catalogs.filter(category=category_code)
+
     context = {
         'catalogs': catalogs,
         'categories': Catalog.CATEGORY_CHOICES,
+        'current_category': category_code,
     }
     return render(request, 'Kickline/catalog_list.html', context)
 
