@@ -249,10 +249,116 @@
         padding: 0.7rem 1rem;
     }
 }
+/* Filter Dropdown Menu Styling */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: auto;
+    margin-top: 8px;
+    min-width: 200px;
+    padding: 8px 0;
+    background: var(--bg-card);
+    border: 1px solid var(--text-muted);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    animation: dropdownSlide 0.25s ease-out;
+    transform-origin: top center;
+}
+
+@keyframes dropdownSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.dropdown-item {
+    display: block;
+    padding: 10px 16px;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    margin: 2px 8px;
+    width: calc(100% - 16px);
+}
+
+.dropdown-item:hover {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.dropdown-item.active {
+    background: var(--secondary-color);
+    color: white;
+    font-weight: 500;
+}
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Fix dropdown duplicate issue - ensure only one dropdown opens
+    const dropdowns = document.querySelectorAll('.dropdown');
+    let activeDropdown = null;
+    
+    dropdowns.forEach(dropdown => {
+        const toggleBtn = dropdown.querySelector('[data-bs-toggle="dropdown"]');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        
+        if (toggleBtn && menu) {
+            // Remove Bootstrap's data-bs-toggle to prevent duplicate initialization
+            toggleBtn.removeAttribute('data-bs-toggle');
+            
+            // Custom dropdown toggle
+            toggleBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Close any other open dropdowns
+                if (activeDropdown && activeDropdown !== menu) {
+                    activeDropdown.classList.remove('show');
+                }
+                
+                // Toggle current dropdown
+                const isOpen = menu.classList.contains('show');
+                if (isOpen) {
+                    menu.classList.remove('show');
+                    activeDropdown = null;
+                } else {
+                    menu.classList.add('show');
+                    activeDropdown = menu;
+                }
+            });
+        }
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (activeDropdown && !e.target.closest('.dropdown')) {
+            activeDropdown.classList.remove('show');
+            activeDropdown = null;
+        }
+    });
+    
+    // Close dropdown when clicking a dropdown item
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', function() {
+            if (activeDropdown) {
+                activeDropdown.classList.remove('show');
+                activeDropdown = null;
+            }
+        });
+    });
+
     // Add stagger animation to category cards
     const cards = document.querySelectorAll('.category-card');
     
