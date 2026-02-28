@@ -398,10 +398,46 @@
     object-fit: contain;
     border-radius: 12px;
   }
+  
+  /* Mobile Header Styles */
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 1.75rem;
+    }
+    .page-header .lead {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .page-header h1 {
+      font-size: 1.5rem;
+    }
+    .page-header .lead {
+      font-size: 0.95rem;
+    }
+    .contact-icon {
+      width: 45px;
+      height: 45px;
+    }
+  }
+  
+  @media (max-width: 375px) {
+    .page-header h1 {
+      font-size: 1.35rem;
+    }
+    .page-header .lead {
+      font-size: 0.9rem;
+    }
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
 </style>
 
 <!-- Page Header -->
-<section class="py-5" style="background: var(--background-color);">
+<section class="py-5 page-header" style="background: var(--background-color);">
     <div class="container">
         <div class="text-center">
             <h1 class="h1 fw-bold mb-4" style="color: var(--text-primary);">Contact Us</h1>

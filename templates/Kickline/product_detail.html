@@ -5,7 +5,7 @@
 
 {% block content %}
 <!-- Page Header -->
-<section class="py-5" style="background: var(--background-color);">
+<section class="py-5 page-header-section" style="background: var(--background-color);">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-8">
@@ -165,7 +165,7 @@
 
 <!-- Related Products -->
 {% if related_products %}
-<section class="section" style="background: var(--background-color);">
+<section class="section related-products-section" style="background: var(--background-color);">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="mb-0" style="color: var(--text-primary);">Related Products</h2>
@@ -332,47 +332,9 @@
 }
 
 /* Mobile Responsiveness */
-@media (max-width: 576px) {
-    .product-detail-section {
-        padding: 40px 0;
-    }
-    
-    .main-product-image {
-        aspect-ratio: 1 / 1;
-        min-height: 300px;
-    }
-    
-    .thumbnail-image {
-        height: 60px;
-    }
-    
-    .contact-btn {
-        padding: 0.8rem 1.2rem !important;
-        font-size: 0.9rem;
-        min-height: 44px;
-        min-width: 100px;
-    }
-    
-    .contact-btn i {
-        font-size: 0.9rem;
-    }
-    
-    .Kickline-contact-card {
-        border-radius: 15px;
-    }
-    
-    h1.h2 {
-        font-size: 1.5rem;
-    }
-    
-    .price-section .h1 {
-        font-size: 2rem;
-    }
-}
-
 @media (max-width: 768px) {
     .product-detail-section {
-        padding: 60px 0;
+        padding: 40px 0;
     }
     
     .main-image-wrapper {
@@ -395,6 +357,145 @@
     .features-section i {
         font-size: 1rem;
         margin-right: 0.8rem;
+    }
+    
+    /* Breadcrumb improvements */
+    .breadcrumb-wrapper {
+        margin-top: 1rem;
+    }
+    .breadcrumb {
+        font-size: 0.85rem;
+    }
+    
+    /* Product title and price */
+    .product-details-content h1.h2 {
+        font-size: 1.6rem;
+    }
+    
+    .price-section .h1 {
+        font-size: 1.8rem;
+    }
+    
+    .price-section .badge {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-detail-section {
+        padding: 30px 0;
+    }
+    
+    .main-product-image {
+        aspect-ratio: 1 / 1;
+        min-height: 280px;
+    }
+    
+    .thumbnail-image {
+        height: 50px;
+    }
+    
+    /* Header section */
+    .page-header-section h1 {
+        font-size: 1.5rem;
+    }
+    .page-header-section .lead {
+        font-size: 0.95rem;
+    }
+    .breadcrumb-wrapper {
+        margin-top: 0.75rem;
+    }
+    .breadcrumb {
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+    }
+    
+    /* Product details */
+    .product-details-content h1.h2 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+    
+    .price-section .h1 {
+        font-size: 1.6rem;
+    }
+    
+    .description h5 {
+        font-size: 1.1rem;
+    }
+    .description p {
+        font-size: 0.95rem;
+    }
+    
+    /* Contact buttons */
+    .contact-btn {
+        padding: 0.7rem 1rem !important;
+        font-size: 0.9rem;
+        min-height: 44px;
+        min-width: auto;
+    }
+    
+    .contact-btn i {
+        font-size: 0.9rem;
+    }
+    
+    .Kickline-contact-card .card-title {
+        font-size: 1.1rem;
+    }
+    .Kickline-contact-card .card-text {
+        font-size: 0.9rem;
+    }
+    
+    /* Features section */
+    .features-section h5 {
+        font-size: 1.1rem;
+    }
+    .features-section li {
+        padding: 0.6rem 0;
+        font-size: 0.9rem;
+    }
+    
+    /* Related products */
+    .related-products-section h2 {
+        font-size: 1.3rem;
+    }
+    .related-products-section .btn {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .main-product-image {
+        min-height: 240px;
+    }
+    
+    .thumbnail-image {
+        height: 45px;
+    }
+    
+    .page-header-section h1 {
+        font-size: 1.35rem;
+    }
+    .page-header-section .lead {
+        font-size: 0.9rem;
+    }
+    
+    .product-details-content h1.h2 {
+        font-size: 1.25rem;
+    }
+    
+    .price-section .h1 {
+        font-size: 1.4rem;
+    }
+    
+    .contact-btn {
+        padding: 0.65rem 0.9rem !important;
+        font-size: 0.85rem;
+    }
+    
+    .Kickline-category-badge {
+        font-size: 0.8rem;
     }
 }
 </style>

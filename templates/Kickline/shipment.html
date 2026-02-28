@@ -5,7 +5,7 @@
 
 {% block content %}
 <!-- Page Header -->
-<section class="py-5" style="background: var(--background-color);">
+<section class="py-5 page-header" style="background: var(--background-color);">
     <div class="container">
         <div class="text-center">
             <h1 class="h1 fw-bold mb-4" style="color: var(--text-primary);">Shipping & Delivery</h1>
@@ -303,6 +303,125 @@
     background: var(--background-color);
     border-radius: 10px;
     border-left: 4px solid var(--secondary-color);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 1.75rem;
+    }
+    .page-header .lead {
+        font-size: 1rem;
+    }
+    .shipping-card .card-title {
+        font-size: 1.2rem;
+    }
+    .shipping-icon {
+        width: 60px;
+        height: 60px;
+    }
+    .shipping-icon-placeholder {
+        width: 60px;
+        height: 60px;
+    }
+    .detail-item {
+        padding: 0.875rem;
+        font-size: 0.9rem;
+    }
+    .Kickline-feature-box .icon-wrapper i {
+        font-size: 2rem;
+    }
+    .Kickline-feature-box .feature-title {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+    .page-header .lead {
+        font-size: 0.95rem;
+    }
+    .shipping-card {
+        border-radius: 15px;
+    }
+    .shipping-card .card-title {
+        font-size: 1.1rem;
+    }
+    .shipping-card .card-text {
+        font-size: 0.9rem;
+    }
+    .shipping-icon {
+        width: 50px;
+        height: 50px;
+    }
+    .shipping-icon-placeholder {
+        width: 50px;
+        height: 50px;
+    }
+    .shipping-icon-placeholder i {
+        font-size: 1.5rem;
+    }
+    .detail-item {
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+    .detail-item strong {
+        font-size: 0.9rem;
+    }
+    .detail-item i {
+        font-size: 0.9rem;
+    }
+    .section h2.h2 {
+        font-size: 1.4rem;
+    }
+    .Kickline-feature-box {
+        padding: 1.5rem 1rem;
+    }
+    .Kickline-feature-box .icon-wrapper {
+        margin-bottom: 1rem;
+    }
+    .Kickline-feature-box .icon-wrapper i {
+        font-size: 1.75rem;
+    }
+    .Kickline-feature-box .feature-title {
+        font-size: 1rem;
+    }
+    .Kickline-feature-box .feature-text {
+        font-size: 0.85rem;
+    }
+    .contact-btn {
+        font-size: 0.95rem;
+        padding: 0.75rem 1.25rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .page-header h1 {
+        font-size: 1.35rem;
+    }
+    .page-header .lead {
+        font-size: 0.9rem;
+    }
+    .shipping-icon {
+        width: 45px;
+        height: 45px;
+    }
+    .shipping-icon-placeholder {
+        width: 45px;
+        height: 45px;
+    }
+    .shipping-card .card-title {
+        font-size: 1rem;
+    }
+    .contact-btn {
+        font-size: 0.9rem;
+        padding: 0.7rem 1rem;
+    }
+    .section h2.h2 {
+        font-size: 1.25rem;
+    }
 }
 </style>
 

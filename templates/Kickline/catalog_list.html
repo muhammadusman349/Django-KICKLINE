@@ -5,7 +5,7 @@
 
 {% block content %}
 <!-- Page Header -->
-<section class="py-5" style="background: var(--background-color);">
+<section class="py-5 page-header" style="background: var(--background-color);">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-8">
@@ -195,6 +195,75 @@
     }
     .catalog-image-placeholder {
         height: 280px;
+    }
+}
+
+/* Mobile Header Styles */
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 1.75rem;
+    }
+    .page-header .lead {
+        font-size: 1rem;
+    }
+    .category-section h3 {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-header {
+        text-align: center;
+    }
+    .page-header .col-md-8 {
+        margin-bottom: 1.5rem;
+    }
+    .page-header .col-md-4 {
+        text-align: center !important;
+    }
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+    .page-header .lead {
+        font-size: 0.95rem;
+    }
+    .catalog-image {
+        height: 180px;
+    }
+    .catalog-image-placeholder {
+        height: 180px;
+    }
+    .product-card .card-title {
+        font-size: 1.1rem;
+    }
+    .product-card .card-text {
+        font-size: 0.9rem;
+    }
+    .contact-btn {
+        font-size: 0.95rem;
+        padding: 0.75rem 1.25rem;
+    }
+    .category-section h3 {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .page-header h1 {
+        font-size: 1.35rem;
+    }
+    .page-header .lead {
+        font-size: 0.9rem;
+    }
+    .catalog-image {
+        height: 160px;
+    }
+    .catalog-image-placeholder {
+        height: 160px;
+    }
+    .contact-btn {
+        font-size: 0.9rem;
+        padding: 0.7rem 1rem;
     }
 }
 
