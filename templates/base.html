@@ -1774,6 +1774,17 @@
                 visibility: visible;
                 transform: translateY(0);
             }
+            /* Hide scroll-up button when WhatsApp popup is open on mobile */
+            .whatsapp-popup.active ~ .scroll-up {
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(20px);
+            }
+            .whatsapp-popup.active ~ .scroll-up.visible {
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(20px);
+            }
         }
 
         @media (max-width: 576px) {
@@ -1783,6 +1794,17 @@
                 bottom: 125px;
                 right: 15px;
             }
+            /* Hide scroll-up button when WhatsApp popup is open on mobile */
+            .whatsapp-popup.active ~ .scroll-up {
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(20px);
+            }
+            .whatsapp-popup.active ~ .scroll-up.visible {
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(20px);
+            }
         }
 
         @media (max-width: 375px) {
@@ -1791,6 +1813,17 @@
                 height: 48px;
                 bottom: 120px;
                 right: 15px;
+            }
+            /* Hide scroll-up button when WhatsApp popup is open on mobile */
+            .whatsapp-popup.active ~ .scroll-up {
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(20px);
+            }
+            .whatsapp-popup.active ~ .scroll-up.visible {
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(20px);
             }
         }
 
@@ -1963,6 +1996,19 @@
         .whatsapp-popup.active {
             transform: scale(1) translateY(0);
             opacity: 1;
+        }
+
+        /* Adjust scroll-up button position when WhatsApp popup is open */
+        .whatsapp-popup.active ~ .scroll-up {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        .whatsapp-popup.active ~ .scroll-up.visible {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
         }
 
         .whatsapp-popup-header {
@@ -2723,7 +2769,7 @@
                     <p>Stay connected with us on social media</p>
                     <div class="social-links">
                         <a href="https://facebook.com/yourpage" target="_blank" class="social-link" aria-label="Facebook">
-                            <img src="{% static 'images/logo/fb.png' %}" alt="Facebook" class="social-icon">
+                            <img src="{% static 'images/logo/facebook.png' %}" alt="Facebook" class="social-icon">
                         </a>
                         <a href="https://instagram.com/yourhandle" target="_blank" class="social-link" aria-label="Instagram">
                             <img src="{% static 'images/logo/instagram.png' %}" alt="Instagram" class="social-icon">
@@ -2745,11 +2791,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- WhatsApp Help Text -->
-    {% comment %} <div class="whatsapp-help-text" id="whatsappHelpText">
-        <i class="fab fa-whatsapp me-2"></i><i class="fas fa-comments me-2"></i>Need help? Chat with us
-    </div> {% endcomment %}
 
     <!-- WhatsApp Popup -->
     <div class="whatsapp-popup" id="whatsappPopup">

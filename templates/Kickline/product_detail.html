@@ -109,12 +109,12 @@
                                 <a href="{{ product.get_whatsapp_url }}" 
                                    class="btn btn-success contact-btn rounded-pill d-flex align-items-center justify-content-center flex-fill"
                                    target="_blank">
-                                    <i class="fab fa-whatsapp me-2"></i>
+                                    <img src="{% static 'images/logo/whatsapp-logo.png' %}" alt="WhatsApp" style="width: 20px; height: 20px; margin-right: 8px;">
                                     <span>WhatsApp</span>
                                 </a>
                                 <a href="mailto:{{ product.get_email_recipient }}?subject={{ product.get_email_subject }}&body={{ product.get_email_body|urlencode }}" 
                                    class="btn btn-primary contact-btn rounded-pill d-flex align-items-center justify-content-center flex-fill">
-                                    <i class="fas fa-envelope me-2"></i>
+                                    <img src="{% static 'images/logo/email-icon.png' %}" alt="Email" style="width: 20px; height: 20px; margin-right: 8px;">
                                     <span>Email</span>
                                 </a>
                             </div>
