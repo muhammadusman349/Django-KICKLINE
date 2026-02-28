@@ -873,6 +873,64 @@
             font-size: 0.9rem;
         }
 
+        /* Social Media Links */
+        .social-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-link i {
+            font-size: 1.3rem;
+        }
+
+        .social-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .social-link[aria-label="Instagram"] {
+            background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+        }
+
+        .social-link[aria-label="TikTok"] {
+            background: #000000;
+        }
+
+        .social-link[aria-label="Twitter"] {
+            background: #1DA1F2;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Dark mode social links */
+        [data-theme="dark"] .social-link {
+            opacity: 0.9;
+        }
+
+        [data-theme="dark"] .social-link:hover {
+            opacity: 1;
+        }
+
         /* Theme Toggle Button - Enhanced Visibility */
         .theme-toggle {
             background: linear-gradient(135deg, #0D9488, #14B8A6);
@@ -1556,8 +1614,8 @@
             }
 
             .whatsapp-float {
-                width: 44px;
-                height: 44px;
+                width: 48px;
+                height: 48px;
                 bottom: 12px;
                 right: 12px;
                 font-size: 20px;
@@ -1569,8 +1627,8 @@
             }
 
             .theme-toggle-float {
-                width: 44px;
-                height: 44px;
+                width: 48px;
+                height: 48px;
                 bottom: 60px;
                 right: 12px;
                 left: auto;
@@ -2284,8 +2342,8 @@
                 height: 250px;
             }
             .whatsapp-float {
-                width: 50px;
-                height: 50px;
+                width: 48px;
+                height: 48px;
                 bottom: 20px;
                 right: 20px;
             }
@@ -2293,9 +2351,9 @@
                 font-size: 1.5rem;
             }
             .theme-toggle-float {
-                width: 44px;
-                height: 44px;
-                bottom: 75px;
+                width: 48px;
+                height: 48px;
+                bottom: 72px;
                 right: 20px;
             }
             .theme-toggle-float i {
@@ -2322,14 +2380,14 @@
                 padding: 0.6rem 0.75rem;
             }
             .whatsapp-float {
-                width: 45px;
-                height: 45px;
+                width: 48px;
+                height: 48px;
                 bottom: 15px;
                 right: 15px;
             }
             .theme-toggle-float {
-                width: 40px;
-                height: 40px;
+                width: 48px;
+                height: 48px;
                 bottom: 65px;
                 right: 15px;
             }
@@ -2528,7 +2586,24 @@
                     <p><i class="fas fa-envelope"></i> {{ CONTACT_EMAIL }}</p>
                     <p><i class="fab fa-whatsapp"></i> <strong>Sales:</strong> {{ WHATSAPP_NUMBER_1 }}</p>
                     <p><i class="fab fa-whatsapp"></i> <strong>Support:</strong> {{ WHATSAPP_NUMBER_2 }}</p>
-
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <p>Stay connected with us on social media</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/yourpage" target="_blank" class="social-link" aria-label="Facebook">
+                            <img src="{% static 'images/logo/fb.png' %}" alt="Facebook" class="social-icon">
+                        </a>
+                        <a href="https://instagram.com/yourhandle" target="_blank" class="social-link" aria-label="Instagram">
+                            <img src="{% static 'images/logo/instagram.png' %}" alt="Instagram" class="social-icon">
+                        </a>
+                        <a href="https://tiktok.com/@yourhandle" target="_blank" class="social-link" aria-label="TikTok">
+                            <img src="{% static 'images/logo/tik-tok.png' %}" alt="TikTok" class="social-icon">
+                        </a>
+                        <a href="https://twitter.com/yourhandle" target="_blank" class="social-link" aria-label="Twitter">
+                            <img src="{% static 'images/logo/twitter.png' %}" alt="Twitter" class="social-icon">
+                        </a>
+                    </div>
                 </div>
             </div>
             <hr class="my-4">
