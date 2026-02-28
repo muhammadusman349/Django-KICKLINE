@@ -9,6 +9,12 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-8">
+                <nav aria-label="breadcrumb" class="mb-3">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'Kickline:home' %}" style="color: var(--text-light); text-decoration: none;">Home</a></li>
+                        <li class="breadcrumb-item active" style="color: var(--secondary-color); font-weight: 600;">Products</li>
+                    </ol>
+                </nav>
                 <h1 class="h1 fw-bold mb-4" style="color: var(--text-primary);">Our Products</h1>
                 <p class="lead" style="color: var(--text-body);">Discover premium sports equipment for every athlete</p>
             </div>
@@ -194,18 +200,19 @@
 }
 
 @media (max-width: 576px) {
+    .page-header-section,
     .page-header {
         text-align: center;
     }
-    .page-header .col-md-8 {
-        margin-bottom: 1.5rem;
+    .page-header-section .breadcrumb,
+    .page-header .breadcrumb {
+        justify-content: center;
     }
-    .page-header .col-md-4 {
-        text-align: center !important;
-    }
+    .page-header-section h1,
     .page-header h1 {
         font-size: 1.5rem;
     }
+    .page-header-section .lead,
     .page-header .lead {
         font-size: 0.95rem;
     }
