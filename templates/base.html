@@ -2058,6 +2058,305 @@
             border-radius: 15px;
             box-shadow: var(--shadow-card);
         }
+
+        /* ==================== RESPONSIVE STYLES ==================== */
+        
+        /* Large Desktop (1200px and up) */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+            .hero-title {
+                font-size: 4rem;
+            }
+        }
+        
+        /* Desktop (992px - 1199px) */
+        @media (max-width: 1199px) {
+            .navbar-nav .nav-link {
+                font-size: 1.1rem;
+                padding: 0.6rem 1rem;
+                margin: 0 0.5rem;
+            }
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Tablet (768px - 991px) */
+        @media (max-width: 991px) {
+            .navbar {
+                height: 80px;
+            }
+            .navbar-brand .logo-image {
+                max-height: 45px;
+            }
+            .navbar-brand .brand-text {
+                font-size: 1.3rem;
+            }
+            .navbar-nav .nav-link {
+                font-size: 1rem;
+                padding: 0.5rem 0.75rem;
+                margin: 0 0.3rem;
+            }
+            .hero-section {
+                min-height: 600px;
+            }
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+            .hero-cta .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+            .section {
+                padding: 3rem 0;
+            }
+            .card-title {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Small Tablet / Large Phone (576px - 767px) */
+        @media (max-width: 767px) {
+            .navbar {
+                height: 70px;
+            }
+            .navbar-brand {
+                margin-left: -10px;
+            }
+            .navbar-brand .logo-image {
+                max-height: 40px;
+            }
+            .navbar-brand .brand-text {
+                font-size: 1.1rem;
+            }
+            .navbar-collapse {
+                background: var(--background-color);
+                padding: 1rem;
+                border-radius: 10px;
+                box-shadow: var(--shadow-hover);
+                margin-top: 0.5rem;
+            }
+            .navbar-nav {
+                align-items: flex-start !important;
+            }
+            .navbar-nav .nav-item {
+                width: 100%;
+                margin: 0.25rem 0;
+            }
+            .navbar-nav .nav-link {
+                font-size: 1rem;
+                padding: 0.75rem 1rem;
+                margin: 0;
+                width: 100%;
+                border-radius: 8px;
+            }
+            .navbar-nav .nav-link:hover {
+                background: rgba(13, 148, 136, 0.1);
+            }
+            .hero-section {
+                min-height: 500px;
+                padding: 2rem 1rem;
+            }
+            .hero-title {
+                font-size: 2.2rem;
+                line-height: 1.2;
+            }
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            .hero-cta {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            .hero-cta .btn {
+                width: 100%;
+                padding: 0.75rem 1.5rem;
+            }
+            .section {
+                padding: 2.5rem 0;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .card {
+                margin-bottom: 1rem;
+            }
+            .product-card .card-img-top {
+                height: 200px !important;
+            }
+            .category-card .card-img-top {
+                height: 180px !important;
+            }
+            .footer .row > div {
+                margin-bottom: 2rem;
+            }
+            .footer .text-md-end {
+                text-align: left !important;
+            }
+        }
+        
+        /* Mobile (575px and down) */
+        @media (max-width: 575px) {
+            .navbar {
+                height: 70px;
+            }
+            .navbar-brand {
+                margin-left: -5px;
+            }
+            .navbar-brand .logo-image {
+                max-height: 45px;
+            }
+            .navbar-brand .brand-text {
+                font-size: 1.2rem;
+            }
+            .navbar-toggler {
+                padding: 0.4rem 0.6rem;
+            }
+            .hero-section {
+                min-height: 450px;
+                padding: 1.5rem 1rem;
+            }
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            .hero-cta .btn {
+                font-size: 0.9rem;
+                padding: 0.6rem 1.2rem;
+            }
+            .section {
+                padding: 2rem 0;
+            }
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            h2 {
+                font-size: 1.3rem;
+            }
+            h3 {
+                font-size: 1.1rem;
+            }
+            .lead {
+                font-size: 1rem;
+            }
+            .card-body {
+                padding: 1rem;
+            }
+            .card-title {
+                font-size: 1rem;
+            }
+            .price {
+                font-size: 1.1rem;
+            }
+            .btn {
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+            }
+            .product-card .card-img-top,
+            .category-card .card-img-top {
+                height: 160px !important;
+            }
+            .feature-box {
+                padding: 1.5rem 1rem;
+            }
+            .contact-card {
+                margin-bottom: 1rem;
+            }
+            .map-container {
+                height: 250px;
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+            .whatsapp-float i {
+                font-size: 1.5rem;
+            }
+            .theme-toggle-float {
+                width: 44px;
+                height: 44px;
+                bottom: 75px;
+                right: 20px;
+            }
+            .theme-toggle-float i {
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* Extra Small Mobile (375px and down) */
+        @media (max-width: 375px) {
+            .navbar-brand .logo-image {
+                max-height: 40px;
+            }
+            .navbar-brand .brand-text {
+                font-size: 1rem;
+            }
+            .hero-title {
+                font-size: 1.5rem;
+            }
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+            .navbar-nav .nav-link {
+                font-size: 0.9rem;
+                padding: 0.6rem 0.75rem;
+            }
+            .whatsapp-float {
+                width: 45px;
+                height: 45px;
+                bottom: 15px;
+                right: 15px;
+            }
+            .theme-toggle-float {
+                width: 40px;
+                height: 40px;
+                bottom: 65px;
+                right: 15px;
+            }
+        }
+        
+        /* Landscape Mode Optimization */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .hero-section {
+                min-height: 400px;
+                padding: 1rem;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .navbar-collapse {
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+        }
+        
+        /* High DPI / Retina Displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .logo-image {
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+            }
+        }
     </style>
     
     <!-- Dynamic Background Styles -->
