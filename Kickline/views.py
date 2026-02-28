@@ -37,7 +37,7 @@ def product_list(request):
         product_list = product_list.filter(category=category)
 
     # Pagination
-    paginator = Paginator(product_list, 9)  # Show 9 products per page
+    paginator = Paginator(product_list, 6)  # Show 9 products per page
     page_number = request.GET.get('page')
     products = paginator.get_page(page_number)
 
@@ -64,11 +64,20 @@ def product_detail(request, slug):
 def category_detail(request, slug):
     """Category page showing all products in that category"""
     category = get_object_or_404(Category, slug=slug)
-    products = Product.objects.filter(category=category)
+    products = Product.objects.filter(category=category).order_by('-created_at')
+
+    # Pagination
+    paginator = Paginator(products, 9)  # Show 9 products per page
+    page_number = request.GET.get('page')
+    products = paginator.get_page(page_number)
+
+    # Get related categories (exclude current category, limit to 3)
+    related_categories = Category.objects.exclude(id=category.id)[:3]
 
     context = {
         'category': category,
         'products': products,
+        'related_categories': related_categories,
     }
     return render(request, 'Kickline/category_detail.html', context)
 
@@ -150,6 +159,11 @@ def catalog_list(request):
     category_code = request.GET.get('category')
     if category_code:
         catalogs = catalogs.filter(category=category_code)
+
+    # Pagination
+    paginator = Paginator(catalogs, 9) # Show 9 catalogs per page
+    page_number = request.GET.get('page')
+    catalogs = paginator.get_page(page_number)
 
     context = {
         'catalogs': catalogs,
