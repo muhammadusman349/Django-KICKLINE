@@ -116,6 +116,9 @@ def category_list(request):
     else:
         category_list = category_list.order_by('name')
 
+    #Category Count
+    category_count = category_list.count()
+    
     # Pagination
     paginator = Paginator(category_list, 6)  # Show 6 categories per page
     page_number = request.GET.get('page')
@@ -125,6 +128,7 @@ def category_list(request):
         'categories': categories,
         'sort_by': sort_by,
         'search_query': search_query,
+        'category_count': category_count,
     }
     return render(request, 'Kickline/category_list.html', context)
 
