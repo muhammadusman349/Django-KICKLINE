@@ -7,8 +7,9 @@
     <title>{% block title %}KickLine - Premium Sports Equipment{% endblock %}</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{% static 'images/logo/KS-Logo-2.png' %}">
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/logo/KS-Logo-2.png' %}">
+    <link rel="icon" type="image/png" sizes="64x64" href="{% static 'images/logo/KS-Logo-2.png' %}">
+    <link rel="shortcut icon" type="image/png" sizes="64x64" href="{% static 'images/logo/KS-Logo-2.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/logo/KS-Logo-2.png' %}">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -915,6 +916,10 @@
 
         .social-link[aria-label="Twitter"] {
             background: #1DA1F2;
+        }
+
+        .social-link[aria-label="LinkedIn"] {
+            background: #0077b5;
         }
 
         .social-link:hover {
@@ -2779,6 +2784,9 @@
                         </a>
                         <a href="https://twitter.com/yourhandle" target="_blank" class="social-link" aria-label="Twitter">
                             <img src="{% static 'images/logo/twitter.png' %}" alt="Twitter" class="social-icon">
+                        </a>
+                        <a href="https://linkedin.com/company/yourcompany" target="_blank" class="social-link" aria-label="LinkedIn">
+                            <img src="{% static 'images/logo/Linkedin.png' %}" alt="LinkedIn" class="social-icon">
                         </a>
                     </div>
                 </div>
