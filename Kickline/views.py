@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import FileResponse, Http404
-from django.db.models import Count
+from django.db.models import Count, Q
 from .models import Category, Product, Shipment, BannerPicture, Catalog
 from .forms import ContactForm, CatalogPasswordForm
 from .tasks import send_contact_notification_email, send_contact_confirmation_email
@@ -26,9 +26,18 @@ def home(request):
 
 
 def product_list(request):
-    """View to display all products"""
+    """View to display all products with search and category filtering"""
     product_list = Product.objects.all().order_by('-created_at')
     categories = Category.objects.all()
+
+    # Handle search query
+    search_query = request.GET.get('search')
+    if search_query:
+        product_list = product_list.filter(
+            Q(name__icontains=search_query) | 
+            Q(description__icontains=search_query) |
+            Q(category__name__icontains=search_query)
+        )
 
     # Get category filter from query parameters
     category_slug = request.GET.get('category')
@@ -37,7 +46,7 @@ def product_list(request):
         product_list = product_list.filter(category=category)
 
     # Pagination
-    paginator = Paginator(product_list, 6)  # Show 9 products per page
+    paginator = Paginator(product_list, 6)  # Show 6 products per page
     page_number = request.GET.get('page')
     products = paginator.get_page(page_number)
 
@@ -45,6 +54,7 @@ def product_list(request):
         'products': products,
         'categories': categories,
         'current_category': category_slug,
+        'search_query': search_query,
     }
     return render(request, 'Kickline/product_list.html', context)
 

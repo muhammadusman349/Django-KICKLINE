@@ -18,21 +18,46 @@
                 <h1 class="fw-bold" style="color: var(--primary-color);">All Categories</h2>
                 <p class="lead" style="color: var(--text-light);">Explore our complete range of premium sports equipment categories</p>
             </div>
-            <div class="col-md-4 text-md-end">
-                <div class="d-flex align-items-center justify-content-end gap-3">
-                    <div class="dropdown">
-                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-sort me-2"></i>Sort Categories
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item {% if sort_by == 'name' %}active{% endif %}" href="?{% if search_query %}search={{ search_query }}&{% endif %}sort=name">Name (A-Z)</a></li>
-                            <li><a class="dropdown-item {% if sort_by == 'name_desc' %}active{% endif %}" href="?{% if search_query %}search={{ search_query }}&{% endif %}sort=name_desc">Name (Z-A)</a></li>
-                            <li><a class="dropdown-item {% if sort_by == 'products' %}active{% endif %}" href="?{% if search_query %}search={{ search_query }}&{% endif %}sort=products">Products (Low to High)</a></li>
-                            <li><a class="dropdown-item {% if sort_by == 'products_desc' %}active{% endif %}" href="?{% if search_query %}search={{ search_query }}&{% endif %}sort=products_desc">Products (High to Low)</a></li>
-                        </ul>
-                    </div>
-                    <div class="category-stats">
-                        <span class="badge Kickline-category-badge fs-5">{{ categories.count }} Categories</span>
+            <div class="col-md-4">
+                <div class="d-flex flex-column align-items-md-end gap-3">
+                    <!-- Search Form -->
+                    <form method="get" class="search-form w-100">
+                        <div class="input-group" style="max-width: 220px;">
+                            <input type="text" 
+                                   class="form-control" 
+                                   name="search" 
+                                   placeholder="Search..." 
+                                   value="{{ search_query|default:'' }}"
+                                   style="border: 2px solid var(--secondary-color); border-right: none; border-radius: 8px 0 0 8px;">
+                            <button class="btn btn-primary" type="submit" style="border: 2px solid var(--secondary-color); border-left: none; border-radius: 0 8px 8px 0; padding: 0.4rem 0.7rem; min-height: 36px;">
+                                <i class="fas fa-search" style="font-size: 0.85rem;"></i>
+                            </button>
+                        </div>
+                        {% if search_query %}
+                        <div class="mt-2 text-end">
+                            <a href="?" class="btn btn-outline-secondary btn-sm" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;">
+                                <i class="fas fa-times me-1"></i>Clear Search
+                            </a>
+                        </div>
+                        {% endif %}
+                    </form>
+                    
+                    <!-- Sort Dropdown and Stats -->
+                    <div class="d-flex align-items-center justify-content-md-end gap-3 w-100">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; min-height: 40px;">
+                                <i class="fas fa-sort me-2" style="font-size: 0.85rem;"></i>Sort Categories
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item {% if sort_by == 'name' %}active{% endif %}" href="?{% if search_query %}search={{ search_query }}&{% endif %}sort=name">Name (A-Z)</a></li>
+                                <li><a class="dropdown-item {% if sort_by == 'name_desc' %}active{% endif %}" href="?{% if search_query %}search={{ search_query }}&{% endif %}sort=name_desc">Name (Z-A)</a></li>
+                                <li><a class="dropdown-item {% if sort_by == 'products' %}active{% endif %}" href="?{% if search_query %}search={{ search_query }}&{% endif %}sort=products">Products (Low to High)</a></li>
+                                <li><a class="dropdown-item {% if sort_by == 'products_desc' %}active{% endif %}" href="?{% if search_query %}search={{ search_query }}&{% endif %}sort=products_desc">Products (High to Low)</a></li>
+                            </ul>
+                        </div>
+                        <div class="category-stats">
+                            <span class="badge Kickline-category-badge fs-5" style="font-size: 0.85rem;">{{ categories.count }} Categories</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -175,6 +200,21 @@
     .page-header .lead {
         font-size: 1rem;
     }
+    .search-form .input-group {
+        max-width: 200px;
+    }
+    .search-form input.form-control {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.6rem;
+        min-height: 36px;
+    }
+    .search-form button {
+        padding: 0.4rem 0.7rem;
+        min-height: 36px;
+    }
+    .search-form button i {
+        font-size: 0.85rem;
+    }
     .product-card .card-img-top {
         height: 240px;
     }
@@ -188,7 +228,7 @@
         text-align: center;
     }
     .page-header .col-md-8 {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
     .page-header .col-md-4 {
         text-align: center !important;
@@ -203,10 +243,31 @@
     .page-header .lead {
         font-size: 0.95rem;
     }
-    .page-header .d-flex.align-items-center.justify-content-end {
-        justify-content: center !important;
-        flex-wrap: wrap;
-        gap: 1rem;
+    .page-header .d-flex.flex-column.align-items-md-end {
+        align-items: center !important;
+        gap: 0.75rem;
+    }
+    .search-form {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .search-form .input-group {
+        max-width: 180px;
+        margin: 0 auto;
+    }
+    .search-form input.form-control {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.6rem;
+        min-height: 34px;
+    }
+    .search-form button {
+        padding: 0.5rem 0.6rem;
+        min-height: 34px;
+    }
+    .search-form button i {
+        font-size: 0.8rem;
     }
     .product-card .card-img-top {
         height: 220px;

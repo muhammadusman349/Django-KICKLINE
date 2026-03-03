@@ -18,17 +18,42 @@
                 <h1 class="h1 fw-bold mb-4" style="color: var(--text-primary);">Our Products</h1>
                 <p class="lead" style="color: var(--text-body);">Discover premium sports equipment for every athlete</p>
             </div>
-            <div class="col-md-4 text-md-end">
-                <div class="dropdown">
-                    <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                        <i class="fas fa-filter me-2"></i>Filter by Category
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'Kickline:product_list' %}">All Products</a></li>
-                        {% for category in categories %}
-                        <li><a class="dropdown-item" href="{% url 'Kickline:product_list' %}?category={{ category.slug }}">{{ category.name }}</a></li>
-                        {% endfor %}
-                    </ul>
+            <div class="col-md-4">
+                <div class="d-flex flex-column align-items-md-end gap-2">
+                    <!-- Search Form -->
+                    <form method="get" class="search-form">
+                        <div class="input-group" style="max-width: 220px;">
+                            <input type="text" 
+                                   class="form-control" 
+                                   name="search" 
+                                   placeholder="Search..." 
+                                   value="{{ search_query|default:'' }}"
+                                   style="border: 2px solid var(--secondary-color); border-right: none; border-radius: 8px 0 0 8px;">
+                            <button class="btn btn-primary" type="submit" style="border: 2px solid var(--secondary-color); border-left: none; border-radius: 0 8px 8px 0; padding: 0.4rem 0.7rem; min-height: 36px;">
+                                <i class="fas fa-search" style="font-size: 0.85rem;"></i>
+                            </button>
+                        </div>
+                        {% if search_query %}
+                        <div class="mt-1 text-end">
+                            <a href="?{% if current_category %}category={{ current_category }}{% endif %}" class="btn btn-outline-secondary btn-sm" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">
+                                <i class="fas fa-times me-1"></i>Clear
+                            </a>
+                        </div>
+                        {% endif %}
+                    </form>
+                    
+                    <!-- Filter Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; min-height: 36px;">
+                            <i class="fas fa-filter me-2" style="font-size: 0.85rem;"></i>Filter by Category
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item {% if not current_category %}active{% endif %}" href="?{% if search_query %}search={{ search_query }}&{% endif %}">All Products</a></li>
+                            {% for category in categories %}
+                            <li><a class="dropdown-item {% if current_category == category.slug %}active{% endif %}" href="?{% if search_query %}search={{ search_query }}&{% endif %}category={{ category.slug }}">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -194,28 +219,74 @@
     .page-header .lead {
         font-size: 1rem;
     }
+    .search-form .input-group {
+        max-width: 200px;
+    }
+    .search-form input.form-control {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.6rem;
+        min-height: 36px;
+    }
+    .search-form button {
+        padding: 0.4rem 0.7rem;
+        min-height: 36px;
+    }
+    .search-form button i {
+        font-size: 0.85rem;
+    }
     .product-card .card-img-top {
         height: 240px;
+    }
+    .category-stats .badge {
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 576px) {
-    .page-header-section,
     .page-header {
         text-align: center;
     }
-    .page-header-section .breadcrumb,
+    .page-header .col-md-8 {
+        margin-bottom: 1rem;
+    }
+    .page-header .col-md-4 {
+        text-align: center !important;
+    }
     .page-header .breadcrumb {
         justify-content: center;
         font-size: 0.85rem;
     }
-    .page-header-section h1,
     .page-header h1 {
         font-size: 1.5rem;
     }
-    .page-header-section .lead,
     .page-header .lead {
         font-size: 0.95rem;
+    }
+    .page-header .d-flex.flex-column.align-items-md-end {
+        align-items: center !important;
+        gap: 0.75rem;
+    }
+    .search-form {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .search-form .input-group {
+        max-width: 180px;
+        margin: 0 auto;
+    }
+    .search-form input.form-control {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.6rem;
+        min-height: 34px;
+    }
+    .search-form button {
+        padding: 0.5rem 0.6rem;
+        min-height: 34px;
+    }
+    .search-form button i {
+        font-size: 0.8rem;
     }
     .product-card .card-img-top {
         height: 220px;
