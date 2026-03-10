@@ -477,7 +477,7 @@
 
         <div class="policy-section">
             <h2><span class="section-number">6</span>Cookies and Tracking Technologies</h2>
-            <p>We use cookies and similar tracking technologies to enhance your browsing experience and analyze website traffic. You can manage your cookie preferences through our <a href="#" onclick="document.getElementById('cookieCustomizeBtn')?.click(); return false;">Cookie Settings</a>.</p>
+            <p>We use cookies and similar tracking technologies to enhance your browsing experience and analyze website traffic. You can manage your cookie preferences through our <a href="#" onclick="openCookieModal(); return false;" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">Cookie Settings</a>.</p>
             
             <div class="cookie-types-grid">
                 <div class="cookie-type-card">
@@ -542,15 +542,29 @@
         <div class="policy-section">
             <h2><span class="section-number">11</span>Contact Us</h2>
             <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
-            <div class="contact-info-box">
-                <ul>
-                    <li><i class="fas fa-envelope"></i><a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a></li>
-                    <li><i class="fas fa-phone"></i><span>+92 348 086 7200</span></li>
-                    <li><i class="fas fa-map-marker-alt"></i><span>Sialkot, Pakistan</span></li>
-                    <li><i class="fas fa-clock"></i><span>Response time: Within 48 hours</span></li>
-                </ul>
+            <div class="info-cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+                <div class="info-card" style="background: #f8fafc; border-radius: 12px; padding: 1.25rem; text-align: center; border: 1px solid rgba(0,0,0,0.05); transition: all 0.3s ease;">
+                    <i class="fas fa-envelope" style="font-size: 1.5rem; color: var(--secondary-color); margin-bottom: 0.75rem;"></i>
+                    <h4 style="font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Email</h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: var(--text-body);"><a href="mailto:{{ CONTACT_EMAIL }}" style="color: var(--secondary-color); text-decoration: none;">{{ CONTACT_EMAIL }}</a></p>
+                </div>
+                <div class="info-card" style="background: #f8fafc; border-radius: 12px; padding: 1.25rem; text-align: center; border: 1px solid rgba(0,0,0,0.05); transition: all 0.3s ease;">
+                    <i class="fas fa-phone" style="font-size: 1.5rem; color: var(--secondary-color); margin-bottom: 0.75rem;"></i>
+                    <h4 style="font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Phone</h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: var(--text-body);">+92 348 086 7200</p>
+                </div>
+                <div class="info-card" style="background: #f8fafc; border-radius: 12px; padding: 1.25rem; text-align: center; border: 1px solid rgba(0,0,0,0.05); transition: all 0.3s ease;">
+                    <i class="fab fa-whatsapp" style="font-size: 1.5rem; color: var(--secondary-color); margin-bottom: 0.75rem;"></i>
+                    <h4 style="font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">WhatsApp</h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: var(--text-body);">+92 348 086 7200</p>
+                </div>
+                <div class="info-card" style="background: #f8fafc; border-radius: 12px; padding: 1.25rem; text-align: center; border: 1px solid rgba(0,0,0,0.05); transition: all 0.3s ease;">
+                    <i class="fas fa-map-marker-alt" style="font-size: 1.5rem; color: var(--secondary-color); margin-bottom: 0.75rem;"></i>
+                    <h4 style="font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Address</h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: var(--text-body);">Sialkot, Pakistan</p>
+                </div>
             </div>
-            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">For data protection inquiries, you may also contact our Data Protection Officer at the email address above.</p>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted); text-align: center;">For data protection inquiries, you may also contact our Data Protection Officer at the email address above.</p>
         </div>
     </div>
 </section>
