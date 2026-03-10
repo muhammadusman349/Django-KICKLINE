@@ -228,3 +228,13 @@ def catalog_download(request, catalog_id):
 
     # Redirect to list if accessed via GET
     return redirect('Kickline:catalog_list')
+
+
+def privacy_policy(request):
+    """Privacy Policy page"""
+    return render(request, 'Kickline/privacy_policy.html')
+
+
+def terms_of_service(request):
+    """Terms of Service page"""
+    return render(request, 'Kickline/terms_of_service.html')

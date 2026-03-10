@@ -13,4 +13,6 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('catalogs/', views.catalog_list, name='catalog_list'),
     path('catalogs/<int:catalog_id>/download/', views.catalog_download, name='catalog_download'),
+    path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
+    path('terms-of-service/', views.terms_of_service, name='terms_of_service'),
 ]

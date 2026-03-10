@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Terms of Service - Kickline{% endblock %}
+
+{% block content %}
+<style>
+  .terms-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .terms-section {
+    background: var(--background-color);
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  [data-theme="dark"] .terms-section {
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  .terms-section h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--secondary-color);
+  }
+  .terms-section h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .terms-section p {
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  .terms-section ul {
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  .terms-section li {
+    margin-bottom: 0.5rem;
+  }
+  .terms-date {
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+  .highlight-box {
+    background: rgba(13, 148, 136, 0.1);
+    border-left: 4px solid var(--secondary-color);
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+  }
+  [data-theme="dark"] .highlight-box {
+    background: rgba(13, 148, 136, 0.2);
+  }
+  .highlight-box p {
+    margin-bottom: 0;
+  }
+  @media (max-width: 768px) {
+    .terms-section {
+      padding: 1.5rem;
+    }
+    .terms-section h2 {
+      font-size: 1.25rem;
+    }
+    .terms-section h3 {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+
+<!-- Page Header -->
+<section class="py-5 page-header" style="background: var(--background-color);">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="h1 fw-bold mb-4" style="color: var(--text-primary);">Terms of Service</h1>
+            <p class="lead" style="color: var(--text-body);">Please read these terms carefully before using our services.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Terms of Service Content -->
+<section class="section">
+    <div class="container terms-container">
+        <div class="terms-date">
+            <i class="far fa-calendar-alt me-2"></i>Last Updated: March 2026
+        </div>
+
+        <div class="terms-section">
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing or using the Kickline Sports website and services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our website or services.</p>
+            <div class="highlight-box">
+                <p><strong>Important:</strong> These terms constitute a legally binding agreement between you and Kickline Sports regarding your use of our website and services.</p>
+            </div>
+            <p>We reserve the right to modify these terms at any time. Changes will be effective immediately upon posting to the website. Your continued use of the website after changes constitutes acceptance of the revised terms.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>2. Company Information</h2>
+            <p>Kickline Sports is a manufacturer and exporter of premium sports equipment based in Sialkot, Pakistan. We specialize in producing high-quality sportswear, team uniforms, and sports accessories.</p>
+            <ul>
+                <li><strong>Business Name:</strong> Kickline Sports</li>
+                <li><strong>Location:</strong> Sialkot, Pakistan</li>
+                <li><strong>Industry:</strong> Sports Equipment Manufacturing & Export</li>
+                <li><strong>Website:</strong> www.kicklinesports.com</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>3. Use of Website</h2>
+            <h3>3.1 Eligibility</h3>
+            <p>By using our website, you represent and warrant that:</p>
+            <ul>
+                <li>You are at least 18 years old or have parental/guardian consent</li>
+                <li>You have the legal capacity to enter into binding contracts</li>
+                <li>You are not prohibited from receiving products or services under applicable laws</li>
+            </ul>
+
+            <h3>3.2 Permitted Use</h3>
+            <p>You may use our website for the following purposes:</p>
+            <ul>
+                <li>Browsing our product catalog and services</li>
+                <li>Submitting inquiries about products</li>
+                <li>Requesting quotes or product information</li>
+                <li>Downloading catalogs (where permitted)</li>
+                <li>Contacting us for business purposes</li>
+            </ul>
+
+            <h3>3.3 Prohibited Activities</h3>
+            <p>You agree not to:</p>
+            <ul>
+                <li>Use the website for any illegal purpose</li>
+                <li>Attempt to gain unauthorized access to our systems</li>
+                <li>Interfere with the proper working of the website</li>
+                <li>Transmit any viruses, malware, or harmful code</li>
+                <li>Scrape, data-mine, or use automated tools to extract data</li>
+                <li>Impersonate any person or entity</li>
+                <li>Harass, abuse, or harm another person</li>
+                <li>Infringe on intellectual property rights</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>4. Products and Services</h2>
+            <h3>4.1 Product Information</h3>
+            <p>We make every effort to display our products and their descriptions as accurately as possible. However:</p>
+            <ul>
+                <li>Colors may vary due to monitor/display differences</li>
+                <li>Product specifications are subject to change without notice</li>
+                <li>All product images are for reference purposes only</li>
+                <li>Custom products may have slight variations from samples</li>
+            </ul>
+
+            <h3>4.2 Custom Orders</h3>
+            <p>For custom product orders:</p>
+            <ul>
+                <li>Minimum order quantities (MOQ) may apply</li>
+                <li>Custom samples require advance payment</li>
+                <li>Production timelines will be communicated before order confirmation</li>
+                <li>Design approvals must be provided in writing before production begins</li>
+            </ul>
+
+            <h3>4.3 Pricing</h3>
+            <ul>
+                <li>All prices are quoted based on specific requirements</li>
+                <li>Prices are subject to change based on material costs and order volume</li>
+                <li>Quotes are valid for a specified period as indicated</li>
+                <li>Final pricing is confirmed upon order acceptance</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>5. Orders and Payments</h2>
+            <h3>5.1 Order Process</h3>
+            <p>Our order process typically involves:</p>
+            <ul>
+                <li>Initial inquiry and requirements discussion</li>
+                <li>Quotation and sample approval (if required)</li>
+                <li>Order confirmation with written agreement</li>
+                <li>Advance payment as per agreed terms</li>
+                <li>Production and quality control</li>
+                <li>Final payment and shipment</li>
+            </ul>
+
+            <h3>5.2 Payment Terms</h3>
+            <ul>
+                <li>Payment terms are agreed upon before order confirmation</li>
+                <li>We accept bank transfers (T/T), Letters of Credit (L/C), and other agreed methods</li>
+                <li>Advance payment is typically required for new customers</li>
+                <li>All bank charges are borne by the respective parties</li>
+            </ul>
+
+            <h3>5.3 Order Cancellation</h3>
+            <p>Cancellation policies:</p>
+            <ul>
+                <li>Orders may be cancelled before production begins</li>
+                <li>Cancellations after production starts may incur charges</li>
+                <li>Custom products cannot be cancelled once production has commenced</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>6. Shipping and Delivery</h2>
+            <h3>6.1 Shipping Methods</h3>
+            <p>We offer various shipping options including:</p>
+            <ul>
+                <li>Air Cargo (2-3 days)</li>
+                <li>Sea Freight (economical for large orders)</li>
+                <li>Express Courier (DHL, FedEx, UPS)</li>
+            </ul>
+
+            <h3>6.2 Delivery Times</h3>
+            <ul>
+                <li>Delivery times are estimates and not guaranteed</li>
+                <li>Delays due to customs, weather, or other circumstances are not our responsibility</li>
+                <li>Production time + shipping time = total delivery time</li>
+            </ul>
+
+            <h3>6.3 Risk and Title</h3>
+            <p>Risk of loss and title for items pass to you upon delivery to the carrier. We are not responsible for items lost or damaged during shipping.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>7. Returns and Refunds</h2>
+            <h3>7.1 Quality Issues</h3>
+            <p>If products arrive with manufacturing defects or quality issues:</p>
+            <ul>
+                <li>Notify us within 7 days of receipt</li>
+                <li>Provide photographic evidence of the issue</li>
+                <li>We will assess and determine appropriate remedy (replacement, repair, or refund)</li>
+                <li>Return shipping for defective items is our responsibility</li>
+            </ul>
+
+            <h3>7.2 Non-Returnable Items</h3>
+            <p>The following cannot be returned or refunded:</p>
+            <ul>
+                <li>Custom-made products (unless defective)</li>
+                <li>Products damaged due to misuse or improper care</li>
+                <li>Products without original packaging</li>
+                <li>Orders cancelled after production has started</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>8. Intellectual Property</h2>
+            <h3>8.1 Our Intellectual Property</h3>
+            <p>All content on this website, including but not limited to:</p>
+            <ul>
+                <li>Logos, trademarks, and brand names</li>
+                <li>Product images and descriptions</li>
+                <li>Text, graphics, and designs</li>
+                <li>Software and code</li>
+            </ul>
+            <p>is the property of Kickline Sports or its licensors and is protected by copyright, trademark, and other intellectual property laws.</p>
+
+            <h3>8.2 Limited License</h3>
+            <p>We grant you a limited, non-exclusive, non-transferable license to access and use our website for personal and business purposes. This license does not include:</p>
+            <ul>
+                <li>Modifying or copying materials</li>
+                <li>Using materials for commercial purposes without authorization</li>
+                <li>Attempting to decompile or reverse engineer any software</li>
+                <li>Removing copyright or proprietary notices</li>
+            </ul>
+
+            <h3>8.3 Customer Designs</h3>
+            <p>When you provide custom designs:</p>
+            <ul>
+                <li>You warrant that you have the right to use such designs</li>
+                <li>Designs do not infringe on third-party intellectual property</li>
+                <li>We may use production photos for portfolio purposes (unless you request otherwise)</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>9. Limitation of Liability</h2>
+            <p>To the maximum extent permitted by applicable law:</p>
+            <ul>
+                <li>We shall not be liable for any indirect, incidental, special, consequential, or punitive damages</li>
+                <li>Our total liability shall not exceed the amount paid for the specific products or services giving rise to the liability</li>
+                <li>We are not responsible for delays or failures due to circumstances beyond our reasonable control</li>
+                <li>We do not guarantee that our website will be error-free or uninterrupted</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>10. Indemnification</h2>
+            <p>You agree to indemnify, defend, and hold harmless Kickline Sports, its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses arising out of or in any way connected with:</p>
+            <ul>
+                <li>Your access to or use of our website</li>
+                <li>Your violation of these Terms of Service</li>
+                <li>Your violation of any rights of another party</li>
+                <li>Your conduct in connection with our services</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>11. Governing Law and Dispute Resolution</h2>
+            <h3>11.1 Governing Law</h3>
+            <p>These Terms of Service shall be governed by and construed in accordance with the laws of Pakistan, without regard to its conflict of law provisions.</p>
+
+            <h3>11.2 Dispute Resolution</h3>
+            <p>In the event of any dispute:</p>
+            <ul>
+                <li>Both parties agree to first attempt to resolve the dispute informally through good faith negotiations</li>
+                <li>If informal resolution fails, disputes shall be resolved through binding arbitration in Sialkot, Pakistan</li>
+                <li>Each party shall bear its own costs in any dispute resolution proceeding</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>12. Termination</h2>
+            <p>We may terminate or suspend your access to our website immediately, without prior notice or liability, for any reason, including:</p>
+            <ul>
+                <li>Breach of these Terms of Service</li>
+                <li>Conduct that we determine to be harmful to other users or us</li>
+                <li>Fraudulent or illegal activities</li>
+                <li>Non-payment of amounts due</li>
+            </ul>
+            <p>Upon termination, all provisions of these Terms which by their nature should survive termination shall remain in effect.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>13. Severability</h2>
+            <p>If any provision of these Terms of Service is held to be invalid, illegal, or unenforceable, such provision shall be struck and the remaining provisions shall continue in full force and effect.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>14. Entire Agreement</h2>
+            <p>These Terms of Service constitute the entire agreement between you and Kickline Sports regarding your use of our website and supersede all prior agreements and understandings.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>15. Contact Information</h2>
+            <p>For any questions about these Terms of Service, please contact us:</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a></li>
+                <li><strong>Phone:</strong> +92 348 086 7200</li>
+                <li><strong>WhatsApp:</strong> +92 348 086 7200</li>
+                <li><strong>Address:</strong> Sialkot, Pakistan</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section" style="background: var(--gradient-primary); color: white;">
+    <div class="container text-center">
+        <h2 class="h3 mb-4">Have Questions About Our Terms?</h2>
+        <p class="mb-4">Contact us for clarification on any of our policies.</p>
+        <a href="{% url 'Kickline:contact' %}" class="btn btn-light btn-lg rounded-pill">
+            <i class="fas fa-envelope me-2"></i>Contact Us
+        </a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Privacy Policy - Kickline{% endblock %}
+
+{% block content %}
+<style>
+  .policy-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .policy-section {
+    background: var(--background-color);
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  [data-theme="dark"] .policy-section {
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  .policy-section h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--secondary-color);
+  }
+  .policy-section h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .policy-section p {
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  .policy-section ul {
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  .policy-section li {
+    margin-bottom: 0.5rem;
+  }
+  .policy-date {
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 768px) {
+    .policy-section {
+      padding: 1.5rem;
+    }
+    .policy-section h2 {
+      font-size: 1.25rem;
+    }
+    .policy-section h3 {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+
+<!-- Page Header -->
+<section class="py-5 page-header" style="background: var(--background-color);">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="h1 fw-bold mb-4" style="color: var(--text-primary);">Privacy Policy</h1>
+            <p class="lead" style="color: var(--text-body);">Your privacy is important to us. Learn how we protect your data.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Privacy Policy Content -->
+<section class="section">
+    <div class="container policy-container">
+        <div class="policy-date">
+            <i class="far fa-calendar-alt me-2"></i>Last Updated: March 2026
+        </div>
+
+        <div class="policy-section">
+            <h2>1. Introduction</h2>
+            <p>Welcome to Kickline Sports. We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, store, and protect your information when you visit our website or use our services.</p>
+            <p>By using our website, you agree to the collection and use of information in accordance with this policy.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>2. Information We Collect</h2>
+            <h3>2.1 Personal Information</h3>
+            <p>We may collect the following personal information when you:</p>
+            <ul>
+                <li>Contact us through our contact form (name, email, phone number, message)</li>
+                <li>Make inquiries about our products</li>
+                <li>Subscribe to our newsletter</li>
+                <li>Request catalogs or product information</li>
+            </ul>
+            
+            <h3>2.2 Automatically Collected Information</h3>
+            <p>When you visit our website, we automatically collect certain information including:</p>
+            <ul>
+                <li>IP address and browser type</li>
+                <li>Device information (operating system, screen resolution)</li>
+                <li>Pages visited and time spent on our website</li>
+                <li>Referring website or search terms</li>
+                <li>Cookies and similar tracking technologies</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>3. How We Use Your Information</h2>
+            <p>We use the collected information for the following purposes:</p>
+            <ul>
+                <li><strong>Communication:</strong> To respond to your inquiries and provide customer support</li>
+                <li><strong>Product Information:</strong> To send details about products you're interested in</li>
+                <li><strong>Marketing:</strong> To send promotional materials (only with your consent)</li>
+                <li><strong>Improvement:</strong> To analyze website usage and improve our services</li>
+                <li><strong>Security:</strong> To protect against fraud and unauthorized access</li>
+                <li><strong>Legal Compliance:</strong> To comply with applicable laws and regulations</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>4. Information Sharing</h2>
+            <p>We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:</p>
+            <ul>
+                <li><strong>Service Providers:</strong> Trusted third parties who assist in operating our website and conducting our business (e.g., hosting providers, email services)</li>
+                <li><strong>Legal Requirements:</strong> When required by law, court order, or governmental authority</li>
+                <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets</li>
+            </ul>
+            <p>All third-party service providers are contractually obligated to keep your information confidential and use it only for the specified purposes.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>5. Data Security</h2>
+            <p>We implement appropriate technical and organizational security measures to protect your personal information against:</p>
+            <ul>
+                <li>Unauthorized access</li>
+                <li>Accidental loss or destruction</li>
+                <li>Alteration or disclosure</li>
+            </ul>
+            <p>These measures include SSL encryption, secure servers, and regular security assessments. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>6. Cookies and Tracking</h2>
+            <p>We use cookies and similar tracking technologies to enhance your browsing experience and analyze website traffic.</p>
+            <h3>Types of Cookies We Use:</h3>
+            <ul>
+                <li><strong>Essential Cookies:</strong> Required for the website to function properly</li>
+                <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our website</li>
+                <li><strong>Preference Cookies:</strong> Remember your settings and preferences (e.g., dark mode)</li>
+            </ul>
+            <p>You can control cookies through your browser settings. Please note that disabling certain cookies may affect the functionality of our website.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>7. Your Rights</h2>
+            <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+            <ul>
+                <li><strong>Access:</strong> Request a copy of your personal data</li>
+                <li><strong>Correction:</strong> Request correction of inaccurate information</li>
+                <li><strong>Deletion:</strong> Request deletion of your personal data</li>
+                <li><strong>Objection:</strong> Object to processing of your data</li>
+                <li><strong>Portability:</strong> Request transfer of your data to another service</li>
+                <li><strong>Withdraw Consent:</strong> Withdraw consent for marketing communications</li>
+            </ul>
+            <p>To exercise these rights, please contact us using the information provided in the "Contact Us" section.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>8. Third-Party Links</h2>
+            <p>Our website may contain links to third-party websites. We are not responsible for the privacy practices or content of these external sites. We encourage you to review the privacy policies of any website you visit.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>9. Children's Privacy</h2>
+            <p>Our website is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>10. Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date. We encourage you to review this policy periodically to stay informed about how we protect your information.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>11. Contact Us</h2>
+            <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a></li>
+                <li><strong>Phone:</strong> +92 348 086 7200</li>
+                <li><strong>Address:</strong> Sialkot, Pakistan</li>
+            </ul>
+            <p>We will respond to your inquiry within 48 hours.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section" style="background: var(--gradient-primary); color: white;">
+    <div class="container text-center">
+        <h2 class="h3 mb-4">Have Questions About Your Privacy?</h2>
+        <p class="mb-4">Our team is here to help you understand how we protect your data.</p>
+        <a href="{% url 'Kickline:contact' %}" class="btn btn-light btn-lg rounded-pill">
+            <i class="fas fa-envelope me-2"></i>Contact Us
+        </a>
+    </div>
+</section>
+{% endblock %}
