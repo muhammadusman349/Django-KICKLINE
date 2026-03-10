@@ -5,215 +5,566 @@
 
 {% block content %}
 <style>
+  /* Modern Glassmorphism Design matching Cookie Consent Banner */
   .policy-container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
+    padding: 0 1rem;
   }
-  .policy-section {
-    background: var(--background-color);
+  
+  /* Hero Section with Glass Effect */
+  .policy-hero {
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.08), rgba(20, 184, 166, 0.05));
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(13, 148, 136, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .policy-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(13, 148, 136, 0.05) 0%, transparent 70%);
+    animation: rotate 30s linear infinite;
+  }
+  
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .policy-hero h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .policy-hero p {
+    font-size: 1.15rem;
+    color: var(--text-body);
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .policy-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
     border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 8px 25px rgba(13, 148, 136, 0.3);
+    position: relative;
+    z-index: 1;
+  }
+  
+  .policy-icon i {
+    font-size: 2rem;
+    color: white;
+  }
+  
+  /* Date Badge */
+  .policy-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    color: white;
+    padding: 0.6rem 1.25rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 4px 15px rgba(13, 148, 136, 0.3);
+  }
+  
+  /* Modern Policy Sections with Glass Effect */
+  .policy-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
     padding: 2.5rem;
-    margin-bottom: 2rem;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
   }
-  [data-theme="dark"] .policy-section {
-    background: #1e293b;
-    border-color: rgba(255, 255, 255, 0.1);
+  
+  .policy-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
   }
+  
+  .policy-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  }
+  
+  .policy-section:hover::before {
+    transform: scaleX(1);
+  }
+  
   .policy-section h2 {
     color: var(--text-primary);
     font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--secondary-color);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
   }
+  
+  .policy-section h2 .section-number {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  
   .policy-section h3 {
     color: var(--text-primary);
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 600;
     margin-top: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--secondary-color);
   }
+  
   .policy-section p {
     color: var(--text-body);
     line-height: 1.8;
     margin-bottom: 1rem;
   }
+  
   .policy-section ul {
     color: var(--text-body);
     line-height: 1.8;
     margin-bottom: 1rem;
     padding-left: 1.5rem;
   }
+  
   .policy-section li {
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+  
+  .policy-section li::marker {
+    color: var(--secondary-color);
+  }
+  
+  .policy-section strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  
+  /* Cookie Types Cards */
+  .cookie-types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .cookie-type-card {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 1.25rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .cookie-type-card:hover {
+    border-color: rgba(13, 148, 136, 0.3);
+    box-shadow: 0 4px 15px rgba(13, 148, 136, 0.1);
+  }
+  
+  .cookie-type-card h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
-  .policy-date {
-    background: var(--secondary-color);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    display: inline-block;
+  
+  .cookie-type-card p {
     font-size: 0.9rem;
-    font-weight: 500;
-    margin-bottom: 2rem;
+    margin: 0;
   }
+  
+  /* Contact Info Box */
+  .contact-info-box {
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.08), rgba(20, 184, 166, 0.05));
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    border: 1px solid rgba(13, 148, 136, 0.15);
+  }
+  
+  .contact-info-box ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+  }
+  
+  .contact-info-box li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding: 0.5rem 0;
+  }
+  
+  .contact-info-box li i {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+  
+  .contact-info-box a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .contact-info-box a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+  }
+  
+  /* Dark Mode Support */
+  [data-theme="dark"] .policy-hero {
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.15), rgba(20, 184, 166, 0.1));
+    border-color: rgba(13, 148, 136, 0.25);
+  }
+  
+  [data-theme="dark"] .policy-section {
+    background: rgba(30, 41, 59, 0.95);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  
+  [data-theme="dark"] .cookie-type-card {
+    background: #0f172a;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  [data-theme="dark"] .contact-info-box {
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.15), rgba(20, 184, 166, 0.1));
+    border-color: rgba(13, 148, 136, 0.25);
+  }
+  
+  /* Mobile Responsive */
   @media (max-width: 768px) {
-    .policy-section {
-      padding: 1.5rem;
+    .policy-hero {
+      padding: 2rem 1.5rem;
+      margin-bottom: 2rem;
     }
+    
+    .policy-hero h1 {
+      font-size: 1.75rem;
+    }
+    
+    .policy-hero p {
+      font-size: 1rem;
+    }
+    
+    .policy-icon {
+      width: 55px;
+      height: 55px;
+    }
+    
+    .policy-icon i {
+      font-size: 1.5rem;
+    }
+    
+    .policy-section {
+      padding: 1.75rem;
+      border-radius: 16px;
+    }
+    
     .policy-section h2 {
       font-size: 1.25rem;
     }
+    
+    .policy-section h2 .section-number {
+      width: 30px;
+      height: 30px;
+      font-size: 0.85rem;
+    }
+    
     .policy-section h3 {
       font-size: 1.1rem;
     }
+    
+    .cookie-types-grid {
+      grid-template-columns: 1fr;
+    }
   }
+  
+  @media (max-width: 575px) {
+    .policy-hero {
+      padding: 1.5rem 1rem;
+    }
+    
+    .policy-hero h1 {
+      font-size: 1.5rem;
+    }
+    
+    .policy-section {
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    
+    .policy-section h2 {
+      font-size: 1.1rem;
+    }
+    
+    .contact-info-box {
+      padding: 1rem;
+    }
+  }
+  
+  /* Entry Animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .policy-section {
+    animation: fadeInUp 0.6s ease forwards;
+  }
+  
+  .policy-section:nth-child(1) { animation-delay: 0.1s; }
+  .policy-section:nth-child(2) { animation-delay: 0.2s; }
+  .policy-section:nth-child(3) { animation-delay: 0.3s; }
+  .policy-section:nth-child(4) { animation-delay: 0.4s; }
+  .policy-section:nth-child(5) { animation-delay: 0.5s; }
+  .policy-section:nth-child(6) { animation-delay: 0.6s; }
+  .policy-section:nth-child(7) { animation-delay: 0.7s; }
+  .policy-section:nth-child(8) { animation-delay: 0.8s; }
+  .policy-section:nth-child(9) { animation-delay: 0.9s; }
+  .policy-section:nth-child(10) { animation-delay: 1s; }
 </style>
 
-<!-- Page Header -->
-<section class="py-5 page-header" style="background: var(--background-color);">
-    <div class="container">
-        <div class="text-center">
-            <h1 class="h1 fw-bold mb-4" style="color: var(--text-primary);">Privacy Policy</h1>
-            <p class="lead" style="color: var(--text-body);">Your privacy is important to us. Learn how we protect your data.</p>
-        </div>
+<!-- Modern Hero Section -->
+<div class="container policy-container">
+  <div class="policy-hero">
+    <div class="policy-icon">
+      <i class="fas fa-shield-alt"></i>
     </div>
-</section>
+    <h1>Privacy Policy</h1>
+    <p>Your privacy is important to us. Learn how we collect, use, and protect your personal data when you use Kickline Sports.</p>
+  </div>
+
+  <div class="policy-date">
+    <i class="far fa-calendar-alt"></i>Last Updated: March 2026
+  </div>
+</div>
 
 <!-- Privacy Policy Content -->
-<section class="section">
+<section class="section" style="padding-top: 0;">
     <div class="container policy-container">
-        <div class="policy-date">
-            <i class="far fa-calendar-alt me-2"></i>Last Updated: March 2026
-        </div>
-
         <div class="policy-section">
-            <h2>1. Introduction</h2>
+            <h2><span class="section-number">1</span>Introduction</h2>
             <p>Welcome to Kickline Sports. We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, store, and protect your information when you visit our website or use our services.</p>
-            <p>By using our website, you agree to the collection and use of information in accordance with this policy.</p>
+            <p>By using our website, you agree to the collection and use of information in accordance with this policy. We comply with applicable data protection laws including GDPR and other relevant regulations.</p>
         </div>
 
         <div class="policy-section">
-            <h2>2. Information We Collect</h2>
+            <h2><span class="section-number">2</span>Information We Collect</h2>
             <h3>2.1 Personal Information</h3>
-            <p>We may collect the following personal information when you:</p>
+            <p>We may collect the following personal information when you interact with our services:</p>
             <ul>
-                <li>Contact us through our contact form (name, email, phone number, message)</li>
-                <li>Make inquiries about our products</li>
-                <li>Subscribe to our newsletter</li>
-                <li>Request catalogs or product information</li>
+                <li><strong>Contact Information:</strong> Name, email address, phone number when you contact us</li>
+                <li><strong>Inquiry Details:</strong> Product interests, messages, and specific requirements</li>
+                <li><strong>Account Information:</strong> If you create an account, we store your login credentials</li>
+                <li><strong>Communication Records:</strong> Emails, chat logs, and support tickets</li>
             </ul>
             
             <h3>2.2 Automatically Collected Information</h3>
-            <p>When you visit our website, we automatically collect certain information including:</p>
+            <p>When you visit our website, we automatically collect certain technical information:</p>
             <ul>
-                <li>IP address and browser type</li>
-                <li>Device information (operating system, screen resolution)</li>
-                <li>Pages visited and time spent on our website</li>
-                <li>Referring website or search terms</li>
-                <li>Cookies and similar tracking technologies</li>
+                <li><strong>Device Information:</strong> IP address, browser type, operating system, screen resolution</li>
+                <li><strong>Usage Data:</strong> Pages visited, time spent, clicks, and navigation patterns</li>
+                <li><strong>Location Data:</strong> General geographic location based on IP address</li>
+                <li><strong>Cookies & Tracking:</strong> See our detailed Cookies section below</li>
             </ul>
         </div>
 
         <div class="policy-section">
-            <h2>3. How We Use Your Information</h2>
-            <p>We use the collected information for the following purposes:</p>
+            <h2><span class="section-number">3</span>How We Use Your Information</h2>
+            <p>We use the collected information for the following legitimate purposes:</p>
             <ul>
                 <li><strong>Communication:</strong> To respond to your inquiries and provide customer support</li>
                 <li><strong>Product Information:</strong> To send details about products you're interested in</li>
-                <li><strong>Marketing:</strong> To send promotional materials (only with your consent)</li>
+                <li><strong>Order Processing:</strong> To process and fulfill your orders and requests</li>
                 <li><strong>Improvement:</strong> To analyze website usage and improve our services</li>
-                <li><strong>Security:</strong> To protect against fraud and unauthorized access</li>
-                <li><strong>Legal Compliance:</strong> To comply with applicable laws and regulations</li>
+                <li><strong>Security:</strong> To protect against fraud, unauthorized access, and cyber threats</li>
+                <li><strong>Legal Compliance:</strong> To comply with applicable laws, regulations, and legal processes</li>
             </ul>
         </div>
 
         <div class="policy-section">
-            <h2>4. Information Sharing</h2>
-            <p>We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:</p>
+            <h2><span class="section-number">4</span>Information Sharing</h2>
+            <p>We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following limited circumstances:</p>
             <ul>
-                <li><strong>Service Providers:</strong> Trusted third parties who assist in operating our website and conducting our business (e.g., hosting providers, email services)</li>
+                <li><strong>Service Providers:</strong> Trusted third parties who assist in operating our website and conducting our business (e.g., hosting providers, email services, payment processors)</li>
                 <li><strong>Legal Requirements:</strong> When required by law, court order, or governmental authority</li>
-                <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets</li>
+                <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets, with notice to users</li>
+                <li><strong>Protection:</strong> To protect our rights, privacy, safety, or property</li>
             </ul>
             <p>All third-party service providers are contractually obligated to keep your information confidential and use it only for the specified purposes.</p>
         </div>
 
         <div class="policy-section">
-            <h2>5. Data Security</h2>
-            <p>We implement appropriate technical and organizational security measures to protect your personal information against:</p>
+            <h2><span class="section-number">5</span>Data Security</h2>
+            <p>We implement appropriate technical and organizational security measures to protect your personal information:</p>
             <ul>
-                <li>Unauthorized access</li>
-                <li>Accidental loss or destruction</li>
-                <li>Alteration or disclosure</li>
+                <li><strong>Encryption:</strong> SSL/TLS encryption for all data transmission</li>
+                <li><strong>Secure Storage:</strong> Encrypted databases and secure servers</li>
+                <li><strong>Access Controls:</strong> Limited access to personal data on a need-to-know basis</li>
+                <li><strong>Regular Audits:</strong> Security assessments and vulnerability testing</li>
+                <li><strong>Staff Training:</strong> Regular privacy and security training for employees</li>
             </ul>
-            <p>These measures include SSL encryption, secure servers, and regular security assessments. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
+            <p>However, no method of transmission over the internet is 100% secure. While we strive to protect your data, we cannot guarantee absolute security.</p>
         </div>
 
         <div class="policy-section">
-            <h2>6. Cookies and Tracking</h2>
-            <p>We use cookies and similar tracking technologies to enhance your browsing experience and analyze website traffic.</p>
-            <h3>Types of Cookies We Use:</h3>
+            <h2><span class="section-number">6</span>Cookies and Tracking Technologies</h2>
+            <p>We use cookies and similar tracking technologies to enhance your browsing experience and analyze website traffic. You can manage your cookie preferences through our <a href="#" onclick="document.getElementById('cookieCustomizeBtn')?.click(); return false;">Cookie Settings</a>.</p>
+            
+            <div class="cookie-types-grid">
+                <div class="cookie-type-card">
+                    <h4><i class="fas fa-shield-alt" style="color: var(--secondary-color);"></i>Essential</h4>
+                    <p>Required for the website to function properly. Cannot be disabled.</p>
+                </div>
+                <div class="cookie-type-card">
+                    <h4><i class="fas fa-chart-bar" style="color: var(--secondary-color);"></i>Analytics</h4>
+                    <p>Help us understand how visitors interact with our website.</p>
+                </div>
+                <div class="cookie-type-card">
+                    <h4><i class="fas fa-palette" style="color: var(--secondary-color);"></i>Preferences</h4>
+                    <p>Remember your settings like dark mode and language preferences.</p>
+                </div>
+                <div class="cookie-type-card">
+                    <h4><i class="fas fa-bullhorn" style="color: var(--secondary-color);"></i>Marketing</h4>
+                    <p>Used to deliver relevant advertisements and promotional content.</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 1.5rem;">You can also control cookies through your browser settings. Please note that disabling certain cookies may affect the functionality of our website.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2><span class="section-number">7</span>Your Rights</h2>
+            <p>Depending on your location, you have the following rights regarding your personal information:</p>
             <ul>
-                <li><strong>Essential Cookies:</strong> Required for the website to function properly</li>
-                <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our website</li>
-                <li><strong>Preference Cookies:</strong> Remember your settings and preferences (e.g., dark mode)</li>
+                <li><strong>Right to Access:</strong> Request a copy of your personal data we hold</li>
+                <li><strong>Right to Correction:</strong> Request correction of inaccurate or incomplete information</li>
+                <li><strong>Right to Deletion:</strong> Request deletion of your personal data ("Right to be Forgotten")</li>
+                <li><strong>Right to Object:</strong> Object to processing of your data for certain purposes</li>
+                <li><strong>Right to Portability:</strong> Request transfer of your data to another service in a structured format</li>
+                <li><strong>Right to Withdraw Consent:</strong> Withdraw consent for marketing communications at any time</li>
+                <li><strong>Right to Restrict Processing:</strong> Request limitation of how we use your data</li>
             </ul>
-            <p>You can control cookies through your browser settings. Please note that disabling certain cookies may affect the functionality of our website.</p>
+            <p>To exercise these rights, please contact us using the information below. We will respond within 30 days as required by applicable law.</p>
         </div>
 
         <div class="policy-section">
-            <h2>7. Your Rights</h2>
-            <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+            <h2><span class="section-number">8</span>Third-Party Links</h2>
+            <p>Our website may contain links to third-party websites, plug-ins, and applications. Clicking on those links may allow third parties to collect or share data about you. We do not control these third-party websites and are not responsible for their privacy practices or content.</p>
+            <p>We encourage you to review the privacy policies of any website you visit to understand how they collect, use, and share your information.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2><span class="section-number">9</span>Children's Privacy</h2>
+            <p>Our website is not intended for children under 16 years of age. We do not knowingly collect personal information from children under 16. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately.</p>
+            <p>If we become aware that we have collected personal data from children without verification of parental consent, we will take steps to remove that information from our servers.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2><span class="section-number">10</span>Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time to reflect changes in our practices, legal requirements, or for other operational reasons. Any changes will be:</p>
             <ul>
-                <li><strong>Access:</strong> Request a copy of your personal data</li>
-                <li><strong>Correction:</strong> Request correction of inaccurate information</li>
-                <li><strong>Deletion:</strong> Request deletion of your personal data</li>
-                <li><strong>Objection:</strong> Object to processing of your data</li>
-                <li><strong>Portability:</strong> Request transfer of your data to another service</li>
-                <li><strong>Withdraw Consent:</strong> Withdraw consent for marketing communications</li>
+                <li>Posted on this page with an updated revision date</li>
+                <li>Significant changes will be notified via email or prominent notice on our website</li>
+                <li>Changes become effective immediately upon posting unless otherwise stated</li>
             </ul>
-            <p>To exercise these rights, please contact us using the information provided in the "Contact Us" section.</p>
+            <p>We encourage you to review this policy periodically to stay informed about how we protect your information.</p>
         </div>
 
         <div class="policy-section">
-            <h2>8. Third-Party Links</h2>
-            <p>Our website may contain links to third-party websites. We are not responsible for the privacy practices or content of these external sites. We encourage you to review the privacy policies of any website you visit.</p>
-        </div>
-
-        <div class="policy-section">
-            <h2>9. Children's Privacy</h2>
-            <p>Our website is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately.</p>
-        </div>
-
-        <div class="policy-section">
-            <h2>10. Changes to This Policy</h2>
-            <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date. We encourage you to review this policy periodically to stay informed about how we protect your information.</p>
-        </div>
-
-        <div class="policy-section">
-            <h2>11. Contact Us</h2>
+            <h2><span class="section-number">11</span>Contact Us</h2>
             <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
-            <ul>
-                <li><strong>Email:</strong> <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a></li>
-                <li><strong>Phone:</strong> +92 348 086 7200</li>
-                <li><strong>Address:</strong> Sialkot, Pakistan</li>
-            </ul>
-            <p>We will respond to your inquiry within 48 hours.</p>
+            <div class="contact-info-box">
+                <ul>
+                    <li><i class="fas fa-envelope"></i><a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a></li>
+                    <li><i class="fas fa-phone"></i><span>+92 348 086 7200</span></li>
+                    <li><i class="fas fa-map-marker-alt"></i><span>Sialkot, Pakistan</span></li>
+                    <li><i class="fas fa-clock"></i><span>Response time: Within 48 hours</span></li>
+                </ul>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">For data protection inquiries, you may also contact our Data Protection Officer at the email address above.</p>
         </div>
     </div>
 </section>
 
 <!-- CTA Section -->
-<section class="section" style="background: var(--gradient-primary); color: white;">
-    <div class="container text-center">
-        <h2 class="h3 mb-4">Have Questions About Your Privacy?</h2>
-        <p class="mb-4">Our team is here to help you understand how we protect your data.</p>
-        <a href="{% url 'Kickline:contact' %}" class="btn btn-light btn-lg rounded-pill">
-            <i class="fas fa-envelope me-2"></i>Contact Us
-        </a>
+<section class="section" style="background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(20, 184, 166, 0.05));">
+  <div class="container text-center">
+    <div style="max-width: 600px; margin: 0 auto;">
+      <h2 class="h3 mb-3" style="color: var(--text-primary);">Have Questions About Your Privacy?</h2>
+      <p class="mb-4" style="color: var(--text-body);">Our team is here to help you understand how we protect your data and respect your privacy rights.</p>
+      <a href="{% url 'Kickline:contact' %}" class="btn btn-lg rounded-pill" style="background: linear-gradient(135deg, var(--secondary-color), var(--accent-color)); color: white; padding: 0.875rem 2rem; box-shadow: 0 4px 15px rgba(13, 148, 136, 0.3);">
+        <i class="fas fa-envelope me-2"></i>Contact Us
+      </a>
     </div>
+  </div>
 </section>
 {% endblock %}
