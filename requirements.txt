@@ -1,3 +1,27 @@
 Django==5.2.5
 Pillow==10.0.1
 python-decouple==3.8
+djangorestframework==3.17.1
+beautifulsoup4==4.14.3
+requests==2.33.1
+
+# Celery & Task Queue
+celery
+redis
+django-celery-beat
+django-celery-results
+
+# Web Scraping
+lxml
+fake-useragent
+dnspython
+
+# Email Validation
+email-validator
+
+# Rate Limiting & Caching
+django-ratelimit
+
+# Frontend
+streamlit
+pandas
