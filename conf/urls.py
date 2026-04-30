@@ -22,6 +22,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("Kickline.urls")),
+    path("api/leads/", include("leads.urls")),
+    # Legacy leads URL (for backward compatibility)
+    path("leads/", include("leads.urls")),
 ]
 
 # Serve media files during development

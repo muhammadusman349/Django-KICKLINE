@@ -38,7 +38,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'rest_framework',
+    "django_celery_beat",
+    "django_celery_results",
     "Kickline",
+    "leads",
 ]
 
 MIDDLEWARE = [
@@ -150,3 +154,36 @@ EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool)
 # Email settings for contact form
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 KICKLINE_SPORTS_OWNER_EMAIL = config('KICKLINE_SPORTS_OWNER_EMAIL')
+
+# Celery Configuration
+# Save Celery task result in Django's database
+CELERY_RESULT_BACKEND = "django-db"
+
+# Broker connections retry on startup
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+
+# Broker URL - Use Redis for simpler setup
+# CELERY_BROKER_URL = "redis://localhost:6379/0"
+
+# Alternative: RabbitMQ (comment out above and uncomment below to use)
+CELERY_BROKER_URL = config('RABBITMQ_URL', default='amqp://localhost:5672')
+
+# Task execution settings
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TIMEZONE = "UTC"
+CELERY_ENABLE_UTC = True
+
+# Task acknowledgment and retry settings
+CELERY_TASK_ACKS_LATE = True  # Acknowledge task after completion (safer for long tasks)
+CELERY_TASK_REJECT_ON_WORKER_LOST = True  # Re-queue if worker crashes
+CELERY_WORKER_PREFETCH_MULTIPLIER = 1  # Don't prefetch tasks (better for long-running tasks)
+
+# Result expiration
+CELERY_RESULT_EXPIRES = 3600  # Results expire after 1 hour
+
+# Concurrency settings for scraping (be polite to websites)
+CELERY_WORKER_CONCURRENCY = 2  # Limit concurrent scraping tasks
