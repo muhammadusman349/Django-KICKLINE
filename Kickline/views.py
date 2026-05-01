@@ -77,7 +77,7 @@ def category_detail(request, slug):
     products = Product.objects.filter(category=category).order_by('-created_at')
 
     # Pagination
-    paginator = Paginator(products, 9)  # Show 9 products per page
+    paginator = Paginator(products, 6)  # Show 6 products per page
     page_number = request.GET.get('page')
     products = paginator.get_page(page_number)
 
@@ -175,7 +175,7 @@ def catalog_list(request):
         catalogs = catalogs.filter(category=category_code)
 
     # Pagination
-    paginator = Paginator(catalogs, 9) # Show 9 catalogs per page
+    paginator = Paginator(catalogs, 6)
     page_number = request.GET.get('page')
     catalogs = paginator.get_page(page_number)
 
