@@ -1,30 +1,28 @@
 Dear {{ reply.contact_message.name }},
 
-Thank you for contacting Kickline! We have reviewed your message and are pleased to provide you with a response.
+Thank you for contacting KICKLINE Sports. We have reviewed your message and our team has prepared a response for you below.
 
-Your Original Message:
+YOUR ORIGINAL MESSAGE
+---------------------
 Subject: {{ reply.contact_message.subject }}
 Date: {{ reply.contact_message.created_at|date:"F d, Y \a\t g:i A" }}
 Message: {{ reply.contact_message.message }}
 
----
-
-Our Response:
+OUR RESPONSE
+------------
 {{ reply.reply_message }}
 
----
-
-Need Further Assistance?
-If you have any additional questions or need more information, don't hesitate to reach out to us!
+NEED FURTHER ASSISTANCE?
+If you have any additional questions, feel free to reach out.
 
 Email: {{ contact_email }}
 WhatsApp: {{ whatsapp_number_1 }}
 
 Best regards,
 {{ reply.sent_by }}
-Kickline Team
+KICKLINE Sports Team
 
 ---
-This email was sent in response to your inquiry on the Kickline website.
+This email was sent in response to your inquiry on the KICKLINE Sports website.
 Reply ID: #{{ reply.id }} | Original Message ID: #{{ reply.contact_message.id }}
-© {{ current_year }} Kickline - Premium Sports Equipment
+© {{ current_year }} KICKLINE Sports. All rights reserved.

@@ -6,209 +6,235 @@
     <title>Reply from KICKLINE Sports</title>
     <style>
         body {
-            font-family: 'Quantico', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #1A1A1A;
-            background-color: #F4F4F4;
+            color: #333333;
+            background-color: #f5f5f5;
             margin: 0;
             padding: 0;
         }
-        .email-container {
+        .wrapper {
+            width: 100%;
             max-width: 600px;
-            margin: 20px auto;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .email-container {
             background: #FFFFFF;
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(14, 28, 54, 0.1);
+            border: 1px solid #e0e0e0;
         }
         .header {
-            background: linear-gradient(135deg, #0E1C36 0%, #1a2f4f 100%);
+            background: #0E1C36;
             color: #FFFFFF;
-            padding: 30px;
-            text-align: center;
+            padding: 32px 40px;
         }
         .header h1 {
             margin: 0;
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         .header .subtitle {
-            margin: 5px 0 0 0;
-            font-size: 14px;
-            opacity: 0.9;
+            margin: 6px 0 0 0;
+            font-size: 13px;
+            color: rgba(255,255,255,0.75);
+            font-weight: 400;
         }
         .content {
-            padding: 30px;
+            padding: 40px;
         }
-        .reply-badge {
-            background: linear-gradient(135deg, #E63946, #ff4757);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
+        .label {
             display: inline-block;
-            margin-bottom: 20px;
+            background: #E63946;
+            color: #FFFFFF;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            margin-bottom: 24px;
         }
         .greeting {
             font-size: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             color: #0E1C36;
+            font-weight: 600;
+        }
+        .content p {
+            margin: 0 0 16px 0;
+            color: #444444;
+            font-size: 15px;
+        }
+        .divider {
+            border: none;
+            border-top: 1px solid #e8e8e8;
+            margin: 28px 0;
+        }
+        .section-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #888888;
+            margin: 0 0 12px 0;
         }
         .original-message {
-            background: #F8F9FA;
-            border-left: 4px solid #E63946;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
-        }
-        .original-message h4 {
-            margin: 0 0 10px 0;
-            color: #0E1C36;
-            font-size: 14px;
+            background: #fafafa;
+            border-left: 3px solid #0E1C36;
+            padding: 16px 20px;
+            margin: 0 0 24px 0;
         }
         .original-message p {
-            margin: 5px 0;
-            font-size: 13px;
-            color: #666;
+            margin: 0 0 8px 0;
+            font-size: 14px;
+            color: #555555;
         }
-        .reply-content {
+        .original-message p:last-child {
+            margin-bottom: 0;
+        }
+        .reply-box {
             background: #FFFFFF;
-            border: 2px solid #E63946;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-        .reply-content h3 {
-            margin: 0 0 15px 0;
-            color: #0E1C36;
-            font-size: 16px;
-        }
-        .reply-message {
-            color: #1A1A1A;
-            line-height: 1.6;
-        }
-        .contact-info {
-            background: linear-gradient(135deg, #F0F8F0, #E8F5E8);
-            border: 1px solid #4CAF50;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 25px 0;
-            text-align: center;
-        }
-        .contact-info h4 {
-            margin: 0 0 10px 0;
-            color: #0E1C36;
-        }
-        .contact-buttons {
-            display: flex;
-            gap: 15px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            text-decoration: none;
+            border: 1px solid #e8e8e8;
+            padding: 24px;
             border-radius: 6px;
-            font-weight: bold;
-            font-size: 13px;
-            transition: all 0.3s ease;
+            margin: 0 0 24px 0;
         }
-        .btn-primary {
-            background: #E63946;
-            color: white;
+        .reply-box .reply-message {
+            color: #333333;
+            line-height: 1.7;
+            font-size: 15px;
         }
-        .btn-secondary {
-            background: #0E1C36;
-            color: white;
+        .reply-box .reply-message p {
+            margin: 0 0 12px 0;
         }
-        .footer {
-            background: #F8F9FA;
-            padding: 20px;
+        .reply-box .reply-message p:last-child {
+            margin-bottom: 0;
+        }
+        .contact-section {
+            background: #fafafa;
+            padding: 24px;
+            border-radius: 6px;
             text-align: center;
-            font-size: 12px;
-            color: #666;
-            border-top: 1px solid #E5E5E5;
+            margin: 24px 0;
+        }
+        .contact-section h4 {
+            margin: 0 0 8px 0;
+            color: #0E1C36;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .contact-section p {
+            margin: 0 0 16px 0;
+            font-size: 14px;
+            color: #666666;
+        }
+        .contact-links {
+            margin-top: 12px;
+        }
+        .contact-links a {
+            color: #E63946;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .contact-links a:hover {
+            text-decoration: underline;
         }
         .signature {
-            margin: 20px 0;
-            padding: 15px;
-            background: #F8F9FA;
-            border-radius: 6px;
-            font-style: italic;
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px solid #e8e8e8;
+        }
+        .signature p {
+            margin: 0;
+            font-size: 14px;
+            color: #555555;
+            line-height: 1.8;
+        }
+        .footer {
+            background: #fafafa;
+            padding: 24px 40px;
+            text-align: center;
+            border-top: 1px solid #e8e8e8;
+        }
+        .footer p {
+            margin: 0 0 6px 0;
+            font-size: 12px;
+            color: #888888;
+        }
+        .footer p:last-child {
+            margin-bottom: 0;
         }
         @media (max-width: 600px) {
-            .email-container {
-                margin: 10px;
-                border-radius: 0;
+            .wrapper {
+                padding: 20px 12px;
             }
             .content {
-                padding: 20px;
+                padding: 28px 24px;
             }
-            .contact-buttons {
-                flex-direction: column;
+            .header {
+                padding: 24px 24px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="email-container">
-        <div class="header">
-            <h1>🏆 KICKLINE Sports</h1>
-            <p class="subtitle">Premium Sports Equipment</p>
-        </div>
-        
-        <div class="content">
-            <div class="reply-badge">✉️ Reply</div>
-            
-            <div class="greeting">
-                Dear {{ reply.contact_message.name }},
+    <div class="wrapper">
+        <div class="email-container">
+            <div class="header">
+                <h1>KICKLINE Sports</h1>
+                <p class="subtitle">Customer Support</p>
             </div>
             
-            <p>Thank you for contacting KICKLINE Sports! We have reviewed your message and are pleased to provide you with a response.</p>
-            
-            <div class="original-message">
-                <h4>📝 Your Original Message:</h4>
-                <p><strong>Subject:</strong> {{ reply.contact_message.subject }}</p>
-                <p><strong>Date:</strong> {{ reply.contact_message.created_at|date:"F d, Y \a\t g:i A" }}</p>
-                <p><strong>Message:</strong> {{ reply.contact_message.message|truncatewords:30 }}</p>
-            </div>
-            
-            <div class="reply-content">
-                <h3>🎯 Our Response:</h3>
-                <div class="reply-message">
-                    {{ reply.reply_message|linebreaks }}
-                </div>
-            </div>
-            
-            <div class="contact-info">
-                <h4>Need Further Assistance?</h4>
-                <p>If you have any additional questions or need more information, don't hesitate to reach out to us!</p>
+            <div class="content">
+                <span class="label">Reply</span>
                 
-                <div class="contact-buttons">
-                    <a href="mailto:{{ contact_email }}?subject=Re: {{ reply.contact_message.subject }}" class="btn btn-primary">
-                        📧 Email Us
-                    </a>
-                    <a href="https://wa.me/{{ whatsapp_number_1 }}?text=Hi KICKLINE Sports, I need more help regarding: {{ reply.contact_message.subject }}" class="btn btn-secondary">
-                        💬 WhatsApp
-                    </a>
+                <div class="greeting">
+                    Dear {{ reply.contact_message.name }},
+                </div>
+                
+                <p>Thank you for contacting KICKLINE Sports. We have reviewed your message and our team has prepared a response for you below.</p>
+                
+                <hr class="divider">
+                
+                <p class="section-title">Your Original Message</p>
+                <div class="original-message">
+                    <p><strong>Subject:</strong> {{ reply.contact_message.subject }}</p>
+                    <p><strong>Date:</strong> {{ reply.contact_message.created_at|date:"F d, Y \a\t g:i A" }}</p>
+                    <p><strong>Message:</strong> {{ reply.contact_message.message|truncatewords:30 }}</p>
+                </div>
+                
+                <p class="section-title">Our Response</p>
+                <div class="reply-box">
+                    <div class="reply-message">
+                        {{ reply.reply_message|linebreaks }}
+                    </div>
+                </div>
+                
+                <div class="contact-section">
+                    <h4>Need Further Assistance?</h4>
+                    <p>If you have any additional questions, feel free to reach out.</p>
+                    <div class="contact-links">
+                        <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="https://wa.me/{{ whatsapp_number_1 }}">WhatsApp</a>
+                    </div>
+                </div>
+                
+                <div class="signature">
+                    <p><strong>Best regards,</strong><br>
+                    {{ reply.sent_by }}<br>
+                    KICKLINE Sports Team</p>
                 </div>
             </div>
             
-            <div class="signature">
-                <p><strong>Best regards,</strong><br>
-                {{ reply.sent_by }}<br>
-                KICKLINE Sports Team</p>
+            <div class="footer">
+                <p>This email was sent in response to your inquiry on the KICKLINE Sports website.</p>
+                <p>&copy; {{ current_year }} KICKLINE Sports. All rights reserved.</p>
             </div>
-        </div>
-        
-        <div class="footer">
-            <p>This email was sent in response to your inquiry on the KICKLINE Sports website.</p>
-            <p>© {{ current_year }} KICKLINE Sports - Premium Sports Equipment | All Rights Reserved</p>
         </div>
     </div>
 </body>

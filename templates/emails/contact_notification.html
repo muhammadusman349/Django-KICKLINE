@@ -3,194 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Contact Message - Kickline</title>
+    <title>New Contact Message - KICKLINE Sports</title>
     <style>
         body {
-            font-family: 'Quantico', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #1A1A1A;
-            background-color: #F4F4F4;
+            color: #333333;
+            background-color: #f5f5f5;
             margin: 0;
             padding: 0;
         }
-        .email-container {
+        .wrapper {
+            width: 100%;
             max-width: 600px;
-            margin: 20px auto;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .email-container {
             background: #FFFFFF;
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(14, 28, 54, 0.1);
+            border: 1px solid #e0e0e0;
         }
         .header {
-            background: linear-gradient(135deg, #0E1C36 0%, #1a2f4f 100%);
+            background: #0E1C36;
             color: #FFFFFF;
-            padding: 30px;
-            text-align: center;
+            padding: 32px 40px;
         }
         .header h1 {
             margin: 0;
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         .header .subtitle {
-            margin: 5px 0 0 0;
-            font-size: 14px;
-            opacity: 0.9;
+            margin: 6px 0 0 0;
+            font-size: 13px;
+            color: rgba(255,255,255,0.75);
+            font-weight: 400;
         }
         .content {
-            padding: 30px;
+            padding: 40px;
         }
-        .alert-badge {
-            background: #E63946;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
+        .label {
             display: inline-block;
-            margin-bottom: 20px;
+            background: #E63946;
+            color: #FFFFFF;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 24px;
+        }
+        .content p {
+            margin: 0 0 16px 0;
+            color: #444444;
+            font-size: 15px;
+        }
+        .divider {
+            border: none;
+            border-top: 1px solid #e8e8e8;
+            margin: 28px 0;
+        }
+        .section-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #888888;
+            margin: 0 0 12px 0;
         }
         .message-details {
-            background: #F8F9FA;
-            border-left: 4px solid #E63946;
+            background: #fafafa;
+            border-left: 3px solid #E63946;
             padding: 20px;
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
+            margin: 0 0 24px 0;
         }
         .detail-row {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             display: flex;
             flex-wrap: wrap;
         }
+        .detail-row:last-child {
+            margin-bottom: 0;
+        }
         .detail-label {
-            font-weight: bold;
+            font-weight: 600;
             color: #0E1C36;
             min-width: 80px;
             margin-right: 10px;
+            font-size: 14px;
         }
         .detail-value {
-            color: #1A1A1A;
+            color: #444444;
             flex: 1;
+            font-size: 14px;
         }
         .message-content {
             background: #FFFFFF;
-            border: 1px solid #E5E5E5;
+            border: 1px solid #e8e8e8;
             padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            font-style: italic;
-        }
-        .action-buttons {
-            text-align: center;
-            margin: 30px 0;
-        }
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            margin: 0 10px;
-            text-decoration: none;
             border-radius: 6px;
-            font-weight: bold;
-            font-size: 14px;
-            transition: all 0.3s ease;
+            margin: 0 0 24px 0;
+        }
+        .message-content p {
+            margin: 0;
+            color: #444444;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        .actions {
+            text-align: center;
+            margin: 24px 0;
+        }
+        .actions a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 8px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 13px;
         }
         .btn-primary {
             background: #E63946;
-            color: white;
+            color: #FFFFFF;
         }
         .btn-secondary {
             background: #0E1C36;
-            color: white;
-        }
-        .footer {
-            background: #F8F9FA;
-            padding: 20px;
-            text-align: center;
-            font-size: 12px;
-            color: #666;
-            border-top: 1px solid #E5E5E5;
+            color: #FFFFFF;
         }
         .metadata {
-            background: #F0F0F0;
-            padding: 15px;
-            margin-top: 20px;
+            background: #fafafa;
+            padding: 16px 20px;
             border-radius: 6px;
+            font-size: 13px;
+            color: #666666;
+        }
+        .metadata p {
+            margin: 0 0 6px 0;
+            font-size: 13px;
+        }
+        .metadata p:last-child {
+            margin-bottom: 0;
+        }
+        .footer {
+            background: #fafafa;
+            padding: 24px 40px;
+            text-align: center;
+            border-top: 1px solid #e8e8e8;
+        }
+        .footer p {
+            margin: 0 0 6px 0;
             font-size: 12px;
-            color: #666;
+            color: #888888;
+        }
+        .footer p:last-child {
+            margin-bottom: 0;
         }
         @media (max-width: 600px) {
-            .email-container {
-                margin: 10px;
-                border-radius: 0;
+            .wrapper {
+                padding: 20px 12px;
             }
             .content {
-                padding: 20px;
+                padding: 28px 24px;
+            }
+            .header {
+                padding: 24px 24px;
             }
             .detail-row {
                 flex-direction: column;
             }
             .detail-label {
-                margin-bottom: 5px;
+                margin-bottom: 4px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="email-container">
-        <div class="header">
-            <h1>🏆 KICKLINE Sports</h1>
-            <p class="subtitle">New Contact Message Received</p>
-        </div>
-        
-        <div class="content">
-            <div class="alert-badge">NEW MESSAGE</div>
+    <div class="wrapper">
+        <div class="email-container">
+            <div class="header">
+                <h1>KICKLINE Sports</h1>
+                <p class="subtitle">New Contact Message</p>
+            </div>
             
-            <p>A new contact message has been received from your Kickline website:</p>
-            
-            <div class="message-details">
-                <div class="detail-row">
-                    <span class="detail-label">Name:</span>
-                    <span class="detail-value">{{ contact_message.name }}</span>
+            <div class="content">
+                <span class="label">New Message</span>
+                
+                <p>A new contact message has been received from the KICKLINE Sports website:</p>
+                
+                <hr class="divider">
+                
+                <p class="section-title">Sender Details</p>
+                <div class="message-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Name:</span>
+                        <span class="detail-value">{{ contact_message.name }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Email:</span>
+                        <span class="detail-value">{{ contact_message.email }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Phone:</span>
+                        <span class="detail-value">{{ contact_message.phone|default:"Not provided" }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Subject:</span>
+                        <span class="detail-value">{{ contact_message.subject }}</span>
+                    </div>
                 </div>
-                <div class="detail-row">
-                    <span class="detail-label">Email:</span>
-                    <span class="detail-value">{{ contact_message.email }}</span>
+                
+                <p class="section-title">Message</p>
+                <div class="message-content">
+                    {{ contact_message.message|linebreaks }}
                 </div>
-                <div class="detail-row">
-                    <span class="detail-label">Phone:</span>
-                    <span class="detail-value">{{ contact_message.phone|default:"Not provided" }}</span>
+                
+                <div class="actions">
+                    <a href="mailto:{{ contact_message.email }}?subject=Re: {{ contact_message.subject }}" class="btn-primary">Reply via Email</a>
+                    <a href="https://wa.me/{{ contact_message.phone|default:'' }}" class="btn-secondary">Reply via WhatsApp</a>
                 </div>
-                <div class="detail-row">
-                    <span class="detail-label">Subject:</span>
-                    <span class="detail-value">{{ contact_message.subject }}</span>
+                
+                <div class="metadata">
+                    <p><strong>Message ID:</strong> #{{ contact_message.id }}</p>
+                    <p><strong>Received:</strong> {{ contact_message.created_at|date:"F d, Y \a\t g:i A" }}</p>
+                    <p><strong>Status:</strong> {{ contact_message.get_status_display }}</p>
                 </div>
             </div>
             
-            <div class="message-content">
-                <strong>Message:</strong><br>
-                {{ contact_message.message|linebreaks }}
+            <div class="footer">
+                <p>This email was automatically generated by the KICKLINE Sports website.</p>
+                <p>&copy; {{ current_year }} KICKLINE Sports. All rights reserved.</p>
             </div>
-            
-            <div class="action-buttons">
-                <a href="mailto:{{ contact_message.email }}?subject=Re: {{ contact_message.subject }}" class="btn btn-primary">
-                    📧 Reply via Email
-                </a>
-                <a href="https://wa.me/{{ contact_message.phone|default:'' }}?text=Hi {{ contact_message.name }}, thank you for contacting Kickline!" class="btn btn-secondary">
-                    💬 Reply via WhatsApp
-                </a>
-            </div>
-            
-            <div class="metadata">
-                <strong>Message Details:</strong><br>
-                Message ID: #{{ contact_message.id }}<br>
-                Received: {{ contact_message.created_at|date:"F d, Y \a\t g:i A" }}<br>
-                Status: {{ contact_message.get_status_display }}
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p>This email was automatically generated by the Kickline website contact form.</p>
-            <p>© {{ current_year }} Kickline - Premium Sports Equipment</p>
         </div>
     </div>
 </body>

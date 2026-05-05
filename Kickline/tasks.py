@@ -47,7 +47,7 @@ def send_contact_confirmation_email(contact_message):
         context = {
             'contact_message': contact_message,
             'current_year': timezone.now().year,
-            'whatsapp_number': settings.WHATSAPP_NUMBER,
+            'whatsapp_number': settings.WHATSAPP_NUMBER_1,
             'contact_email': settings.CONTACT_EMAIL,
         }
 
@@ -101,6 +101,12 @@ def send_reply_email(reply):
             body=text_content,
             from_email=settings.DEFAULT_FROM_EMAIL,
             to=[reply.contact_message.email],
+            reply_to=[settings.CONTACT_EMAIL],
+            headers={
+                'X-Priority': '3',
+                'X-Mailer': 'KICKLINE Sports',
+                'List-Unsubscribe': f'<mailto:{settings.CONTACT_EMAIL}?subject=Unsubscribe>',
+            }
         )
         email.attach_alternative(html_content, "text/html")
 
