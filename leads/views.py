@@ -6,7 +6,6 @@ import os
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics, mixins, viewsets
 from rest_framework.decorators import action
@@ -226,14 +225,15 @@ class ScrapingTaskViewSet(viewsets.ReadOnlyModelViewSet):
         })
 
 
-class SearchScrapeAPIView(APIView):
+class SearchScrapeAPIView(generics.GenericAPIView):
     """
     Search for companies and scrape their websites for emails.
     Supports both synchronous and asynchronous execution.
     """
+    serializer_class = ScrapingRequestSerializer
     
     def post(self, request):
-        serializer = ScrapingRequestSerializer(data=request.data)
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         
         query = serializer.validated_data['query']
@@ -292,13 +292,14 @@ class SearchScrapeAPIView(APIView):
                 )
 
 
-class BulkScrapeAPIView(APIView):
+class BulkScrapeAPIView(generics.GenericAPIView):
     """
     Bulk scrape multiple search queries.
     """
+    serializer_class = BulkScrapingRequestSerializer
     
     def post(self, request):
-        serializer = BulkScrapingRequestSerializer(data=request.data)
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         
         queries = serializer.validated_data['queries']
@@ -319,7 +320,7 @@ class BulkScrapeAPIView(APIView):
         }, status=status.HTTP_202_ACCEPTED)
 
 
-class ValidateEmailsAPIView(APIView):
+class ValidateEmailsAPIView(generics.GenericAPIView):
     """
     Re-validate all emails in the database.
     """
@@ -333,7 +334,7 @@ class ValidateEmailsAPIView(APIView):
         }, status=status.HTTP_202_ACCEPTED)
 
 
-class CeleryTaskStatusAPIView(APIView):
+class CeleryTaskStatusAPIView(generics.GenericAPIView):
     """
     Check status of a Celery task.
     """
@@ -360,7 +361,7 @@ class CeleryTaskStatusAPIView(APIView):
 
 # Legacy API Views for backward compatibility
 
-class LeadSearchAPIView(APIView):
+class LeadSearchAPIView(generics.GenericAPIView):
     """
     Legacy search endpoint - redirects to new async search.
     """
@@ -392,11 +393,12 @@ class LeadSearchAPIView(APIView):
         })
 
 
-class LeadQuickSearchAPIView(APIView):
+class LeadQuickSearchAPIView(generics.GenericAPIView):
     """
     Quick synchronous search for simple use cases.
     Limited to 5 results to avoid timeouts.
     """
+    serializer_class = LeadListSerializer
 
     @method_decorator(ratelimit(key='ip', rate='5/m', method='GET'))
     def get(self, request):
@@ -431,22 +433,28 @@ class LeadQuickSearchAPIView(APIView):
             country = result.get('country', '')
             city = result.get('city', '')
 
-            if emails:
-                prioritized = prioritize_emails(emails, item['name'])
-                best_email = prioritized[0]
+            has_social = any(v for v in social_media.values() if v)
+
+            if emails or phones or has_social:
+                best_email = None
+                if emails:
+                    prioritized = prioritize_emails(emails, item['name'])
+                    best_email = prioritized[0] if prioritized else None
                 primary_phone = phones[0] if phones else ''
 
                 lead = Lead.objects.create(
                     name=item["name"][:255],
                     website=website,
                     email=best_email,
-                    email_validated=True,
+                    email_validated=bool(best_email),
                     phone=primary_phone,
                     country=country,
                     city=city,
                     linkedin=social_media.get('linkedin', ''),
                     facebook=social_media.get('facebook', ''),
                     instagram=social_media.get('instagram', ''),
+                    twitter=social_media.get('twitter', ''),
+                    youtube=social_media.get('youtube', ''),
                     scraped_pages=result.get('scraped_pages', []),
                     source='search',
                 )
@@ -454,12 +462,12 @@ class LeadQuickSearchAPIView(APIView):
             else:
                 skipped.append({
                     'website': website,
-                    'reason': 'no_emails',
+                    'reason': 'no_contact_info',
                     'name': item['name'],
                     'phones_found': len(phones),
                 })
 
-        serializer = LeadListSerializer(created_leads, many=True)
+        serializer = self.get_serializer(created_leads, many=True)
 
         return Response({
             "message": "Lead search completed",
@@ -476,7 +484,7 @@ class LeadQuickSearchAPIView(APIView):
 # NEW: Manual Selection API Views (Search + Individual Scraping)
 # ============================================================================
 
-class SearchCompaniesAPIView(APIView):
+class SearchCompaniesAPIView(generics.GenericAPIView):
     """
     Search for companies ONLY - does NOT scrape websites.
     Returns list of companies (name + website) for manual selection.
@@ -514,7 +522,7 @@ class SearchCompaniesAPIView(APIView):
         })
 
 
-class ScrapeSingleCompanyAPIView(APIView):
+class ScrapeSingleCompanyAPIView(generics.GenericAPIView):
     """
     Scrape a single selected company website for emails.
     Accepts company name and website, returns scraped lead.
@@ -566,11 +574,12 @@ class ScrapeSingleCompanyAPIView(APIView):
         }, status=status.HTTP_202_ACCEPTED)
 
 
-class QuickScrapeSingleAPIView(APIView):
+class QuickScrapeSingleAPIView(generics.GenericAPIView):
     """
     Synchronous scraping for a single company (for immediate feedback).
     Use for small scraping jobs only.
     """
+    serializer_class = LeadDetailSerializer
 
     @method_decorator(ratelimit(key='ip', rate='3/m', method='POST'))
     def post(self, request):
@@ -607,9 +616,13 @@ class QuickScrapeSingleAPIView(APIView):
             country = result.get('country', '')
             city = result.get('city', '')
 
-            if emails:
-                prioritized = prioritize_emails(emails, company_name)
-                best_email = prioritized[0] if prioritized else None
+            has_social = any(v for v in social_media.values() if v)
+
+            if emails or phones or has_social:
+                best_email = None
+                if emails:
+                    prioritized = prioritize_emails(emails, company_name)
+                    best_email = prioritized[0] if prioritized else None
                 primary_phone = phones[0] if phones else ''
 
                 # Create lead with all extracted data
@@ -617,19 +630,21 @@ class QuickScrapeSingleAPIView(APIView):
                     name=company_name[:255],
                     website=normalized_url,
                     email=best_email,
-                    email_validated=True,
+                    email_validated=bool(best_email),
                     phone=primary_phone,
                     country=country,
                     city=city,
                     linkedin=social_media.get('linkedin', ''),
                     facebook=social_media.get('facebook', ''),
                     instagram=social_media.get('instagram', ''),
+                    twitter=social_media.get('twitter', ''),
+                    youtube=social_media.get('youtube', ''),
                     scraped_pages=result.get('scraped_pages', []),
                     source='search',
                     status='new',
                 )
 
-                serializer = LeadDetailSerializer(lead)
+                serializer = self.get_serializer(lead)
 
                 return Response({
                     'message': 'Company scraped and saved successfully',
@@ -643,8 +658,8 @@ class QuickScrapeSingleAPIView(APIView):
                 })
             else:
                 return Response({
-                    'message': 'No emails found on this website',
-                    'status': 'no_emails',
+                    'message': 'No contact info found on this website',
+                    'status': 'no_contact',
                     'website': normalized_url,
                     'phones': phones,
                     'social_media': social_media,

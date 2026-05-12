@@ -5,10 +5,12 @@ Multi-page email extraction with validation and duplicate prevention.
 
 import re
 import time
+import json
 import logging
 import requests
 import dns.resolver
 import random
+import urllib3
 from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
 from typing import List, Dict, Set, Optional, Tuple
@@ -16,6 +18,10 @@ from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 
 logger = logging.getLogger(__name__)
+
+# Suppress SSL verification warnings when using verify=False
+from urllib3.exceptions import InsecureRequestWarning
+urllib3.disable_warnings(InsecureRequestWarning)
 
 # User agent handling with fallback
 DEFAULT_USER_AGENTS = [
@@ -66,11 +72,14 @@ class EmailExtractor:
         r'screenshot', r'image', r'photo', r'logo',
     ]
     
-    # Priority pages to check for contact info
+    # Priority pages to check for contact info (expanded)
     CONTACT_PATHS = [
-        '/contact', '/contact-us', '/about', '/about-us',
-        '/team', '/staff', '/people', '/support', '/help',
+        '/contact', '/contact-us', '/contactus', '/contact.html',
+        '/about', '/about-us', '/aboutus', '/about.html',
+        '/team', '/staff', '/people', '/our-team', '/team.html',
+        '/support', '/help', '/customer-service',
         '/careers', '/jobs', '/partners', '/partnerships',
+        '/enquiries', '/inquiry', '/get-in-touch', '/reach-us',
     ]
     
     def __init__(self, max_pages: int = 5, delay: float = 1.0, timeout: int = 10):
@@ -89,10 +98,20 @@ class EmailExtractor:
         self.all_emails: Set[str] = set()
         
     def _get_headers(self) -> Dict[str, str]:
-        """Generate random headers for each request"""
+        """Generate realistic browser headers for each request"""
         return {
             'User-Agent': ua.random,
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+            'Accept-Language': 'en-US,en;q=0.5',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Referer': 'https://www.google.com/',
+            'DNT': '1',
+            'Connection': 'keep-alive',
+            'Upgrade-Insecure-Requests': '1',
+            'Sec-Fetch-Dest': 'document',
+            'Sec-Fetch-Mode': 'navigate',
+            'Sec-Fetch-Site': 'cross-site',
+            'Cache-Control': 'max-age=0',
         }
     
     def _is_valid_url(self, url: str) -> bool:
@@ -189,7 +208,7 @@ class EmailExtractor:
         return emails
     
     def _extract_emails_from_html(self, soup: BeautifulSoup) -> Set[str]:
-        """Extract emails from BeautifulSoup parsed HTML"""
+        """Extract emails from BeautifulSoup parsed HTML, with footer priority"""
         emails = set()
         
         # Extract from mailto: links
@@ -211,6 +230,12 @@ class EmailExtractor:
                     potential = tag.get(attr).lower().strip()
                     if '@' in potential and '.' in potential:
                         emails.add(potential)
+        
+        # Prioritize footer and contact section text (often missed in general get_text)
+        for section in soup.find_all(['footer', 'div', 'section'], class_=re.compile(r'footer|contact|bottom', re.I)):
+            section_text = section.get_text(separator=' ', strip=True)
+            footer_emails = self._extract_emails_from_text(section_text)
+            emails.update(footer_emails)
         
         return emails
     
@@ -242,17 +267,21 @@ class EmailExtractor:
         return contact_urls[:self.max_pages - 1]  # Limit additional pages
 
     def _extract_phones_from_html(self, soup: BeautifulSoup) -> Set[str]:
-        """Extract phone numbers from BeautifulSoup parsed HTML"""
+        """Extract phone numbers from BeautifulSoup parsed HTML, with footer priority"""
         phones = set()
         
-        # Pattern for international phone numbers
+        # Pattern for international phone numbers (expanded)
         phone_patterns = [
-            # International format: +1 (555) 123-4567, +44 20 7946 0958
-            r'\+\d{1,4}[\s\-\.]?\(?\d{1,4}\)?[\s\-\.]?\d{1,4}[\s\-\.]?\d{1,4}[\s\-\.]?\d{1,4}',
-            # US format: (555) 123-4567, 555-123-4567
+            # International format: +1 (555) 123-4567, +44 20 7946 0958, +92 300 1234567
+            r'\+\d{1,4}[\s\-\.]?\(?\d{1,5}\)?[\s\-\.]?\d{1,5}[\s\-\.]?\d{1,5}[\s\-\.]?\d{0,5}',
+            # US format: (555) 123-4567, 555-123-4567, 555.123.4567
             r'\(?\d{3}\)?[\s\-\.]?\d{3}[\s\-\.]?\d{4}',
-            # European format with country code
-            r'\+\d{2}[\s\-\.]?\d{3}[\s\-\.]?\d{3}[\s\-\.]?\d{3,4}',
+            # European format with country code: +49 170 1234567
+            r'\+\d{2}[\s\-\.]?\d{3,4}[\s\-\.]?\d{3,4}[\s\-\.]?\d{3,4}',
+            # General international: 00 44 20 7946 0958
+            r'00\s+\d{1,3}[\s\-\.]?\d{1,5}[\s\-\.]?\d{1,5}[\s\-\.]?\d{1,5}',
+            # Longer grouped numbers: +1-555-123-4567
+            r'\+\d{1,4}[\s\-/]\d{1,4}[\s\-/]\d{1,4}[\s\-/]\d{1,4}',
         ]
         
         # Extract from tel: links
@@ -260,10 +289,18 @@ class EmailExtractor:
             href = link['href']
             if href.startswith('tel:'):
                 phone = href[4:].split('?')[0].strip()
-                # Clean up the phone number
                 phone = re.sub(r'[^\d\+\-\(\)\s]', '', phone)
                 if len(phone) >= 7:
                     phones.add(phone)
+        
+        # Extract from data-tel/data-phone attributes
+        for tag in soup.find_all(['a', 'span', 'div', 'p', 'li']):
+            for attr in ['data-phone', 'data-tel', 'data-contact-phone', 'data-mobile', 'data-telephone']:
+                if tag.get(attr):
+                    potential = tag.get(attr).strip()
+                    cleaned = re.sub(r'[^\d\+\-\(\)\s]', '', potential)
+                    if len(cleaned) >= 7:
+                        phones.add(cleaned)
         
         # Extract from text content
         text = soup.get_text(separator=' ', strip=True)
@@ -276,19 +313,20 @@ class EmailExtractor:
                 if len(cleaned) >= 7 and len(cleaned) <= 25:
                     phones.add(cleaned)
         
-        # Look for phone numbers in specific attributes
-        for tag in soup.find_all(['a', 'span', 'div', 'p', 'li']):
-            for attr in ['data-phone', 'data-tel', 'data-contact-phone']:
-                if tag.get(attr):
-                    potential = tag.get(attr).strip()
-                    cleaned = re.sub(r'[^\d\+\-\(\)\s]', '', potential)
-                    if len(cleaned) >= 7:
+        # Prioritize footer and contact section phone numbers
+        for section in soup.find_all(['footer', 'div', 'section'], class_=re.compile(r'footer|contact|bottom', re.I)):
+            section_text = section.get_text(separator=' ', strip=True)
+            for pattern in phone_patterns:
+                matches = re.findall(pattern, section_text)
+                for match in matches:
+                    cleaned = re.sub(r'[^\d\+\-\(\)\s]', '', match).strip()
+                    if len(cleaned) >= 7 and len(cleaned) <= 30:
                         phones.add(cleaned)
         
         return phones
 
     def _extract_social_media_from_html(self, soup: BeautifulSoup, base_url: str) -> Dict[str, str]:
-        """Extract social media links from BeautifulSoup parsed HTML"""
+        """Extract social media links from BeautifulSoup parsed HTML with expanded patterns"""
         social_links = {
             'linkedin': '',
             'facebook': '',
@@ -299,74 +337,149 @@ class EmailExtractor:
         
         parsed_base = urlparse(base_url)
         
-        # Social media domains to look for
+        # Social media domains to look for (expanded)
         social_patterns = {
             'linkedin': r'linkedin\.com',
-            'facebook': r'facebook\.com|fb\.com',
+            'facebook': r'facebook\.com|fb\.com|fb\.me',
             'instagram': r'instagram\.com|instagr\.am',
-            'twitter': r'twitter\.com|x\.com',
-            'youtube': r'youtube\.com|youtu\.be',
+            'twitter': r'twitter\.com|x\.com|t\.co',
+            'youtube': r'youtube\.com|youtu\.be|youtube-nocookie\.com',
         }
         
-        for link in soup.find_all('a', href=True):
-            href = link['href']
+        # Check href links and data-social attributes
+        all_tags = soup.find_all(['a', 'button', 'span', 'div', 'i'])
+        for tag in all_tags:
+            href = tag.get('href', '')
+            if not href:
+                # Check data attributes
+                for attr in ['data-social', 'data-platform', 'data-url']:
+                    href = tag.get(attr, '')
+                    if href:
+                        break
+            
+            if not href:
+                continue
             
             # Handle relative URLs
             if href.startswith('/'):
                 href = urljoin(base_url, href)
             
+            # Handle protocol-relative URLs
+            if href.startswith('//'):
+                href = 'https:' + href
+            
             # Check each social platform
             for platform, pattern in social_patterns.items():
                 if re.search(pattern, href, re.IGNORECASE):
-                    # Clean up the URL
                     if not social_links[platform]:  # Only take first found
                         social_links[platform] = href
                     break
         
+        # Also check footer and social-section specifically
+        for section in soup.find_all(['footer', 'div', 'section', 'nav'], class_=re.compile(r'footer|social|follow|connect|share', re.I)):
+            for link in section.find_all('a', href=True):
+                href = link['href']
+                if href.startswith('/'):
+                    href = urljoin(base_url, href)
+                if href.startswith('//'):
+                    href = 'https:' + href
+                for platform, pattern in social_patterns.items():
+                    if re.search(pattern, href, re.IGNORECASE):
+                        if not social_links[platform]:
+                            social_links[platform] = href
+                        break
+        
         return social_links
 
     def _extract_country_city_from_html(self, soup: BeautifulSoup) -> Dict[str, str]:
-        """Extract country and city information from HTML"""
+        """Extract country and city information from HTML using text, schema.org, and JSON-LD"""
         location_info = {
             'country': '',
             'city': '',
         }
         
-        # Common patterns for address/location
-        address_keywords = ['address', 'location', 'headquarters', 'office', 'contact']
+        # --- 1. Parse JSON-LD structured data (modern sites use this heavily) ---
+        for script in soup.find_all('script', type='application/ld+json'):
+            try:
+                import json
+                data = json.loads(script.string or '')
+                # JSON-LD can be a list or dict
+                items = data if isinstance(data, list) else [data]
+                for item in items:
+                    if not isinstance(item, dict):
+                        continue
+                    # Check address directly
+                    address = item.get('address') or {}
+                    if isinstance(address, dict):
+                        country = address.get('addressCountry', '')
+                        city = address.get('addressLocality', '')
+                        if country:
+                            location_info['country'] = country
+                        if city:
+                            location_info['city'] = city
+                    # Check for Organization/LocalBusiness with location
+                    if 'location' in item and isinstance(item['location'], dict):
+                        loc = item['location']
+                        addr = loc.get('address', {}) if isinstance(loc.get('address'), dict) else {}
+                        if addr.get('addressCountry'):
+                            location_info['country'] = addr['addressCountry']
+                        if addr.get('addressLocality'):
+                            location_info['city'] = addr['addressLocality']
+            except (json.JSONDecodeError, AttributeError, TypeError):
+                continue
         
-        # Look for address elements
-        for tag in soup.find_all(['div', 'p', 'span', 'address']):
-            text = tag.get_text(strip=True).lower()
-            
-            # Check if it contains address keywords
-            if any(keyword in text for keyword in address_keywords):
-                # Try to extract country from common patterns
-                country_patterns = [
-                    r'(?:USA|United States|UK|United Kingdom|Germany|France|Italy|Spain|',
-                    r'Canada|Australia|Japan|China|India|Pakistan|Brazil|Mexico|',
-                    r'Netherlands|Belgium|Switzerland|Austria|Sweden|Norway|Denmark)',
-                ]
-                
-                full_pattern = '|'.join(country_patterns)
-                match = re.search(full_pattern, text, re.IGNORECASE)
-                if match:
-                    location_info['country'] = match.group(0)
-                
-                # Try to find city (often before country or after "in")
-                city_match = re.search(r'(?:in|at)\s+([A-Z][a-zA-Z\s]+?)(?:,|\s+(?:USA|UK|Germany))', text)
-                if city_match:
-                    location_info['city'] = city_match.group(1).strip()
+        # If JSON-LD already found both, return early
+        if location_info['country'] and location_info['city']:
+            return location_info
         
-        # Look for schema.org address data
-        for tag in soup.find_all(attrs={"itemtype": re.compile(r'schema\.org/PostalAddress|schema\.org/Place')}):
+        # --- 2. Parse schema.org microdata (itemtype/itemprop) ---
+        for tag in soup.find_all(attrs={"itemtype": re.compile(r'schema\.org/PostalAddress|schema\.org/Place|schema\.org/LocalBusiness')}):
             country_tag = tag.find(attrs={"itemprop": "addressCountry"})
-            if country_tag:
+            if country_tag and not location_info['country']:
                 location_info['country'] = country_tag.get_text(strip=True)
             
             city_tag = tag.find(attrs={"itemprop": "addressLocality"})
-            if city_tag:
+            if city_tag and not location_info['city']:
                 location_info['city'] = city_tag.get_text(strip=True)
+        
+        # If microdata already found both, return early
+        if location_info['country'] and location_info['city']:
+            return location_info
+        
+        # --- 3. Text-based extraction as fallback ---
+        address_keywords = ['address', 'location', 'headquarters', 'office', 'contact']
+        
+        # Common country list for regex
+        common_countries = (
+            r'USA|United\s+States|UK|United\s+Kingdom|Germany|France|Italy|Spain|'
+            r'Canada|Australia|Japan|China|India|Pakistan|Brazil|Mexico|'
+            r'Netherlands|Belgium|Switzerland|Austria|Sweden|Norway|Denmark|'
+            r'Portugal|Ireland|Poland|Czech\s+Republic|Russia|UAE|South\s+Africa|'
+            r'New\s+Zealand|Singapore|Malaysia|Thailand|South\s+Korea|Indonesia|'
+            r'Philippines|Vietnam|Turkey|Saudi\s+Arabia|Egypt|Nigeria|Argentina|'
+            r'Chile|Colombia|Peru|Ecuador|Venezuela|Uruguay|Paraguay|Bolivia'
+        )
+        
+        for tag in soup.find_all(['div', 'p', 'span', 'address']):
+            text = tag.get_text(strip=True)
+            text_lower = text.lower()
+            
+            # Check if it contains address keywords
+            if any(keyword in text_lower for keyword in address_keywords):
+                # Try to extract country
+                if not location_info['country']:
+                    match = re.search(common_countries, text, re.IGNORECASE)
+                    if match:
+                        location_info['country'] = match.group(0)
+                
+                # Try to find city (often after "in" or before country)
+                if not location_info['city']:
+                    city_match = re.search(
+                        r'(?:in|at)\s+([A-Z][a-zA-Z\s]+?)(?:,|\s+(?:' + common_countries + r'))',
+                        text
+                    )
+                    if city_match:
+                        location_info['city'] = city_match.group(1).strip()
         
         return location_info
     
@@ -382,13 +495,14 @@ class EmailExtractor:
                 url,
                 headers=self._get_headers(),
                 timeout=self.timeout,
-                allow_redirects=True
+                allow_redirects=True,
+                verify=False
             )
             response.raise_for_status()
             
-            # Check if content is HTML
+            # Check if content is HTML (be lenient if no content-type header)
             content_type = response.headers.get('content-type', '').lower()
-            if 'text/html' not in content_type:
+            if content_type and 'text/html' not in content_type:
                 logger.debug(f"Non-HTML content at {url}: {content_type}")
                 return None
             
@@ -447,20 +561,26 @@ class EmailExtractor:
         # Fetch homepage
         homepage_soup = self._fetch_page(website_url)
         if not homepage_soup:
+            logger.warning(f"Failed to fetch homepage: {website_url}")
             results['errors'].append(f"Failed to fetch homepage: {website_url}")
             return results
+        
+        logger.info(f"Successfully fetched homepage: {website_url}")
         
         # Extract from homepage
         homepage_emails = self._extract_emails_from_html(homepage_soup)
         all_emails.update(homepage_emails)
+        logger.info(f"Homepage emails found: {len(homepage_emails)}")
         
         homepage_phones = self._extract_phones_from_html(homepage_soup)
         all_phones.update(homepage_phones)
+        logger.info(f"Homepage phones found: {len(homepage_phones)}")
         
         homepage_social = self._extract_social_media_from_html(homepage_soup, website_url)
         for key, value in homepage_social.items():
             if value and not all_social[key]:
                 all_social[key] = value
+        logger.info(f"Homepage social found: {any(v for v in homepage_social.values() if v)}")
         
         homepage_location = self._extract_country_city_from_html(homepage_soup)
         if homepage_location['country']:
@@ -468,7 +588,14 @@ class EmailExtractor:
         if homepage_location['city']:
             results['city'] = homepage_location['city']
         
-        results['scraped_pages'].append(website_url)
+        # Track per-page results for debugging
+        results['scraped_pages'].append({
+            'url': website_url,
+            'page_type': 'homepage',
+            'emails_found': len(homepage_emails),
+            'phones_found': len(homepage_phones),
+            'social_found': any(v for v in homepage_social.values() if v),
+        })
         
         # Find and crawl contact pages
         contact_urls = self._get_contact_urls(website_url, homepage_soup)
@@ -476,19 +603,23 @@ class EmailExtractor:
         for url in contact_urls:
             soup = self._fetch_page(url)
             if soup:
+                logger.info(f"Successfully fetched contact page: {url}")
                 # Extract emails
                 page_emails = self._extract_emails_from_html(soup)
                 all_emails.update(page_emails)
+                logger.info(f"  Page emails found: {len(page_emails)}")
                 
                 # Extract phones
                 page_phones = self._extract_phones_from_html(soup)
                 all_phones.update(page_phones)
+                logger.info(f"  Page phones found: {len(page_phones)}")
                 
                 # Extract social media
                 page_social = self._extract_social_media_from_html(soup, url)
                 for key, value in page_social.items():
                     if value and not all_social[key]:
                         all_social[key] = value
+                logger.info(f"  Page social found: {any(v for v in page_social.values() if v)}")
                 
                 # Extract location info
                 page_location = self._extract_country_city_from_html(soup)
@@ -497,7 +628,20 @@ class EmailExtractor:
                 if page_location['city'] and not results['city']:
                     results['city'] = page_location['city']
                 
-                results['scraped_pages'].append(url)
+                # Track per-page results
+                page_type = 'contact'
+                if any(k in url.lower() for k in ['about', 'team', 'staff', 'career', 'job', 'partner']):
+                    page_type = 'about'
+                results['scraped_pages'].append({
+                    'url': url,
+                    'page_type': page_type,
+                    'emails_found': len(page_emails),
+                    'phones_found': len(page_phones),
+                    'social_found': any(v for v in page_social.values() if v),
+                })
+            else:
+                logger.warning(f"Failed to fetch contact page: {url}")
+                results['errors'].append(f"Failed to fetch contact page: {url}")
         
         # Validate all collected emails
         valid_emails = []
@@ -553,7 +697,7 @@ class CompanySearcher:
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             }
             
-            response = self.session.get(url, params=params, headers=headers, timeout=15)
+            response = self.session.get(url, params=params, headers=headers, timeout=15, verify=False)
             response.raise_for_status()
             
             soup = BeautifulSoup(response.content, 'lxml')

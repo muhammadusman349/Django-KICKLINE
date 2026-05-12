@@ -22,7 +22,7 @@ search_sports = CompanySearcher().search_duckduckgo
 extract_emails = EmailExtractor().extract_from_website
 
 
-def check_duplicate_website(website_url: str, exclude_id: Optional[int] = None) -> bool:
+def check_duplicate_website(website_url: str, exclude_id=None) -> bool:
     """
     Check if a website already exists in the database.
     

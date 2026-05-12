@@ -1,6 +1,6 @@
-"""
-Celery tasks for asynchronous sports company scraping and lead generation.
-"""
+
+# Celery tasks for asynchronous sports company scraping and lead generation.
+
 
 import logging
 from typing import List, Dict, Optional
@@ -61,10 +61,23 @@ def scrape_single_website(self, website_url: str, company_name: str = '',
         scraped_pages = result.get('scraped_pages', [])
         errors = result.get('errors', [])
 
+        has_social = any(v for v in social_media.values() if v)
+
+        # Log what was found for debugging
+        logger.info(f"Scraped {normalized_url}: emails={len(emails)}, phones={len(phones)}, social={has_social}, pages={len(scraped_pages)}")
         if emails:
-            # Prioritize emails
-            prioritized = prioritize_emails(emails, company_name)
-            best_email = prioritized[0] if prioritized else None
+            logger.info(f"  Emails found: {emails[:5]}")  # Log first 5
+        if phones:
+            logger.info(f"  Phones found: {phones[:3]}")  # Log first 3
+        if has_social:
+            logger.info(f"  Social: {social_media}")
+        
+        if emails or phones or has_social:
+            # Prioritize emails if any found
+            best_email = None
+            if emails:
+                prioritized = prioritize_emails(emails, company_name)
+                best_email = prioritized[0] if prioritized else None
 
             # Get primary phone (first one if available)
             primary_phone = phones[0] if phones else ''
@@ -75,20 +88,25 @@ def scrape_single_website(self, website_url: str, company_name: str = '',
                     name=company_name or get_domain_from_url(normalized_url),
                     website=normalized_url,
                     email=best_email,
-                    email_validated=True,
+                    email_validated=bool(best_email),
                     phone=primary_phone,
                     country=country,
                     city=city,
                     linkedin=social_media.get('linkedin', ''),
                     facebook=social_media.get('facebook', ''),
                     instagram=social_media.get('instagram', ''),
+                    twitter=social_media.get('twitter', ''),
+                    youtube=social_media.get('youtube', ''),
                     scraped_pages=scraped_pages,
                     source='search',
                     status='new',
                     task_id=task_id,
                 )
 
-                logger.info(f"Created lead: {lead.name} with email: {best_email}, phone: {primary_phone}")
+                logger.info(
+                    f"Created lead: {lead.name} with email: {best_email}, phone: {primary_phone}, "
+                    f"social: {has_social}"
+                )
 
                 return {
                     'status': 'success',
@@ -105,15 +123,18 @@ def scrape_single_website(self, website_url: str, company_name: str = '',
                     'errors': errors,
                 }
         else:
-            logger.info(f"No emails found for: {normalized_url}")
+            logger.warning(f"No contact info found for: {normalized_url} - pages_scraped={len(scraped_pages)}, errors={errors}")
             return {
-                'status': 'no_emails',
+                'status': 'no_contact',
                 'website': normalized_url,
                 'phones': phones,
                 'social_media': social_media,
                 'country': country,
                 'city': city,
                 'pages_scraped': len(scraped_pages),
+                'emails_found': len(emails),
+                'phones_found': len(phones),
+                'social_found': has_social,
                 'errors': errors,
             }
 
@@ -150,10 +171,14 @@ def search_and_scrape_companies(query: str, max_results: int = 10,
     """
     # Update task status
     if task_id:
-        ScrapingTask.objects.filter(id=task_id).update(
-            status='in_progress',
-            started_at=timezone.now(),
-        )
+        try:
+            ScrapingTask.objects.filter(id=task_id).update(
+                status='in_progress',
+                started_at=timezone.now(),
+            )
+            logger.info(f"Updated ScrapingTask {task_id} to in_progress")
+        except Exception as e:
+            logger.error(f"Failed to update ScrapingTask {task_id}: {e}")
     
     # Search for companies
     searcher = CompanySearcher(delay=2.0)
@@ -173,37 +198,52 @@ def search_and_scrape_companies(query: str, max_results: int = 10,
         scrape_tasks.append(task)
     
     # Execute all scrape tasks in parallel
+    scrape_results = []
     if scrape_tasks:
-        job = group(scrape_tasks)
-        results = job.apply_async()
-        scrape_results = results.get(timeout=300)  # 5 minute timeout
-    else:
-        scrape_results = []
+        try:
+            job = group(scrape_tasks)
+            results = job.apply_async()
+            scrape_results = results.get(timeout=600)  # 10 minute timeout
+            logger.info(f"Completed {len(scrape_results)} scrape tasks")
+        except Exception as e:
+            logger.error(f"Group execution failed: {e}")
+            # Try to get individual results if group fails
+            for task in scrape_tasks:
+                try:
+                    result = task.apply().get(timeout=60)
+                    scrape_results.append(result)
+                except Exception as te:
+                    logger.error(f"Individual task failed: {te}")
+                    scrape_results.append({'status': 'error', 'error': str(te)})
     
     # Aggregate results
     total_found = len(search_results)
     total_saved = sum(1 for r in scrape_results if r.get('status') == 'success')
     duplicates = sum(1 for r in scrape_results if r.get('status') == 'duplicate')
-    no_emails = sum(1 for r in scrape_results if r.get('status') == 'no_emails')
+    no_contact = sum(1 for r in scrape_results if r.get('status') == 'no_contact')
     errors = sum(1 for r in scrape_results if r.get('status') == 'error')
     
     # Update task with final status
     if task_id:
-        ScrapingTask.objects.filter(id=task_id).update(
-            status='completed',
-            completed_at=timezone.now(),
-            total_found=total_found,
-            total_saved=total_saved,
-            duplicates_skipped=duplicates,
-            errors=f"No emails: {no_emails}, Errors: {errors}",
-        )
+        try:
+            ScrapingTask.objects.filter(id=task_id).update(
+                status='completed',
+                completed_at=timezone.now(),
+                total_found=total_found,
+                total_saved=total_saved,
+                duplicates_skipped=duplicates,
+                errors=f"No contact: {no_contact}, Errors: {errors}",
+            )
+            logger.info(f"Updated ScrapingTask {task_id} to completed: saved={total_saved}, no_contact={no_contact}")
+        except Exception as e:
+            logger.error(f"Failed to update ScrapingTask {task_id} to completed: {e}")
     
     return {
         'query': query,
         'total_found': total_found,
         'total_saved': total_saved,
         'duplicates_skipped': duplicates,
-        'no_emails': no_emails,
+        'no_contact': no_contact,
         'errors': errors,
         'details': scrape_results,
     }
@@ -261,7 +301,7 @@ def bulk_scrape_from_queries(queries: List[str], max_results_per_query: int = 10
 
 
 @shared_task
-def re_scrape_lead(lead_id: int, max_pages: int = 5) -> Dict:
+def re_scrape_lead(lead_id, max_pages: int = 5) -> Dict:
     """
     Re-scrape an existing lead to find updated emails, phones, and social media.
 
@@ -314,6 +354,12 @@ def re_scrape_lead(lead_id: int, max_pages: int = 5) -> Dict:
             updated = True
         if social_media.get('instagram') and not lead.instagram:
             lead.instagram = social_media['instagram']
+            updated = True
+        if social_media.get('twitter') and not lead.twitter:
+            lead.twitter = social_media['twitter']
+            updated = True
+        if social_media.get('youtube') and not lead.youtube:
+            lead.youtube = social_media['youtube']
             updated = True
 
         # Update location if not already set
@@ -392,7 +438,7 @@ def validate_all_emails() -> Dict:
 
 
 @shared_task
-def export_leads_to_csv(lead_ids: Optional[List[int]] = None,
+def export_leads_to_csv(lead_ids: Optional[List] = None,
                         status: Optional[str] = None,
                         email_validated: Optional[bool] = None) -> str:
     """
