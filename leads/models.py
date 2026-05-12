@@ -60,6 +60,8 @@ class Lead(models.Model):
     linkedin = models.URLField(blank=True)
     facebook = models.URLField(blank=True)
     instagram = models.URLField(blank=True)
+    twitter = models.URLField(blank=True)
+    youtube = models.URLField(blank=True)
     
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='new')
     source = models.CharField(max_length=20, choices=SOURCE_CHOICES, default='search')

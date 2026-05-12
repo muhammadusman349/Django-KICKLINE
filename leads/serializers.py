@@ -45,7 +45,8 @@ class LeadListSerializer(serializers.ModelSerializer):
             "linkedin": obj.linkedin,
             "facebook": obj.facebook,
             "instagram": obj.instagram,
-            "twitter": "",
+            "twitter": obj.twitter,
+            "youtube": obj.youtube,
         }
 
 
@@ -91,6 +92,8 @@ class LeadDetailSerializer(serializers.ModelSerializer):
             "linkedin": obj.linkedin,
             "facebook": obj.facebook,
             "instagram": obj.instagram,
+            "twitter": obj.twitter,
+            "youtube": obj.youtube,
         }
     
     def get_outreach_count(self, obj):
@@ -113,6 +116,8 @@ class LeadCreateUpdateSerializer(serializers.ModelSerializer):
             "linkedin",
             "facebook",
             "instagram",
+            "twitter",
+            "youtube",
             "status",
             "source",
             "notes",
@@ -200,7 +205,7 @@ class BulkScrapingRequestSerializer(serializers.Serializer):
 class RescrapeRequestSerializer(serializers.Serializer):
     """Serializer for re-scraping requests"""
     lead_ids = serializers.ListField(
-        child=serializers.IntegerField(),
+        child=serializers.UUIDField(),
         allow_empty=False,
         max_length=100
     )
@@ -230,7 +235,7 @@ class OutreachEmailSerializer(serializers.ModelSerializer):
 class LeadExportSerializer(serializers.Serializer):
     """Serializer for lead export requests"""
     lead_ids = serializers.ListField(
-        child=serializers.IntegerField(),
+        child=serializers.UUIDField(),
         required=False,
         allow_empty=True
     )
