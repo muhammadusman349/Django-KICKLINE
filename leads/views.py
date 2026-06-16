@@ -13,6 +13,7 @@ from rest_framework.pagination import PageNumberPagination
 from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
 from .scrapers import CompanySearcher
+from .utils import check_duplicate_website, normalize_url, prioritize_emails
 
 from .models import Lead, ScrapingTask
 from .tasks import (
