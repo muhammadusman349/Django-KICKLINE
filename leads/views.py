@@ -1,6 +1,3 @@
-"""
-DRF Views for Leads app with async scraping capabilities.
-"""
 
 import os
 from django.db import models
