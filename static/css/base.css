@@ -172,17 +172,26 @@
             text-transform: uppercase;
         }
 
-        /* Navigation - Minimal Premium High Contrast */
+        /* Navigation - Modern Premium Glassmorphism */
         .navbar {
-            background: rgba(248, 250, 252, 0.98);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
-            transition: all 0.3s ease;
-            height: 100px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 90px;
             display: flex;
             align-items: center;
-            border-bottom: 2px solid rgba(15, 23, 42, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
             overflow: visible;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
+            height: 80px;
         }
 
         .navbar .container {
@@ -197,18 +206,19 @@
             font-family: 'Quantico', 'Space Grotesk', sans-serif;
             font-weight: 700;
             color: var(--text-primary) !important;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             letter-spacing: 0.03em;
             text-transform: uppercase;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             height: 100%;
+            text-decoration: none;
         }
 
         .navbar-brand:hover {
             color: var(--secondary-color) !important;
-            transform: scale(1.02);
+            transform: translateY(-2px);
         }
 
         .navbar-brand:hover .brand-text {
@@ -216,44 +226,53 @@
         }
 
         .navbar-brand .logo-image {
-            max-height: 90px;
+            max-height: 75px;
             width: auto;
             object-fit: contain;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             margin-right: 0;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .navbar-brand:hover .logo-image {
+            transform: scale(1.05) rotate(2deg);
+            filter: drop-shadow(0 4px 12px rgba(13, 148, 136, 0.3));
         }
 
         .navbar-brand .brand-text {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--text-primary);
             font-family: 'Quantico', 'Space Grotesk', sans-serif;
             letter-spacing: 0.02em;
             text-transform: uppercase;
-            margin-left: -8px;
+            margin-left: -5px;
             align-self: center;
-        }
-
-        .navbar-brand:hover .logo-image {
-            transform: scale(1.02);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* Mobile responsive logo */
         @media (max-width: 768px) {
             .navbar-brand .logo-image {
-                max-height: 90px;
+                max-height: 65px;
             }
             .navbar-brand .brand-text {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+            }
+            .navbar {
+                height: 80px;
             }
         }
 
         @media (max-width: 576px) {
             .navbar-brand .logo-image {
-                max-height: 75px;
+                max-height: 55px;
             }
             .navbar-brand .brand-text {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
             }
         }
 
@@ -264,36 +283,49 @@
         }
 
         .navbar-nav .nav-link {
-            font-weight: 500;
+            font-weight: 600;
             color: var(--text-secondary) !important;
-            margin: 0 0.8rem;
+            margin: 0 0.5rem;
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: none;
-            letter-spacing: 0.3px;
-            font-size: 1.25rem;
-            padding: 0.75rem 1.25rem;
+            letter-spacing: 0.5px;
+            font-size: 1rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            background: transparent;
         }
 
         .navbar-nav .nav-link:hover {
             color: var(--secondary-color) !important;
+            background: rgba(13, 148, 136, 0.08);
+            transform: translateY(-1px);
         }
 
         .navbar-nav .nav-link::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 2px;
-            bottom: -4px;
+            height: 3px;
+            bottom: 0;
             left: 50%;
-            background: var(--secondary-color);
-            transition: all 0.3s ease;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             transform: translateX(-50%);
-            border-radius: 1px;
+            border-radius: 2px;
         }
 
         .navbar-nav .nav-link:hover::after {
-            width: 100%;
+            width: 80%;
+        }
+
+        .navbar-nav .nav-link.active {
+            color: var(--secondary-color) !important;
+            background: rgba(13, 148, 136, 0.1);
+        }
+
+        .navbar-nav .nav-link.active::after {
+            width: 80%;
         }
 
         /* Hero Section - Modern Professional Sports Design */
@@ -851,6 +883,12 @@
         .footer .text-center p {
             color: #475569;
             font-size: 0.9rem;
+        }
+
+        .footer-copyright {
+            color: #94A3B8;
+            font-size: 1.1rem;
+            font-weight: 500;
         }
 
         /* Social Media Links */
@@ -2859,6 +2897,79 @@
             display: flex;
             gap: 0.75rem;
             justify-content: flex-end;
+        }
+
+        /* Footer Mobile Responsive Font Sizes */
+        @media (max-width: 768px) {
+            .footer .d-flex.align-items-center img {
+                height: 50px !important;
+            }
+            .footer h4 {
+                font-size: 1.3rem !important;
+            }
+            .footer .d-flex.align-items-center p {
+                font-size: 13px !important;
+            }
+            .footer .contact-info p {
+                font-size: 14px !important;
+            }
+            .footer .contact-info i {
+                font-size: 14px !important;
+            }
+            .footer h5 {
+                font-size: 1rem !important;
+            }
+            .footer h5 i {
+                font-size: 1rem !important;
+            }
+            .footer ul li a {
+                font-size: 14px !important;
+            }
+            .footer .footer-links-bottom a {
+                font-size: 13px !important;
+            }
+            .footer .footer-links-bottom span {
+                font-size: 13px !important;
+            }
+            .footer .col-md-6 p {
+                font-size: 13px !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer .d-flex.align-items-center img {
+                height: 45px !important;
+            }
+            .footer h4 {
+                font-size: 1.2rem !important;
+            }
+            .footer .d-flex.align-items-center p {
+                font-size: 12px !important;
+            }
+            .footer .contact-info p {
+                font-size: 13px !important;
+            }
+            .footer .contact-info i {
+                font-size: 13px !important;
+            }
+            .footer h5 {
+                font-size: 0.95rem !important;
+            }
+            .footer h5 i {
+                font-size: 0.95rem !important;
+            }
+            .footer ul li a {
+                font-size: 13px !important;
+            }
+            .footer .footer-links-bottom a {
+                font-size: 12px !important;
+            }
+            .footer .footer-links-bottom span {
+                font-size: 12px !important;
+            }
+            .footer .col-md-6 p {
+                font-size: 12px !important;
+            }
         }
 
         .cookie-modal-footer .cookie-btn {

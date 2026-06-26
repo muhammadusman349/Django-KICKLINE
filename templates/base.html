@@ -1,338 +1,759 @@
 {% load static %}
+
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{% block title %}KickLine - Premium Sports Equipment{% endblock %}</title>
+
     
+
     <!-- Favicon -->
+
     <link rel="icon" type="image/png" sizes="64x64" href="{% static 'images/logo/KS-Logo-2.png' %}">
+
     <link rel="shortcut icon" type="image/png" sizes="64x64" href="{% static 'images/logo/KS-Logo-2.png' %}">
+
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/logo/KS-Logo-2.png' %}">
+
     
+
     <!-- Bootstrap CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Font Awesome -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- Google Fonts - Quantico -->
+
     <link href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
     
+
     <link rel="stylesheet" href="{% static 'css/base.css'%}">
 
+
+
     <!-- Dynamic Background Styles -->
+
     <style>
+
         {% if backgrounds.bg_categories %}
+
         .categories-section {
+
             {{ backgrounds.bg_categories.get_css_background|safe }}
+
             color: var(--text-secondary) !important;
+
         }
+
         .categories-section .section-title,
+
         .categories-section p,
+
         .categories-section .text-muted,
+
         .categories-section .card-title,
+
         .categories-section .card-text {
+
             color: var(--text-secondary) !important;
+
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+
         }
+
         {% else %}
+
         .categories-section {
+
             background: #ffffff !important;
+
             color: var(--text-primary) !important;
+
         }
+
         .categories-section .section-title,
+
         .categories-section p,
+
         .categories-section .text-muted,
+
         .categories-section .card-title,
+
         .categories-section .card-text {
+
             color: var(--text-primary) !important;
+
             text-shadow: none !important;
+
         }
+
         [data-theme="dark"] .categories-section {
+
             background: var(--bg-dark) !important;
+
         }
+
         [data-theme="dark"] .categories-section .section-title,
+
         [data-theme="dark"] .categories-section p,
+
         [data-theme="dark"] .categories-section .text-muted,
+
         [data-theme="dark"] .categories-section .card-title,
+
         [data-theme="dark"] .categories-section .card-text {
+
             color: var(--text-primary) !important;
+
         }
+
         {% endif %}
+
+
 
         {% if backgrounds.bg_featured %}
+
         .featured-products {
+
             {{ backgrounds.bg_featured.get_css_background|safe }}
+
             color: var(--text-secondary) !important;
+
         }
+
         .featured-products .section-title,
+
         .featured-products p,
+
         .featured-products .text-muted,
+
         .featured-products .card-title,
+
         .featured-products .card-text {
+
             color: var(--text-secondary) !important;
+
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+
         }
+
         {% else %}
+
         .featured-products {
+
             background: #ffffff !important;
+
             color: var(--text-primary) !important;
+
         }
+
         .featured-products .section-title,
+
         .featured-products p,
+
         .featured-products .text-muted,
+
         .featured-products .card-title,
+
         .featured-products .card-text {
+
             color: var(--text-primary) !important;
+
             text-shadow: none !important;
+
         }
+
         [data-theme="dark"] .featured-products {
+
             background: var(--background-color) !important;
+
         }
+
         [data-theme="dark"] .featured-products .section-title,
+
         [data-theme="dark"] .featured-products p,
+
         [data-theme="dark"] .featured-products .text-muted,
+
         [data-theme="dark"] .featured-products .card-title,
+
         [data-theme="dark"] .featured-products .card-text {
+
             color: var(--text-primary) !important;
+
         }
+
         {% endif %}
+
+
 
         {% if backgrounds.bg_hero %}
+
         .hero-section {
+
             {{ backgrounds.bg_hero.get_css_background|safe }}
+
         }
+
         {% endif %}
+
     </style>
 
+
+
 </head>
+
 <body>
+
     <!-- Navigation -->
+
     <nav class="navbar navbar-expand-lg fixed-top">
+
         <div class=" container-fluid px-3">
+
             <a class="navbar-brand" href="{% url 'Kickline:home' %}">
+
     <img src="{% static 'images/logo/KS-Logo-2.png' %}" alt="Kickline Sports" class="logo-image">
+
     <span class="brand-text">Kickline Sports</span>
+
 </a>
+
             
+
             <button class="navbar-toggler hamburger-menu collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
                 <span class="hamburger-line line-1"></span>
+
                 <span class="hamburger-line line-2"></span>
+
                 <span class="hamburger-line line-3"></span>
+
             </button>
+
             
+
             <div class="collapse navbar-collapse" id="navbarNav">
+
                 <ul class="navbar-nav ms-auto align-items-center">
+
                     <li class="nav-item">
+
                         <a class="nav-link" href="{% url 'Kickline:home' %}">Home</a>
+
                     </li>
+
                     <li class="nav-item">
+
                         <a class="nav-link" href="{% url 'Kickline:product_list' %}">Products</a>
+
                     </li>
+
                     <li class="nav-item">
+
                         <a class="nav-link" href="{% url 'Kickline:category_list' %}">Categories</a>
+
                     </li>
+
                     <li class="nav-item">
+
                         <a class="nav-link" href="{% url 'Kickline:catalog_list' %}">Catalogs</a>
+
                     </li>
+
+
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'Kickline:shipment' %}">Shipping</a>
-                    </li>
-                    <li class="nav-item">
+
                         <a class="nav-link" href="{% url 'Kickline:contact' %}">Contact</a>
+
                     </li>
+
                 </ul>
+
             </div>
+
         </div>
+
     </nav>
 
+
+
     <!-- Main Content -->
+
     <main style="margin-top: 80px;">
+
         {% if messages %}
+
         <div class="container mt-3">
+
             {% for message in messages %}
+
             <div class="alert alert-{% if message.tags %}{{ message.tags }}{% else %}info{% endif %} shadow-sm" role="alert">
+
                 {{ message }}
+
             </div>
+
             {% endfor %}
+
         </div>
+
         {% endif %}
+
         {% block content %}
+
         {% endblock %}
+
     </main>
 
+
+
     <!-- Footer -->
-    <footer class="footer">
+
+    <footer class="footer" style="background: #0F172A; padding: 60px 0 30px;">
+
         <div class="container">
+
             <div class="row">
-                <div class="col-md-4">
-                    <h5 class="d-flex align-items-center gap-2 mb-3">
-                        <img src="{% static 'images/logo/KS-Logo-2.png' %}" alt="Kickline Sports" style="height: 30px; width: auto;">
-                        <span>Kickline Sports</span>
-                    </h5>
-                    <p>Your premier destination for high-quality sports equipment and gear. We bring you the best in athletic performance.</p>
-                </div>
-                <div class="col-md-4">
-                    <h5>Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{% url 'Kickline:home' %}">Home</a></li>
-                        <li><a href="{% url 'Kickline:product_list' %}">Products</a></li>
-                        <li><a href="{% url 'Kickline:category_list' %}">Categories</a></li>
-                        <li><a href="{% url 'Kickline:catalog_list' %}">Catalogs</a></li>
-                        <li><a href="{% url 'Kickline:shipment' %}">Shipping Info</a></li>
-                        <li><a href="{% url 'Kickline:contact' %}">Contact</a></li>
-                        <li><a href="{% url 'Kickline:privacy_policy' %}">Privacy Policy</a></li>
-                        <li><a href="{% url 'Kickline:terms_of_service' %}">Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h5>Contact Us</h5>
-                    <p><i class="fas fa-map-marker-alt"></i> Head Marala Road, Gohad Pur, Sialkot</p>
-                    <p><i class="fas fa-envelope"></i> {{ CONTACT_EMAIL }}</p>
-                    <p><i class="fab fa-whatsapp"></i> <strong>Sales:</strong> {{ WHATSAPP_NUMBER_1 }}</p>
-                    <p><i class="fab fa-whatsapp"></i> <strong>Support:</strong> {{ WHATSAPP_NUMBER_2 }}</p>
-                </div>
-                <div class="col-md-4">
-                    <h5>Follow Us</h5>
-                    <p>Stay connected with us on social media</p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=61584885486885" target="_blank" class="social-link" aria-label="Facebook">
-                            <img src="{% static 'images/logo/facebook.png' %}" alt="Facebook" class="social-icon">
-                        </a>
-                        <a href="https://www.instagram.com/kickline_sports" target="_blank" class="social-link" aria-label="Instagram">
-                            <img src="{% static 'images/logo/instagram.png' %}" alt="Instagram" class="social-icon">
-                        </a>
-                        <a href="https://tiktok.com/@kickline.sports" target="_blank" class="social-link" aria-label="TikTok">
-                            <img src="{% static 'images/logo/tik-tok.png' %}" alt="TikTok" class="social-icon">
-                        </a>
-                        <a href="https://x.com/KicklineSports" target="_blank" class="social-link" aria-label="Twitter">
-                            <img src="{% static 'images/logo/twitter.png' %}" alt="Twitter" class="social-icon">
-                        </a>
-                        <a href="https://www.linkedin.com/in/kickline-sports-2b0b383b5/" target="_blank" class="social-link" aria-label="LinkedIn">
-                            <img src="{% static 'images/logo/linkedin.png' %}" alt="LinkedIn" class="social-icon">
-                        </a>
+
+                <div class="col-lg-6 mb-4 mb-lg-0">
+
+                    <div class="d-flex align-items-center mb-3">
+
+                        <img src="{% static 'images/logo/KS-Logo-2.png' %}" alt="Kickline Sports" style="height: 70px; width: auto; margin-right: 15px;">
+
+                        <div>
+
+                            <h4 class="mb-0" style="color: #FFFFFF; font-weight: 700; font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem;">KICKLINE SPORTS</h4>
+
+                            <p class="mb-0" style="color: #0D9488; font-weight: 600; font-size: 17px; letter-spacing: 2px;">PREMIUM EQUIPMENT</p>
+
+                        </div>
+
                     </div>
+
+                    <p class="mb-4" style="color: #94A3B8; font-size: 17px; line-height: 1.6; max-width: 500px;">Premium sports products designed for performance, quality, and champions worldwide. Your trusted partner in athletic excellence.</p>
+
+                    <div class="contact-info">
+
+                        <p class="mb-3 d-flex align-items-center" style="color: #FFFFFF; font-size: 17px;">
+
+                            <i class="fas fa-envelope me-3" style="color: #0D9488; width: 20px; font-size: 17px;"></i>
+
+                            <span>info@kicklinesports.com</span>
+
+                        </p>
+
+                        <p class="mb-3 d-flex align-items-center" style="color: #FFFFFF; font-size: 17px;">
+
+                            <i class="fas fa-phone me-3" style="color: #0D9488; width: 20px; font-size: 17px;"></i>
+
+                            <span>+92 348 0867200</span>
+
+                        </p>
+
+                        <p class="mb-0 d-flex align-items-center" style="color: #FFFFFF; font-size: 17px;">
+
+                            <i class="fas fa-map-marker-alt me-3" style="color: #0D9488; width: 20px; font-size: 17px;"></i>
+
+                            <span>Head Marala Road, Gohad Pur, Sialkot</span>
+
+                        </p>
+
+                    </div>
+
                 </div>
+
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+
+                    <div class="quick-links-section">
+
+                        <h5 class="d-flex align-items-center mb-4" style="color: #FFFFFF; font-weight: 700; font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem;">
+
+                            <i class="fas fa-bolt me-2" style="color: #0D9488; font-size: 1.35rem;"></i>
+
+                            QUICK LINKS
+
+                        </h5>
+
+                        <ul class="list-unstyled">
+
+                            <li class="mb-3">
+
+                                <a href="{% url 'Kickline:home' %}" style="color: #94A3B8; text-decoration: none; transition: color 0.3s; display: flex; align-items-center; font-size: 17px;">
+
+                                    <span style="color: #0D9488; margin-right: 10px; font-weight: bold;">&gt;</span>
+
+                                    <span>Home</span>
+
+                                </a>
+
+                            </li>
+
+                            <li class="mb-3">
+
+                                <a href="{% url 'Kickline:product_list' %}" style="color: #94A3B8; text-decoration: none; transition: color 0.3s; display: flex; align-items-center; font-size: 17px;">
+
+                                    <span style="color: #0D9488; margin-right: 10px; font-weight: bold;">&gt;</span>
+
+                                    <span>Products</span>
+
+                                </a>
+
+                            </li>
+
+                            <li class="mb-3">
+
+                                <a href="{% url 'Kickline:category_list' %}" style="color: #94A3B8; text-decoration: none; transition: color 0.3s; display: flex; align-items-center; font-size: 17px;">
+
+                                    <span style="color: #0D9488; margin-right: 10px; font-weight: bold;">&gt;</span>
+
+                                    <span>Categories</span>
+
+                                </a>
+
+                            </li>
+
+                            <li class="mb-3">
+
+                                <a href="{% url 'Kickline:contact' %}" style="color: #94A3B8; text-decoration: none; transition: color 0.3s; display: flex; align-items-center; font-size: 17px;">
+
+                                    <span style="color: #0D9488; margin-right: 10px; font-weight: bold;">&gt;</span>
+
+                                    <span>Contact</span>
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+
+                    <div class="follow-us-section">
+
+                        <h5 class="d-flex align-items-center mb-4" style="color: #FFFFFF; font-weight: 700; font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem;">
+
+                            <i class="fas fa-share-alt me-2" style="color: #0D9488; font-size: 1.35rem;"></i>
+
+                            FOLLOW US
+
+                        </h5>
+
+                        <div class="social-links d-flex align-items-center gap-2">
+
+                            <a href="https://www.facebook.com/profile.php?id=61584885486885" target="_blank" class="social-link" style="background: #1877F2; color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s; flex-shrink: 0;">
+
+                                <i class="fab fa-facebook-f" style="font-size: 14px;"></i>
+
+                            </a>
+
+                            <a href="https://www.instagram.com/kickline_sports" target="_blank" class="social-link" style="background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4); color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s; flex-shrink: 0;">
+
+                                <i class="fab fa-instagram" style="font-size: 14px;"></i>
+
+                            </a>
+
+                            <a href="https://tiktok.com/@kickline.sports" target="_blank" class="social-link" style="background: #000000; color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s; flex-shrink: 0;">
+
+                                <i class="fab fa-tiktok" style="font-size: 14px;"></i>
+
+                            </a>
+
+                            <a href="https://www.linkedin.com/in/kickline-sports-2b0b383b5/" target="_blank" class="social-link" style="background: #0077B5; color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s; flex-shrink: 0;">
+
+                                <i class="fab fa-linkedin-in" style="font-size: 14px;"></i>
+
+                            </a>
+
+                            <a href="https://x.com/KicklineSports" target="_blank" class="social-link" style="background: #000000; color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s; flex-shrink: 0;">
+
+                                <i class="fab fa-twitter" style="font-size: 14px;"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
-            <hr class="my-4">
+
+            <hr class="my-4" style="border-top: 1px solid rgba(255, 255, 255, 0.1);">
+
             <div class="row">
-                <div class="col-12 text-center">
-                    <p class="footer-copyright">&copy; {% now "Y" %} AR Group Of Industries. All rights reserved.</p>
+
+                <div class="col-md-6 mb-3 mb-md-0">
+
+                    <p class="mb-0" style="color: #94A3B8; font-size: 16px;">&copy; {% now "Y" %} AR Group Of Industries. All rights reserved.</p>
+
                 </div>
+
+                <div class="col-md-6 text-md-end">
+
+                    <div class="footer-links-bottom">
+
+                        <a href="{% url 'Kickline:privacy_policy' %}" style="color: #94A3B8; text-decoration: none; font-size: 16px; transition: color 0.3s;">Privacy Policy</a>
+
+                        <span class="mx-2" style="color: #94A3B8;">|</span>
+
+                        <a href="{% url 'Kickline:terms_of_service' %}" style="color: #94A3B8; text-decoration: none; font-size: 16px; transition: color 0.3s;">Terms of Service</a>
+
+                        <span class="mx-2" style="color: #94A3B8;">|</span>
+
+                        <a href="{% url 'Kickline:shipment' %}" style="color: #94A3B8; text-decoration: none; font-size: 16px; transition: color 0.3s;">Shipping Info</a>
+
+                    </div>
+
+                </div>
+
             </div>
+
         </div>
+
     </footer>
 
+
+
     <!-- WhatsApp Popup -->
+
     <div class="whatsapp-popup" id="whatsappPopup">
+
         <div class="whatsapp-popup-header">
+
             <img src="{% static 'images/logo/whatsapp-logo.png' %}" alt="WhatsApp">
+
             <div>
+
                 <h6>Kickline Sports</h6>
+
                 <p>Online</p>
+
             </div>
+
         </div>
+
         <div class="whatsapp-popup-body">
+
             <div class="whatsapp-message-bubble">
+
                 <p>Hi there! 👋</p>
+
                 <p>How can we help you today?</p>
+
                 <small>+92 348 0867200</small>
+
             </div>
+
         </div>
+
         <div class="whatsapp-popup-footer">
+
             <a href="https://api.whatsapp.com/send?phone=923480867200&text=Hi, I'm interested in your sports products!" target="_blank" class="whatsapp-btn">
+
                 <i class="fab fa-whatsapp"></i> Start Chat
+
             </a>
+
         </div>
+
     </div>
+
+
 
     <!-- Scroll Up Button -->
+
     <div class="scroll-up" id="scrollUp" aria-label="Scroll to top">
+
         <i class="fas fa-arrow-up"></i>
+
     </div>
+
+
 
     <!-- WhatsApp Float Button -->
+
     <div class="whatsapp-float" id="whatsappFloat">
+
         <i class="fab fa-whatsapp"></i>
+
     </div>
+
+
 
     <!-- Theme Toggle Float Button -->
+
     <div class="theme-toggle-float" id="themeToggle" aria-label="Toggle dark mode">
+
         <i class="fas fa-moon"></i>
+
     </div>
+
+
 
     <!-- Bootstrap JS -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     
+
     {% block extra_js %}
+
     {% endblock %}
 
+
+
     <!-- Cookie Consent Banner -->
+
     <div class="cookie-banner" id="cookieBanner">
+
         <div class="cookie-banner-container">
+
             <div class="cookie-content">
+
                 <h3 class="cookie-title">
+
                     <i class="fas fa-cookie-bite"></i>
+
                     We Value Your Privacy
+
                 </h3>
+
                 <p class="cookie-text">
+
                     We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. <a href="{% url 'Kickline:privacy_policy' %}">Privacy Policy</a>
+
                 </p>
+
             </div>
+
             <div class="cookie-actions">
+
                 <button class="cookie-btn cookie-btn-accept" onclick="acceptAllCookies()">Accept All</button>
+
                 <button class="cookie-btn cookie-btn-reject" onclick="rejectCookies()">Reject</button>
+
                 <button class="cookie-btn cookie-btn-customize" onclick="openCookieModal()">Customize</button>
+
             </div>
+
         </div>
+
     </div>
+
+
 
     <!-- Cookie Preferences Modal -->
+
     <div class="cookie-modal-overlay" id="cookieModalOverlay">
+
         <div class="cookie-modal">
+
             <div class="cookie-modal-header">
+
                 <h3 class="cookie-modal-title">
+
                     <i class="fas fa-sliders-h"></i>
+
                     Cookie Preferences
+
                 </h3>
+
                 <button class="cookie-modal-close" onclick="closeCookieModal()">
+
                     <i class="fas fa-times"></i>
+
                 </button>
+
             </div>
+
             <div class="cookie-modal-body">
+
                 <p class="cookie-modal-description">
+
                     Customize your cookie preferences. Essential cookies are always enabled as they are necessary for the website to function properly.
+
                 </p>
+
                 <div class="cookie-option">
+
                     <div class="cookie-option-info">
+
                         <h4>Essential Cookies</h4>
+
                         <p>Required for the website to function properly. Cannot be disabled.</p>
+
                     </div>
+
                     <input type="checkbox" class="cookie-toggle" id="essentialCookies" checked disabled>
+
                 </div>
+
                 <div class="cookie-option">
+
                     <div class="cookie-option-info">
+
                         <h4>Analytics Cookies</h4>
+
                         <p>Help us understand how visitors interact with our website.</p>
+
                     </div>
+
                     <input type="checkbox" class="cookie-toggle" id="analyticsCookies">
+
                 </div>
+
                 <div class="cookie-option">
+
                     <div class="cookie-option-info">
+
                         <h4>Marketing Cookies</h4>
+
                         <p>Used to deliver personalized advertisements and content.</p>
+
                     </div>
+
                     <input type="checkbox" class="cookie-toggle" id="marketingCookies">
+
                 </div>
+
             </div>
+
             <div class="cookie-modal-footer">
+
                 <button class="cookie-btn cookie-btn-reject" onclick="closeCookieModal()">Cancel</button>
+
                 <button class="cookie-btn cookie-btn-accept" onclick="saveCookiePreferences()">Save Preferences</button>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     
+
 <script src="{% static 'js/base.js' %}"></script>
+
 </body>
+
 </html>
+
