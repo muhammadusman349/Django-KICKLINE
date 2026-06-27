@@ -40,6 +40,8 @@
 
     <link rel="stylesheet" href="{% static 'css/base.css'%}">
 
+    <link rel="stylesheet" href="{% static 'css/navbar.css'%}">
+
 
 
     <!-- Dynamic Background Styles -->
@@ -217,81 +219,13 @@
 <body>
 
     <!-- Navigation -->
-
-    <nav class="navbar navbar-expand-lg fixed-top">
-
-        <div class=" container-fluid px-3">
-
-            <a class="navbar-brand" href="{% url 'Kickline:home' %}">
-
-    <img src="{% static 'images/logo/KS-Logo-2.png' %}" alt="Kickline Sports" class="logo-image">
-
-    <span class="brand-text">Kickline Sports</span>
-
-</a>
-
-            
-
-            <button class="navbar-toggler hamburger-menu collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-
-                <span class="hamburger-line line-1"></span>
-
-                <span class="hamburger-line line-2"></span>
-
-                <span class="hamburger-line line-3"></span>
-
-            </button>
-
-            
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-
-                <ul class="navbar-nav ms-auto align-items-center">
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="{% url 'Kickline:home' %}">Home</a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="{% url 'Kickline:product_list' %}">Products</a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="{% url 'Kickline:category_list' %}">Categories</a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="{% url 'Kickline:catalog_list' %}">Catalogs</a>
-
-                    </li>
-
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="{% url 'Kickline:contact' %}">Contact</a>
-
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-    </nav>
+    {% include 'components/navbar.html' %}
 
 
 
     <!-- Main Content -->
 
-    <main style="margin-top: 80px;">
+    <main style="margin-top: 0;">
 
         {% if messages %}
 

@@ -1,0 +1,40 @@
+{% load static %}
+
+<!-- Navigation Component -->
+<nav class="kl-navbar navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid px-3">
+        <a class="kl-navbar-brand navbar-brand d-flex align-items-center" href="{% url 'Kickline:home' %}" style="text-decoration: none;">
+            <img src="{% static 'images/logo/KS-Logo-2.png' %}" alt="Kickline Sports" class="kl-logo-image logo-image" style="height: 85px; width: auto; margin-right: 15px;">
+            <div style="display: flex; flex-direction: column; line-height: 1.2;">
+                <span class="kl-brand-text brand-text" style="font-size: 1.8rem; font-weight: 700; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px;">KICKLINE SPORTS</span>
+                <span style="font-size: 0.85rem; font-weight: 600; color: #0D9488; text-transform: uppercase; letter-spacing: 2px;">PREMIUM EQUIPMENT</span>
+            </div>
+        </a>
+
+        <button class="navbar-toggler hamburger-menu collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="hamburger-line line-1"></span>
+            <span class="hamburger-line line-2"></span>
+            <span class="hamburger-line line-3"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="kl-navbar-nav navbar-nav ms-auto align-items-center">
+                <li class="nav-item">
+                    <a class="kl-nav-link nav-link" href="{% url 'Kickline:home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="kl-nav-link nav-link" href="{% url 'Kickline:product_list' %}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="kl-nav-link nav-link" href="{% url 'Kickline:category_list' %}">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="kl-nav-link nav-link" href="{% url 'Kickline:catalog_list' %}">Catalogs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="kl-nav-link nav-link" href="{% url 'Kickline:contact' %}">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

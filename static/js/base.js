@@ -264,3 +264,65 @@
         initTheme();
     }
 })();
+
+// Mobile Navbar Toggle - Enhanced functionality for all devices
+(function() {
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    
+    if (navbarToggler && navbarCollapse) {
+        // Toggle function
+        const toggleNavbar = () => {
+            const isCollapsed = navbarToggler.classList.contains('collapsed');
+            
+            if (isCollapsed) {
+                // Open menu
+                navbarToggler.classList.remove('collapsed');
+                navbarToggler.setAttribute('aria-expanded', 'true');
+                navbarCollapse.classList.add('show');
+            } else {
+                // Close menu
+                navbarToggler.classList.add('collapsed');
+                navbarToggler.setAttribute('aria-expanded', 'false');
+                navbarCollapse.classList.remove('show');
+            }
+        };
+        
+        // Add click event listener
+        navbarToggler.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleNavbar();
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navbarToggler.contains(e.target) && !navbarCollapse.contains(e.target)) {
+                if (!navbarToggler.classList.contains('collapsed')) {
+                    toggleNavbar();
+                }
+            }
+        });
+        
+        // Close menu when clicking on nav links
+        const navLinks = navbarCollapse.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (!navbarToggler.classList.contains('collapsed')) {
+                    toggleNavbar();
+                }
+            });
+        });
+        
+        // Handle Bootstrap collapse events as fallback
+        navbarCollapse.addEventListener('show.bs.collapse', () => {
+            navbarToggler.classList.remove('collapsed');
+            navbarToggler.setAttribute('aria-expanded', 'true');
+        });
+        
+        navbarCollapse.addEventListener('hide.bs.collapse', () => {
+            navbarToggler.classList.add('collapsed');
+            navbarToggler.setAttribute('aria-expanded', 'false');
+        });
+    }
+})();
